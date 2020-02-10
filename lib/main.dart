@@ -6,6 +6,7 @@ import 'package:flutter_itemsecure_dsr/app_screens/employee_info_screen.dart';
 import 'package:flutter_itemsecure_dsr/app_screens/map_appointmentlist_screen.dart';
 import 'package:flutter_itemsecure_dsr/utils/prefs_file.dart';
 
+import 'app_screens/Loginscreen.dart';
 import 'app_screens/navigation_screen.dart';
 
 //https://vimeo.com/372583791
@@ -42,7 +43,8 @@ Future main() async {
       ),
 //      home: new SplashScreen()));
 //      home: new EmployeeInfoScreen()));
-      home: new BottomNavBar()));
+      home: new Loginscreen()));
+//      home: new BottomNavBar()));
 }
 
 class SplashScreen extends StatefulWidget {
