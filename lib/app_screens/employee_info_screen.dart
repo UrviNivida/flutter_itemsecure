@@ -1,4 +1,3 @@
-import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:xlive_switch/xlive_switch.dart';
@@ -9,7 +8,6 @@ class EmployeeInfoScreen extends StatefulWidget {
 }
 
 class _EmployeeInfoScreenState extends State<EmployeeInfoScreen> {
-
   var _padding = 8.0;
   bool _value = true;
   var _imageheight = 40.0;
@@ -22,7 +20,6 @@ class _EmployeeInfoScreenState extends State<EmployeeInfoScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     TextStyle headStyle = TextStyle(
         fontSize: 16.0,
         fontWeight: FontWeight.w700,
@@ -51,10 +48,10 @@ class _EmployeeInfoScreenState extends State<EmployeeInfoScreen> {
         color: Theme.of(context).primaryColor);
 
     TextStyle textStyleTitleWhite = TextStyle(
-      fontSize: 14.0,
-      fontWeight: FontWeight.w500,
-      fontFamily: 'Quicksand',
-      color: Colors.white);
+        fontSize: 14.0,
+        fontWeight: FontWeight.w500,
+        fontFamily: 'Quicksand',
+        color: Colors.white);
 
     TextStyle hintStyle = TextStyle(
       fontSize: 14.0,
@@ -62,33 +59,18 @@ class _EmployeeInfoScreenState extends State<EmployeeInfoScreen> {
       fontFamily: 'Quicksand',
     );
 
-
-
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Row(
-//          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             GestureDetector(
               onTap: () {
-//                Alert(
-//                    context: context,
-//                    title: "",
-//                    content: Form(
-//                      child: new Column(
-//                        children: <Widget>[
-//                          CircleAvatar(
-//                            backgroundImage: NetworkImage(
-//                                "http://app.nivida.in/bita_rjvision/files/upload_document/" +
-//                                    widget.image_path),
-//                            minRadius: 50,
-//                            maxRadius: 90,
-//                          ),
-//                        ],
-//                      ),
-//                    )).show();
+//                                print(
+//                                    "http://app.nivida.in/bita_rjvision/files/upload_document/" +
+//                                        snapshot.data.data.user.iMAGEURL);
+
                 //Insert event to be fired up when button is clicked here
                 //in this case, this increments our `countValue` variable by one.
               },
@@ -103,29 +85,98 @@ class _EmployeeInfoScreenState extends State<EmployeeInfoScreen> {
                             "https://cdn.pixabay.com/photo/2013/07/21/13/00/rose-165819_960_720.jpg"),
                       ))),
             ),
-            Padding(
-              padding: EdgeInsets.all(5.0),
+            new Expanded(
+              flex: 1,
               child: Column(
-//                mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text(
-                    'Urvi Suthar',
-                    style: headStyle,
-                  ),
-                  Text(
-                    'Designation',
-                    textDirection: TextDirection.ltr,
-                    style: textStyle,
-                  ),
+                  ListTile(
+                    title: Text(
+                      'Urvi Suthar',
+                      style: headStyle,
+                    ),
+                    subtitle: Text(
+                      'Designation',
+                      textDirection: TextDirection.ltr,
+                      style: textStyle,
+                    ),
+                  )
                 ],
               ),
             ),
           ],
         ),
+
+//        Row(
+////          crossAxisAlignment: CrossAxisAlignment.stretch,
+//          children: <Widget>[
+//            GestureDetector(
+//              onTap: () {
+////                Alert(
+////                    context: context,
+////                    title: "",
+////                    content: Form(
+////                      child: new Column(
+////                        children: <Widget>[
+////                          CircleAvatar(
+////                            backgroundImage: NetworkImage(
+////                                "http://app.nivida.in/bita_rjvision/files/upload_document/" +
+////                                    widget.image_path),
+////                            minRadius: 50,
+////                            maxRadius: 90,
+////                          ),
+////                        ],
+////                      ),
+////                    )).show();
+//                //Insert event to be fired up when button is clicked here
+//                //in this case, this increments our `countValue` variable by one.
+//              },
+//              child: new Container(
+//                  width: 50.0,
+//                  height: 50.0,
+//                  decoration: new BoxDecoration(
+//                      shape: BoxShape.circle,
+//                      image: new DecorationImage(
+//                        fit: BoxFit.fill,
+//                        image: new NetworkImage(
+//                            "https://cdn.pixabay.com/photo/2013/07/21/13/00/rose-165819_960_720.jpg"),
+//                      ))),
+//            ),
+//            Padding(
+//                padding: EdgeInsets.all(5.0),
+////              child: Column(
+//////                mainAxisAlignment: MainAxisAlignment.center,
+////                children: <Widget>[
+////                  Text(
+////                    'Urvi Suthar',
+////                    style: headStyle,
+////                  ),
+////                  Text(
+////                    'Designation',
+////                    textDirection: TextDirection.ltr,
+////                    style: textStyle,
+////                  ),
+////                ],
+////              ),
+//                child: ListTile(
+//                  title: Text(
+//                    'Urvi Suthar',
+//                    style: headStyle,
+//                  ),
+//                  subtitle: Text(
+//                    'Designation',
+//                    textDirection: TextDirection.ltr,
+//                    style: textStyle,
+//                  ),
+//                )),
+//          ],
+//        ),
         actions: <Widget>[
           IconButton(
             // action button
-            icon: Icon(Icons.arrow_forward_ios),
+            icon: Icon(
+              Icons.arrow_forward_ios,
+              size: 32,
+            ),
             onPressed: () {},
           ),
 //          PopupMenuButton<Choice>( // overflow menu
@@ -172,42 +223,40 @@ class _EmployeeInfoScreenState extends State<EmployeeInfoScreen> {
             child: Row(
               children: <Widget>[
                 Expanded(
-                    flex: 1,
-                    child: GestureDetector(
-                          child: Stack(
-                        alignment: Alignment.center,
-                        children: <Widget>[
-                          Container(
-                            child: Image(
-                              image: AssetImage('images/yellowcircle.png'),
-                              width: _imagewidth,
-                              height: _imageheight,
-                              color: Theme.of(context).primaryColor,
-                            ),
-                          ),
-                          Container(
-                            child:  IconTheme(
-                              data: new IconThemeData(color: Colors.white,),
-                              child: new Icon(Icons.location_on),
-                            )
-                          )
-                        ],
-                      )),
-                    ),
+                  flex: 1,
+                  child: GestureDetector(
+                      child: Stack(
+                    alignment: Alignment.center,
+                    children: <Widget>[
+                      Container(
+                        child: Image(
+                          image: AssetImage('images/yellowcircle.png'),
+                          width: _imagewidth,
+                          height: _imageheight,
+                          color: Theme.of(context).primaryColor,
+                        ),
+                      ),
+                      Container(
+                          child: IconTheme(
+                        data: new IconThemeData(
+                          color: Colors.white,
+                        ),
+                        child: new Icon(Icons.location_on),
+                      ))
+                    ],
+                  )),
+                ),
                 Expanded(
-                      flex: 4,
-                      child: GestureDetector(
-                        child: Padding(
-                          padding: EdgeInsets.all(_circlePadding),
-                          child: Text(
-                            'Appointments (5 today)',
-                            style: textStyleTitle,
-                          ),
-                        )
-
-
-                        ,
-                      )),
+                    flex: 4,
+                    child: GestureDetector(
+                      child: Padding(
+                        padding: EdgeInsets.all(_circlePadding),
+                        child: Text(
+                          'Appointments (5 today)',
+                          style: textStyleTitle,
+                        ),
+                      ),
+                    )),
                 Expanded(
                     flex: 3,
                     child: GestureDetector(
@@ -219,7 +268,9 @@ class _EmployeeInfoScreenState extends State<EmployeeInfoScreen> {
                           style: textStyleTitleBlue,
                         ),
                         IconTheme(
-                          data: new IconThemeData(color: Theme.of(context).primaryColor,),
+                          data: new IconThemeData(
+                            color: Theme.of(context).primaryColor,
+                          ),
                           child: new Icon(Icons.add),
                         )
                       ],
@@ -235,21 +286,21 @@ class _EmployeeInfoScreenState extends State<EmployeeInfoScreen> {
                   flex: 1,
                   child: GestureDetector(
                       child: Stack(
-                        alignment: Alignment.center,
-                        children: <Widget>[
-                          Container(
-                            child: Image(
-                              image: AssetImage('images/yellowcircle.png'),
-                              width: _imagewidth,
-                              height: _imageheight,
-                              color: Theme.of(context).primaryColor,
-                            ),
-                          ),
-                          Container(
-                            child: IconTheme(
-                              data: new IconThemeData(color: Colors.white),
-                              child: new Icon(Icons.message),
-                            )
+                    alignment: Alignment.center,
+                    children: <Widget>[
+                      Container(
+                        child: Image(
+                          image: AssetImage('images/yellowcircle.png'),
+                          width: _imagewidth,
+                          height: _imageheight,
+                          color: Theme.of(context).primaryColor,
+                        ),
+                      ),
+                      Container(
+                          child: IconTheme(
+                        data: new IconThemeData(color: Colors.white),
+                        child: new Icon(Icons.message),
+                      )
 
 //                            Image(
 //                              image: AssetImage('images/whitepin.png'),
@@ -257,8 +308,8 @@ class _EmployeeInfoScreenState extends State<EmployeeInfoScreen> {
 //                              height: _imageheightSub,
 //                            ),
                           )
-                        ],
-                      )),
+                    ],
+                  )),
                 ),
                 Expanded(
                     flex: 4,
@@ -269,10 +320,7 @@ class _EmployeeInfoScreenState extends State<EmployeeInfoScreen> {
                           'Messages',
                           style: textStyleTitle,
                         ),
-                      )
-
-
-                      ,
+                      ),
                     )),
                 Expanded(
                     flex: 3,
@@ -302,24 +350,26 @@ class _EmployeeInfoScreenState extends State<EmployeeInfoScreen> {
                   flex: 1,
                   child: GestureDetector(
                       child: Stack(
-                        alignment: Alignment.center,
-                        children: <Widget>[
-                          Container(
-                            child: Image(
-                              image: AssetImage('images/yellowcircle.png'),
-                              width: _imagewidth,
-                              height: _imageheight,
-                              color: Theme.of(context).primaryColor,
-                            ),
+                    alignment: Alignment.center,
+                    children: <Widget>[
+                      Container(
+                        child: Image(
+                          image: AssetImage('images/yellowcircle.png'),
+                          width: _imagewidth,
+                          height: _imageheight,
+                          color: Theme.of(context).primaryColor,
+                        ),
+                      ),
+                      Container(
+                        child: IconTheme(
+                          data: new IconThemeData(
+                            color: Colors.white,
                           ),
-                          Container(
-                            child: IconTheme(
-                              data: new IconThemeData(color: Colors.white,),
-                              child: new Icon(Icons.info),
-                            ),
-                          )
-                        ],
-                      )),
+                          child: new Icon(Icons.info),
+                        ),
+                      )
+                    ],
+                  )),
                 ),
                 Expanded(
                     flex: 4,
@@ -330,10 +380,7 @@ class _EmployeeInfoScreenState extends State<EmployeeInfoScreen> {
                           'Alerts',
                           style: textStyleTitle,
                         ),
-                      )
-
-
-                      ,
+                      ),
                     )),
                 Expanded(
                     flex: 3,
@@ -363,24 +410,26 @@ class _EmployeeInfoScreenState extends State<EmployeeInfoScreen> {
                   flex: 1,
                   child: GestureDetector(
                       child: Stack(
-                        alignment: Alignment.center,
-                        children: <Widget>[
-                          Container(
-                            child: Image(
-                              image: AssetImage('images/yellowcircle.png'),
-                              width: _imagewidth,
-                              height: _imageheight,
-                              color: Theme.of(context).primaryColor,
-                            ),
+                    alignment: Alignment.center,
+                    children: <Widget>[
+                      Container(
+                        child: Image(
+                          image: AssetImage('images/yellowcircle.png'),
+                          width: _imagewidth,
+                          height: _imageheight,
+                          color: Theme.of(context).primaryColor,
+                        ),
+                      ),
+                      Container(
+                        child: IconTheme(
+                          data: new IconThemeData(
+                            color: Colors.white,
                           ),
-                          Container(
-                            child: IconTheme(
-                              data: new IconThemeData(color: Colors.white,),
-                              child: new Icon(Icons.explicit),
-                            ),
-                          )
-                        ],
-                      )),
+                          child: new Icon(Icons.explicit),
+                        ),
+                      )
+                    ],
+                  )),
                 ),
                 Expanded(
                     flex: 4,
@@ -391,10 +440,7 @@ class _EmployeeInfoScreenState extends State<EmployeeInfoScreen> {
                           'Expenses',
                           style: textStyleTitle,
                         ),
-                      )
-
-
-                      ,
+                      ),
                     )),
                 Expanded(
                     flex: 3,
@@ -419,24 +465,26 @@ class _EmployeeInfoScreenState extends State<EmployeeInfoScreen> {
                   flex: 1,
                   child: GestureDetector(
                       child: Stack(
-                        alignment: Alignment.center,
-                        children: <Widget>[
-                          Container(
-                            child: Image(
-                              image: AssetImage('images/yellowcircle.png'),
-                              width: _imagewidth,
-                              height: _imageheight,
-                              color: Theme.of(context).primaryColor,
-                            ),
+                    alignment: Alignment.center,
+                    children: <Widget>[
+                      Container(
+                        child: Image(
+                          image: AssetImage('images/yellowcircle.png'),
+                          width: _imagewidth,
+                          height: _imageheight,
+                          color: Theme.of(context).primaryColor,
+                        ),
+                      ),
+                      Container(
+                        child: IconTheme(
+                          data: new IconThemeData(
+                            color: Colors.white,
                           ),
-                          Container(
-                            child: IconTheme(
-                              data: new IconThemeData(color: Colors.white,),
-                              child: new Icon(Icons.calendar_today),
-                            ),
-                          )
-                        ],
-                      )),
+                          child: new Icon(Icons.calendar_today),
+                        ),
+                      )
+                    ],
+                  )),
                 ),
                 Expanded(
                     flex: 4,
@@ -447,10 +495,7 @@ class _EmployeeInfoScreenState extends State<EmployeeInfoScreen> {
                           'Calender',
                           style: textStyleTitle,
                         ),
-                      )
-
-
-                      ,
+                      ),
                     )),
                 Expanded(
                     flex: 3,
@@ -470,24 +515,26 @@ class _EmployeeInfoScreenState extends State<EmployeeInfoScreen> {
                   flex: 1,
                   child: GestureDetector(
                       child: Stack(
-                        alignment: Alignment.center,
-                        children: <Widget>[
-                          Container(
-                            child: Image(
-                              image: AssetImage('images/yellowcircle.png'),
-                              width: _imagewidth,
-                              height: _imageheight,
-                              color: Theme.of(context).primaryColor,
-                            ),
+                    alignment: Alignment.center,
+                    children: <Widget>[
+                      Container(
+                        child: Image(
+                          image: AssetImage('images/yellowcircle.png'),
+                          width: _imagewidth,
+                          height: _imageheight,
+                          color: Theme.of(context).primaryColor,
+                        ),
+                      ),
+                      Container(
+                        child: IconTheme(
+                          data: new IconThemeData(
+                            color: Colors.white,
                           ),
-                          Container(
-                            child: IconTheme(
-                              data: new IconThemeData(color: Colors.white,),
-                              child: new Icon(Icons.settings),
-                            ),
-                          )
-                        ],
-                      )),
+                          child: new Icon(Icons.settings),
+                        ),
+                      )
+                    ],
+                  )),
                 ),
                 Expanded(
                     flex: 4,
@@ -498,10 +545,7 @@ class _EmployeeInfoScreenState extends State<EmployeeInfoScreen> {
                           'Settings',
                           style: textStyleTitle,
                         ),
-                      )
-
-
-                      ,
+                      ),
                     )),
                 Expanded(
                     flex: 3,

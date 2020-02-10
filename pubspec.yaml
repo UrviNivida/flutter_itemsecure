@@ -27,6 +27,10 @@ dependencies:
   xlive_switch: 1.0.5
   curved_navigation_bar: ^0.3.1
   cupertino_tabbar: 1.0.1
+  flutter_platform_widgets: ^0.12.0
+  provider: ^3.0.0+1
+  easy_dialog: ^1.0.5
+  google_maps_flutter: ^0.5.22
 #  flutter_native_splash: 0.1.9
 
 

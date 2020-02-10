@@ -1,9 +1,12 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_itemsecure_dsr/app_screens/appointment_detail_screen.dart';
-import 'package:flutter_itemsecure_dsr/app_screens/employee_info_screen.dart';
-import 'package:flutter_itemsecure_dsr/app_screens/outcome_screen.dart';
+
+import 'appointment_detail_screen.dart';
+import 'employee_info_screen.dart';
+import 'maps_appointmentlist_screen.dart';
+import 'outcome_screen.dart';
+
 
 class BottomNavBar extends StatefulWidget {
   @override
@@ -18,8 +21,11 @@ class _BottomNavBarState extends State<BottomNavBar> {
     EmployeeInfoScreen(),
     OutcomeScreen(),
     AppointmentDetailScreen(),
-    OutcomeScreen(),
-    EmployeeInfoScreen(),
+//    MapAppointmentListScreen()
+    maps_appointmentlist_screen()
+
+//    OutcomeScreen(),
+//    EmployeeInfoScreen(),
 //    PlaceholderWidget(Colors.white),
 //    PlaceholderWidget(Colors.deepOrange),
 //    PlaceholderWidget(Colors.green)
@@ -42,7 +48,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
           Icon(Icons.filter_2, size: 30),
           Icon(Icons.filter_3, size: 30),
           Icon(Icons.filter_4, size: 30),
-          Icon(Icons.filter_5, size: 30),
+//          Icon(Icons.filter_5, size: 30),
         ],
         color: Theme.of(context).primaryColor,
         buttonBackgroundColor: Theme.of(context).primaryColor,
@@ -64,7 +70,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
 //for navigation to another activity from tab click
 //        https://inducesmile.com/google-flutter/how-to-route-to-a-new-page-from-bottom-navigation-bar-in-flutter/
-
 
 //        body: Container(
 //          color: Colors.blueAccent,

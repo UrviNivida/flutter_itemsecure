@@ -1,6 +1,4 @@
-import 'package:cupertino_tabbar/cupertino_tabbar.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:cupertino_tabbar/cupertino_tabbar.dart' as CupertinoTabBar;
 import 'package:flutter/material.dart';
 
 class OutcomeScreen extends StatefulWidget {
@@ -56,7 +54,11 @@ class _OutcomeScreenState extends State<OutcomeScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: new IconButton(
-          icon: new Icon(Icons.cancel, color: Colors.black),
+          icon: new Icon(
+            Icons.cancel,
+            color: Colors.black,
+            size: 32,
+          ),
           onPressed: () => Navigator.of(context).pop(),
         ),
         automaticallyImplyLeading: false,
@@ -80,7 +82,10 @@ class _OutcomeScreenState extends State<OutcomeScreen> {
         actions: <Widget>[
           IconButton(
             // action button
-            icon: Icon(Icons.check_circle),
+            icon: Icon(
+              Icons.check_circle,
+              size: 32,
+            ),
             onPressed: () {},
           ),
 //          PopupMenuButton<Choice>( // overflow menu
@@ -126,7 +131,7 @@ class _OutcomeScreenState extends State<OutcomeScreen> {
                         image: AssetImage('images/smile_fill.png'),
                         width: _imagewidth,
                         height: _imageheight,
-                        color: Theme.of(context).primaryColor,
+                        color: Colors.green,
                       ),
                     ),
 //                    Container(
@@ -192,7 +197,7 @@ class _OutcomeScreenState extends State<OutcomeScreen> {
                         image: AssetImage('images/yellowcircle.png'),
                         width: _imagewidth,
                         height: _imageheight,
-                        color: Theme.of(context).primaryColor,
+                        color: Colors.grey,
                       ),
                     ),
                     Container(
@@ -213,11 +218,10 @@ class _OutcomeScreenState extends State<OutcomeScreen> {
                           children: <Widget>[
                             Container(
                               child: Image(
-                                image: AssetImage('images/yellowcircle.png'),
-                                width: _imagewidth,
-                                height: _imageheight,
-                                color: Colors.grey,
-                              ),
+                                  image: AssetImage('images/yellowcircle.png'),
+                                  width: _imagewidth,
+                                  height: _imageheight,
+                                  color: Theme.of(context).primaryColor),
                             ),
                             Container(
                                 child: IconTheme(

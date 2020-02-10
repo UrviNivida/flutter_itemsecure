@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_itemsecure_dsr/model/Schdeulecard.dart';
@@ -8,7 +6,7 @@ import 'package:flutter_itemsecure_dsr/model/Schedulelist.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 
-class MapAppointmentListScreen extends StatefulWidget {
+class maps_appointmentlist_screen extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -16,7 +14,7 @@ class MapAppointmentListScreen extends StatefulWidget {
   }
 }
 
-class googlemap_screennew extends State<MapAppointmentListScreen> {
+class googlemap_screennew extends State<maps_appointmentlist_screen> {
   var _padding = 12.0;
   bool _value = true;
   var _imageheight = 40.0;
@@ -35,30 +33,17 @@ class googlemap_screennew extends State<MapAppointmentListScreen> {
       fontWeight: FontWeight.w700,
       fontFamily: 'Quicksand',
       color: Colors.white);
-  Completer<GoogleMapController> _controller = Completer();
-
-  static const LatLng _center = const LatLng(22.317498, 73.164598);
-
-  final Set<Marker> _markers = {};
-
-  LatLng _lastMapPosition = _center;
-
-  MapType _currentMapType = MapType.normal;
-  void _onMapTypeButtonPressed() {
-    setState(() {
-      _currentMapType = _currentMapType == MapType.normal
-          ? MapType.satellite
-          : MapType.normal;
-    });
-  }
 
   final List<ScheduleModel> scheduleing = Schedulelist.getschedule();
-  void _onAddMarkerButtonPressed() {
+  GoogleMapController myMapController;
+  final Set<Marker> _markers = new Set();
+  static const LatLng _mainLocation = const LatLng(22.317498, 73.164598);
+  Set<Marker> myMarker() {
     setState(() {
       _markers.add(Marker(
         // This marker id can be anything that uniquely identifies each marker.
-        markerId: MarkerId(_lastMapPosition.toString()),
-        position: _lastMapPosition,
+        markerId: MarkerId(_mainLocation.toString()),
+        position: _mainLocation,
         infoWindow: InfoWindow(
           title: 'Nivida Web Solutions Pvt. Ltd.',
           snippet:
@@ -67,14 +52,8 @@ class googlemap_screennew extends State<MapAppointmentListScreen> {
         icon: BitmapDescriptor.defaultMarker,
       ));
     });
-  }
 
-  void _onCameraMove(CameraPosition position) {
-    _lastMapPosition = position.target;
-  }
-
-  void _onMapCreated(GoogleMapController controller) {
-    _controller.complete(controller);
+    return _markers;
   }
 
   void _showBottom() {
@@ -367,39 +346,21 @@ class googlemap_screennew extends State<MapAppointmentListScreen> {
   Widget _tabSection(BuildContext context) {
     return Container(
       height: 380,
-      child: Stack(
+      child: Column(
         children: <Widget>[
-          GoogleMap(
-            onMapCreated: _onMapCreated,
-            initialCameraPosition: CameraPosition(
-              target: _center,
-              zoom: 11.0,
-            ),
-            mapType: _currentMapType,
-            markers: _markers,
-            onCameraMove: _onCameraMove,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Align(
-              alignment: Alignment.topRight,
-              child: Column(
-                children: <Widget>[
-                  FloatingActionButton(
-                    onPressed: _onMapTypeButtonPressed,
-                    materialTapTargetSize: MaterialTapTargetSize.padded,
-                    backgroundColor: Color(0xFFF8C300),
-                    child: const Icon(Icons.map, size: 36.0),
-                  ),
-                  SizedBox(height: 16.0),
-                  FloatingActionButton(
-                    onPressed: _onAddMarkerButtonPressed,
-                    materialTapTargetSize: MaterialTapTargetSize.padded,
-                    backgroundColor: Color(0xFFF8C300),
-                    child: const Icon(Icons.add_location, size: 36.0),
-                  ),
-                ],
+          Expanded(
+            child: GoogleMap(
+              initialCameraPosition: CameraPosition(
+                target: _mainLocation,
+                zoom: 10.0,
               ),
+              markers: this.myMarker(),
+              mapType: MapType.normal,
+              onMapCreated: (controller) {
+                setState(() {
+                  myMapController = controller;
+                });
+              },
             ),
           ),
         ],
