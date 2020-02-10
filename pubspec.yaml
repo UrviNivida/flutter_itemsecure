@@ -1,0 +1,72 @@
+name: flutter_itemsecure_dsr
+description: A new Flutter application.
+
+# The following defines the version and build number for your application.
+# A version number is three numbers separated by dots, like 1.2.43
+# followed by an optional build number separated by a +.
+# Both the version and the builder number may be overridden in flutter
+# build by specifying --build-name and --build-number, respectively.
+# In Android, build-name is used as versionName while build-number used as versionCode.
+# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
+# In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
+# Read more about iOS versioning at
+# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.1.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^0.1.2
+  http: 0.12.0+4
+  shared_preferences: ^0.5.6
+  circular_profile_avatar: ^1.0.6
+  xlive_switch: 1.0.5
+  curved_navigation_bar: ^0.3.1
+  cupertino_tabbar: 1.0.1
+#  flutter_native_splash: 0.1.9
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+#flutter_native_splash:
+#  image: images/splashscreen.png
+#  color: "42a5f5"
+#  android_disable_fullscreen: true
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - images/splashscreen.png
+    - images/art.png
+    - images/itemlogo.png
+    - images/photo_camera.png
+    - images/wrong.png
+    - images/yellowcircle.png
+    - images/whitepin.png
+    - images/smile_fill.png
+    - images/sad_b.png
+    - images/sad_fill.png
+    - images/smile_b.png
+
+  fonts:
+    - family: Quicksand
+      fonts:
+        - asset: fonts/Quicksand-Regular.ttf
+        - asset: fonts/quicksand-italic_[allfont.net].ttf
+          style: italic
+          weight: 300
+        - asset: fonts/Quicksand-Bold.ttf
+          weight: 700
+    - family: Roboto
+      fonts:
+        - asset: fonts/roboto-light-italic.ttf
+        - asset: fonts/roboto_medium.ttf
+          weight: 700
+
