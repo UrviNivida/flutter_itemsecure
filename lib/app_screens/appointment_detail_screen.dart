@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_itemsecure_dsr/model/MeetingModel.dart';
-import 'package:flutter_itemsecure_dsr/model/Meetingcard.dart';
-import 'package:flutter_itemsecure_dsr/model/Meetinglist.dart';
+import 'package:flutter_itemsecure_dsr/adapters/Meetingcard.dart';
+import 'package:flutter_itemsecure_dsr/listing_data/Meetinglist.dart';
 
 
 class AppointmentDetailScreen extends StatefulWidget {

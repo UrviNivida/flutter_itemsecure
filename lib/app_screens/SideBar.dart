@@ -46,6 +46,8 @@ class _SideBarState extends State<SideBar>
       fontFamily: 'Quicksand',
       color: Colors.black);
 
+  String punchstring="";
+
   @override
   void initState() {
     super.initState();
@@ -137,6 +139,9 @@ class _SideBarState extends State<SideBar>
     var _padding = 8.0;
 
     Widget getinout() {
+
+
+
       if (_value == true) {
         return StreamBuilder<bool>(
           initialData: false,

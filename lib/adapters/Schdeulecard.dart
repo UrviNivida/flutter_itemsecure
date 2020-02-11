@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'ScheduleModel.dart';
+import '../model/ScheduleModel.dart';
 
 
 class Schdeulecard extends StatelessWidget {

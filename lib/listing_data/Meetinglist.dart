@@ -1,6 +1,6 @@
 
 
-import 'MeetingModel.dart';
+import '../model/MeetingModel.dart';
 
 class Meetinglist {
   static List<MeetingModel> getmeeting() {

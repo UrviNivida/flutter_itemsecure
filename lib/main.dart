@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_itemsecure_dsr/app_screens/checkin_screen.dart';
 import 'package:flutter_itemsecure_dsr/app_screens/employee_info_screen.dart';
 import 'package:flutter_itemsecure_dsr/app_screens/map_appointmentlist_screen.dart';
 import 'package:flutter_itemsecure_dsr/utils/prefs_file.dart';
@@ -32,19 +33,16 @@ Future main() async {
       theme: new ThemeData(
         primaryColor: const Color(0xFFF8C300),
         accentColor: const Color(0xFF212121),
-
 //        textTheme: TextTheme(
 //          headline: TextStyle(fontSize: 72.0,
 //              fontWeight: FontWeight.bold),
 //          title: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
 //          body1: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
-//
 //        ),
       ),
-//      home: new SplashScreen()));
-//      home: new EmployeeInfoScreen()));
-      home: new Loginscreen()));
-//      home: new BottomNavBar()));
+//      home: new Loginscreen()));
+      home: new CheckInScreen()));
+
 }
 
 class SplashScreen extends StatefulWidget {

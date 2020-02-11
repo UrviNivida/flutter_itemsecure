@@ -1,7 +1,7 @@
 import 'package:easy_dialog/easy_dialog.dart';
 import 'package:flutter/material.dart';
 
-import 'MeetingModel.dart';
+import '../model/MeetingModel.dart';
 
 
 class Meetingcard extends StatelessWidget {

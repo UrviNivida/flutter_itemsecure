@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_itemsecure_dsr/model/Schdeulecard.dart';
+import 'package:flutter_itemsecure_dsr/adapters/Schdeulecard.dart';
 import 'package:flutter_itemsecure_dsr/model/ScheduleModel.dart';
-import 'package:flutter_itemsecure_dsr/model/Schedulelist.dart';
+import 'package:flutter_itemsecure_dsr/listing_data/Schedulelist.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 
