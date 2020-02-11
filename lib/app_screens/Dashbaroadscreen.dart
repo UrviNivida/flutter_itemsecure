@@ -14,7 +14,13 @@ class Dashbaroadscreen extends StatefulWidget {
 }
 
 class Dashbaroadscreennew extends State<Dashbaroadscreen> {
-  var title = TextStyle(fontSize: 20, color: Colors.white);
+
+  TextStyle headStyle = TextStyle(
+      fontSize: 16.0,
+      fontWeight: FontWeight.w700,
+      fontFamily: 'Quicksand',
+      color: Colors.black);
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -23,8 +29,8 @@ class Dashbaroadscreennew extends State<Dashbaroadscreen> {
         automaticallyImplyLeading: false,
         centerTitle: true,
         title: Text(
-          "Today",
-          style: title,
+          'Today',
+          style: headStyle,
         ),
         actions: <Widget>[
           Row(
@@ -60,7 +66,7 @@ class Dashbaroadscreennew extends State<Dashbaroadscreen> {
                             alignment: Alignment.topCenter,
                             child: Text(
                               "1",
-                              style: title,
+                              style: headStyle,
                             ),
                           )),
                         ),

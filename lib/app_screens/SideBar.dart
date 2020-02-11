@@ -23,6 +23,29 @@ class _SideBarState extends State<SideBar>
   StreamSink<bool> isSidebarOpenedSink;
   final _animationDuration = const Duration(milliseconds: 500);
 
+  TextStyle headStyle = TextStyle(
+      fontSize: 16.0,
+      fontWeight: FontWeight.w700,
+      fontFamily: 'Quicksand',
+      color: Colors.black);
+  TextStyle textStyle = TextStyle(
+      fontSize: 14.0,
+      fontWeight: FontWeight.w500,
+      fontFamily: 'Quicksand',
+      color: Colors.black);
+
+  TextStyle textStylePunch = TextStyle(
+      fontSize: 13.0,
+      fontWeight: FontWeight.w600,
+      fontFamily: 'Quicksand',
+      color: Colors.black);
+
+  TextStyle navStyle = TextStyle(
+      fontSize: 16.0,
+      fontWeight: FontWeight.w600,
+      fontFamily: 'Quicksand',
+      color: Colors.black);
+
   @override
   void initState() {
     super.initState();
@@ -57,6 +80,13 @@ class _SideBarState extends State<SideBar>
   bool _value = true;
   @override
   Widget build(BuildContext context) {
+
+    TextStyle headStyleYellow = TextStyle(
+        fontSize: 16.0,
+        fontWeight: FontWeight.w700,
+        fontFamily: 'Quicksand',
+        color: Theme.of(context).primaryColor);
+
     print(_value);
     void _changeValue(bool value) {
       setState(() {
@@ -72,7 +102,7 @@ class _SideBarState extends State<SideBar>
                   title: new Text('Item Secure',
                       style: TextStyle(
                         fontSize: 16.0,
-                        color: Color(0xFFF8C300),
+                        color: Theme.of(context).primaryColor,
                       )),
                   content: new Text(
                     'Are you sure you want to PunchOut?',
@@ -93,7 +123,7 @@ class _SideBarState extends State<SideBar>
                         });
                       },
                       child: new Text('Yes'),
-                      textColor: Color(0xFFF8C300),
+                      textColor: Theme.of(context).primaryColor,
                     ),
                   ],
                 ),
@@ -105,6 +135,7 @@ class _SideBarState extends State<SideBar>
 
     final screenWidth = MediaQuery.of(context).size.width;
     var _padding = 8.0;
+
     Widget getinout() {
       if (_value == true) {
         return StreamBuilder<bool>(
@@ -122,23 +153,17 @@ class _SideBarState extends State<SideBar>
                   Expanded(
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
-                      color: const Color(0xFFF8C300),
+                      color: Theme.of(context).primaryColor,
                       child: Column(
                         children: <Widget>[
                           ListTile(
                             title: Text(
                               "Khushali Thakkar",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w800),
+                              style: headStyle,
                             ),
                             subtitle: Text(
                               "Android Developer",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 14,
-                              ),
+                              style: textStyle,
                             ),
                             leading: CircleAvatar(
                               child: Icon(
@@ -156,18 +181,15 @@ class _SideBarState extends State<SideBar>
 //                        endIndent: 10,
                           ),
                           Padding(
-                            padding: EdgeInsets.all(1),
+                            padding: EdgeInsets.all(0.0),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
                                 Expanded(
-                                  flex: 3,
+                                  flex: 5,
                                   child: Text(
                                     'Punched in : 23rd May 2014, 9:00 am',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w800),
+                                    style: textStylePunch,
                                   ),
                                 ),
                                 Expanded(
@@ -191,15 +213,12 @@ class _SideBarState extends State<SideBar>
                           ),
                           ListTile(
                             leading: Icon(
-                              Icons.perm_identity,
-                              color: Colors.white,
+                              Icons.card_travel,
+                              color: Colors.black,
                             ),
                             title: Text(
                               "Visit",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w800),
+                              style: navStyle,
                             ),
                             onTap: () {
                               onIconPressed();
@@ -209,15 +228,12 @@ class _SideBarState extends State<SideBar>
                           ),
                           ListTile(
                             leading: Icon(
-                              Icons.message,
-                              color: Colors.white,
+                              Icons.chat_bubble_outline,
+                              color: Colors.black,
                             ),
                             title: Text(
                               "Message",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w800),
+                              style: navStyle,
                             ),
                             onTap: () {
                               onIconPressed();
@@ -227,15 +243,12 @@ class _SideBarState extends State<SideBar>
                           ),
                           ListTile(
                             leading: Icon(
-                              Icons.perm_identity,
-                              color: Colors.white,
+                              Icons.attach_money,
+                              color: Colors.black,
                             ),
                             title: Text(
                               "Expenses",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w800),
+                              style: navStyle,
                             ),
                             onTap: () {
                               onIconPressed();
@@ -245,15 +258,13 @@ class _SideBarState extends State<SideBar>
                           ),
                           ListTile(
                             leading: Icon(
-                              Icons.perm_identity,
-                              color: Colors.white,
+                              Icons.help_outline,
+                              color: Colors.black,
+
                             ),
                             title: Text(
                               "Tips",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w800),
+                              style: navStyle,
                             ),
                             onTap: () {
                               onIconPressed();
@@ -271,14 +282,11 @@ class _SideBarState extends State<SideBar>
                           ListTile(
                             leading: Icon(
                               Icons.power_settings_new,
-                              color: Colors.white,
+                              color: Colors.black,
                             ),
                             title: Text(
                               "Logout",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w800),
+                              style: navStyle,
                             ),
                             onTap: () {
                               //onIconPressed();
@@ -288,10 +296,10 @@ class _SideBarState extends State<SideBar>
                                       title: new Text(
                                         'Logout',
                                         style:
-                                            TextStyle(color: Color(0xFFF8C300)),
+                                            headStyle,
                                       ),
                                       content:
-                                          new Text('Are you sure to logout?'),
+                                          new Text('Are you sure to logout?',style: textStyle,),
                                       actions: <Widget>[
                                         new FlatButton(
                                           onPressed: () =>
@@ -304,7 +312,7 @@ class _SideBarState extends State<SideBar>
                                           onPressed: () =>
                                               Navigator.of(context).pop(false),
                                           child: new Text('Yes'),
-                                          textColor: Color(0xFFF8C300),
+                                          textColor: Theme.of(context).primaryColor,
                                         ),
                                       ],
                                     ),
@@ -327,12 +335,12 @@ class _SideBarState extends State<SideBar>
                         child: Container(
                           width: 35,
                           height: 100,
-                          color: Color(0xFFF8C300),
+                          color: Theme.of(context).primaryColor,
                           alignment: Alignment.centerLeft,
                           child: AnimatedIcon(
                             progress: _animationController.view,
                             icon: AnimatedIcons.menu_close,
-                            color: Color(0xFF1BB5FD),
+                            color: Colors.black,
                             size: 25,
                           ),
                         ),
