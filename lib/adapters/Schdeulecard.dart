@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 import '../model/ScheduleModel.dart';
@@ -102,5 +104,6 @@ class Schdeulecard extends StatelessWidget {
         ),
       ]),
     );
+
   }
 }

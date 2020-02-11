@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_itemsecure_dsr/adapters/Schdeulecard.dart';
+import 'package:flutter_itemsecure_dsr/adapters/checkin_layout.dart';
 import 'package:flutter_itemsecure_dsr/model/ScheduleModel.dart';
 import 'package:flutter_itemsecure_dsr/listing_data/Schedulelist.dart';
 
@@ -26,16 +27,19 @@ class CheckInScreenState extends State<CheckInScreen>
         fontWeight: FontWeight.w700,
         fontFamily: 'Quicksand',
         color: Colors.black);
+
     TextStyle textStyle = TextStyle(
         fontSize: 14.0,
         fontWeight: FontWeight.w500,
         fontFamily: 'Quicksand',
         color: Colors.black);
+
     TextStyle textStyleBlue = TextStyle(
         fontSize: 14.0,
         fontWeight: FontWeight.w600,
         fontFamily: 'Quicksand',
         color: Colors.black);
+
     TextStyle textStyleTitle = TextStyle(
         fontSize: 14.0,
         fontWeight: FontWeight.w500,
@@ -132,7 +136,7 @@ class CheckInScreenState extends State<CheckInScreen>
               color: Colors.red,
             ),
             background: Container(),
-            child: Schdeulecard(scheduleModel: scheduleing[index]),
+            child: CheckInLayout(scheduleModel: scheduleing[index]),
             key: UniqueKey(),
             direction: DismissDirection.endToStart,
           );
