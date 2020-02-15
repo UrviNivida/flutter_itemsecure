@@ -87,13 +87,13 @@ class CheckInScreenState extends State<CheckInScreen>
           ],
         ),
         actions: <Widget>[
-          IconButton(
-            // action button
-            icon: Icon(
-              Icons.check_circle,
-            ),
-            onPressed: () {},
-          ),
+//          IconButton(
+//            // action button
+//            icon: Icon(
+//              Icons.check_circle,
+//            ),
+//            onPressed: () {},
+//          ),
 //          PopupMenuButton<Choice>( // overflow menu
 //            onSelected: _select,
 //            itemBuilder: (BuildContext context) {

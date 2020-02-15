@@ -5,7 +5,6 @@ import 'package:flutter_itemsecure_dsr/model/ScheduleModel.dart';
 import 'package:flutter_itemsecure_dsr/listing_data/Schedulelist.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-
 class maps_appointmentlist_screen extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -38,6 +37,7 @@ class googlemap_screennew extends State<maps_appointmentlist_screen> {
   GoogleMapController myMapController;
   final Set<Marker> _markers = new Set();
   static const LatLng _mainLocation = const LatLng(22.317498, 73.164598);
+
   Set<Marker> myMarker() {
     setState(() {
       _markers.add(Marker(

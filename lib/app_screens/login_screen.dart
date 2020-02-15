@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'Dashbaroadscreen.dart';
 import 'FadeAnimation.dart';
 
-
 class Loginscreen extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -26,9 +25,9 @@ class Loginscreennew extends State<Loginscreen> {
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
             gradient: LinearGradient(begin: Alignment.topCenter, colors: [
-          Color(0xFFF8C300),
+          Theme.of(context).primaryColor,
           Color(0xFFFFEE58),
-          Color(0xFFF8C300)
+          Theme.of(context).primaryColor
         ])),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

@@ -2,13 +2,15 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_itemsecure_dsr/app_screens/addvisit_screen.dart';
 import 'package:flutter_itemsecure_dsr/app_screens/checkin_screen.dart';
 import 'package:flutter_itemsecure_dsr/app_screens/employee_info_screen.dart';
+import 'package:flutter_itemsecure_dsr/app_screens/expense_list_screen.dart';
 import 'package:flutter_itemsecure_dsr/app_screens/map_appointmentlist_screen.dart';
 import 'package:flutter_itemsecure_dsr/utils/prefs_file.dart';
 
-import 'app_screens/Loginscreen.dart';
-import 'app_screens/navigation_screen.dart';
+import 'app_screens/login_screen.dart';
+import 'app_screens/bottom_navigation_screen.dart';
 
 //https://vimeo.com/372583791
 //https://pub.dev/packages/flutter_native_splash
@@ -41,7 +43,11 @@ Future main() async {
 //        ),
       ),
 //      home: new Loginscreen()));
-      home: new CheckInScreen()));
+//      home: new CheckInScreen()));
+//      home: new AddVisitScreen()));
+//      home: new ExpenseListScreen()));
+      home: new BottomNavBar()));
+
 
 }
 
