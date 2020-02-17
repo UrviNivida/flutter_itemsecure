@@ -67,33 +67,43 @@ class CheckInScreenState extends State<CheckInScreen>
             color: Colors.black,
           ),
           onPressed: () => Navigator.of(context).pop(),
+
         ),
         automaticallyImplyLeading: false,
+//        title: Text(
+//          'Check-IN',
+//          style: headStyle,
+//          textAlign: TextAlign.center,
+//        ),
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Padding(
-              padding: EdgeInsets.all(5.0),
+              padding: EdgeInsets.all(0.0),
               child: Column(
 //                mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text(
-                    'Report Outcome',
-                    style: headStyle,
-                  ),
+                  Center(
+                    child: Text(
+                      'Check-IN',
+                      style: headStyle,
+                    ),
+                  )
+
                 ],
               ),
             ),
           ],
         ),
         actions: <Widget>[
-//          IconButton(
-//            // action button
-//            icon: Icon(
-//              Icons.check_circle,
-//            ),
-//            onPressed: () {},
-//          ),
+          IconButton(
+            // action button
+            icon: Icon(
+              Icons.message,
+              color: Theme.of(context).primaryColor,
+            ),
+            onPressed: () {},
+          ),
 //          PopupMenuButton<Choice>( // overflow menu
 //            onSelected: _select,
 //            itemBuilder: (BuildContext context) {

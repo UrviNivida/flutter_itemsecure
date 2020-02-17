@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_itemsecure_dsr/app_screens/addexpense_screen.dart';
 import 'package:flutter_itemsecure_dsr/app_screens/addvisit_screen.dart';
 import 'package:flutter_itemsecure_dsr/app_screens/checkin_screen.dart';
 import 'package:flutter_itemsecure_dsr/app_screens/employee_info_screen.dart';
@@ -46,8 +47,8 @@ Future main() async {
 //      home: new CheckInScreen()));
 //      home: new AddVisitScreen()));
 //      home: new ExpenseListScreen()));
-      home: new BottomNavBar()));
-
+//      home: new BottomNavBar()));
+      home: new AddExpenseScreen()));
 
 }
 
@@ -67,7 +68,6 @@ class SplashScreenState extends State<SplashScreen> {
   startTime() async {
     var _duration = new Duration(seconds: 8);
     print("111111" + isLogin);
-
     return new Timer(_duration, navigationPage);
   }
 
@@ -76,7 +76,6 @@ class SplashScreenState extends State<SplashScreen> {
 //      Navigator.push(context, MaterialPageRoute(builder: (context) {
 //        return Home();
 //      }));
-
     } else {
       Navigator.push(context, MaterialPageRoute(builder: (context) {
         return EmployeeInfoScreen();

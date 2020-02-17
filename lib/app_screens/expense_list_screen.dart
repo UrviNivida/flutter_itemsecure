@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_itemsecure_dsr/adapters/expenselist_layout.dart';
 import 'package:flutter_itemsecure_dsr/app_screens/navigation_drawer.dart';
+import 'package:flutter_itemsecure_dsr/listing_data/Schedulelist.dart';
+import 'package:flutter_itemsecure_dsr/model/ScheduleModel.dart';
 
 import 'NavigationBloc.dart';
 import 'SideBar.dart';
@@ -19,20 +22,31 @@ class ExpenseListScreenState extends State<ExpenseListScreen> {
       fontFamily: 'Quicksand',
       color: Colors.black);
 
+  TextStyle titleStyle = TextStyle(
+      fontSize: 14.0,
+      fontWeight: FontWeight.w700,
+      fontFamily: 'Quicksand',
+      color: Colors.black);
+
+  TextStyle valueStyle = TextStyle(
+      fontSize: 14.0,
+      fontWeight: FontWeight.w700,
+      fontFamily: 'Quicksand',
+      color: Colors.grey);
+
+  final List<ScheduleModel> scheduleing = Schedulelist.getschedule();
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      appBar: AppBar(leading: IconButton(
-        //        automaticallyImplyLeading: false,
-        //        centerTitle: true,
-        icon: Icon(Icons.menu, color: Colors.black), // set your color here
-        onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return NavigationDrawerScreen();
-          }));
-        },
-      ),
+      appBar: AppBar(
+        leading: Builder(
+          builder: (context) => IconButton(
+            icon: new Icon(Icons.menu),
+            onPressed: () => Scaffold.of(context).openDrawer(),
+          ),
+        ),
         title: Text(
           'Expenses',
           style: headStyle,
@@ -41,51 +55,19 @@ class ExpenseListScreenState extends State<ExpenseListScreen> {
         actions: <Widget>[
           Row(
             children: <Widget>[
-              Container(
-                margin: const EdgeInsets.only(right: 10.0),
-                width: 32,
-                height: 32,
-                child: Stack(
-                  children: [
-                    GestureDetector(
-                        onTap: () {},
-                        child: Icon(
-                          Icons.message,
-                          color: Colors.white,
-                          size: 35,
-                        )),
-                    Container(
-                      width: 40,
-                      height: 40,
-                      alignment: Alignment.topRight,
-                      child: Container(
-                        width: 19,
-                        height: 19,
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.red,
-                            border: Border.all(color: Colors.white, width: 1)),
-                        child: Padding(
-                          padding: const EdgeInsets.all(0.0),
-                          child: Center(
-                              child: Container(
-                                alignment: Alignment.topCenter,
-                                child: Text(
-                                  "1",
-                                  style: headStyle,
-                                ),
-                              )),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+              IconButton(
+                icon: new Icon(Icons.add),
+                onPressed: (){},
               ),
+              IconButton(
+                icon: new Icon(Icons.filter_list),
+                onPressed: () {},
+              )
             ],
           ),
         ],
       ),
-      drawer: NavigationDrawerScreen(),
+      drawer: new NavigationDrawerScreen(),
       body: Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
@@ -103,22 +85,109 @@ class ExpenseListScreenState extends State<ExpenseListScreen> {
 
   Widget expenseListWidget()
   {
-    return Container(
-      child: Column(
-        children: <Widget>[
-          Container(
-            child: Column(
-              children: <Widget>[
-                Text('111'),
-                Text('111'),
-                Text('111'),
-                Text('111'),
-              ],
+    return new
+    Padding(padding: EdgeInsets.all(10.0),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisSize: MainAxisSize.max,
+      children: <Widget>[
+        Row(
+          children: <Widget>[
+            Expanded(
+              flex: 1,
+              child: Text('Claimed',textAlign: TextAlign.left,style: titleStyle),
             ),
-          )
-        ],
-      ),
+            Expanded(
+              flex: 1,
+              child: Text('₹ '+'380.0',textAlign: TextAlign.right,style: valueStyle),
+            )
+          ],
+        ),
+        SizedBox(
+          height: 10.0,
+        ),
+        Row(
+          children: <Widget>[
+            Expanded(
+              flex: 1,
+              child: Text('Approved',textAlign: TextAlign.left,style: titleStyle),
+            ),
+            Expanded(
+              flex: 1,
+              child: Text('₹ '+'0.0',textAlign: TextAlign.right,style: valueStyle),
+            )
+          ],
+        ),
+        SizedBox(
+          height: 10.0,
+        ),
+        Row(
+          children: <Widget>[
+            Expanded(
+              flex: 1,
+              child: Text('Disbursed',textAlign: TextAlign.left,style: titleStyle),
+            ),
+            Expanded(
+              flex: 1,
+              child: Text('₹ '+'0.0',textAlign: TextAlign.right,style: valueStyle),
+            )
+          ],
+        ),
+        SizedBox(
+          height: 10.0,
+        ),
+        Row(
+          children: <Widget>[
+            Expanded(
+              flex: 1,
+              child: Text('Date Range',textAlign: TextAlign.left,style: titleStyle),
+            ),
+            Expanded(
+              flex: 1,
+              child: Text('Current Month',textAlign: TextAlign.right,style: valueStyle),
+            )
+          ],
+        ),
+        SizedBox(
+          height: 10.0,
+        ),
+        new Expanded(child: _buildExpenseList(),)
+      ],
+    ));
+  }
 
+
+  Widget _buildExpenseList() {
+    return Container(
+
+//      width: MediaQuery.of(context).size.width,
+      child: scheduleing.length > 0
+          ? ListView.builder(
+        itemCount: scheduleing.length,
+        itemBuilder: (BuildContext context, int index) {
+          return Dismissible(
+            onDismissed: (DismissDirection direction) {
+              setState(() {
+                scheduleing.removeAt(index);
+              });
+            },
+            secondaryBackground: Container(
+              child: Center(
+                child: Text(
+                  'Delete',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+              color: Colors.red,
+            ),
+            background: Container(),
+            child: ExpenseListLayout(scheduleModel: scheduleing[index]),
+            key: UniqueKey(),
+            direction: DismissDirection.endToStart,
+          );
+        },
+      )
+          : Center(child: Text('No Items')),
     );
   }
 }

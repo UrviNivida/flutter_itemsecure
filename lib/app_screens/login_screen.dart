@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'Dashbaroadscreen.dart';
+import 'dashboard_screen.dart';
 import 'FadeAnimation.dart';
 
 class Loginscreen extends StatefulWidget {
@@ -173,7 +173,7 @@ class Loginscreennew extends State<Loginscreen> {
                                   onTap: () {
                                     Navigator.push(context,
                                         MaterialPageRoute(builder: (context) {
-                                      return Dashbaroadscreen();
+                                      return DashbaroadScreen();
                                     }));
                                   },
                                   child: Text("Login",
