@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+
+import 'expense_list_screen.dart';
 
 class OutcomeScreen extends StatefulWidget {
   @override
@@ -16,7 +19,7 @@ class _OutcomeScreenState extends State<OutcomeScreen> {
   var _circlePadding = 8.0;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext contextt) {
     TextStyle headStyle = TextStyle(
         fontSize: 16.0,
         fontWeight: FontWeight.w700,
@@ -50,6 +53,18 @@ class _OutcomeScreenState extends State<OutcomeScreen> {
       fontFamily: 'Quicksand',
     );
 
+    TextEditingController startdatecon = new TextEditingController();
+    TextEditingController starttimecon = new TextEditingController();
+    TextEditingController endtimecon = new TextEditingController();
+
+    final format = DateFormat("yyyy-MM-dd");
+//  final format = TimeOfDayFormat("yyyy-MM-dd");
+    String startformat = '',starttimeformat='';
+    DateTime selectedDate = DateTime.now();
+    TimeOfDay selectedTime;
+
+
+
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
@@ -57,7 +72,6 @@ class _OutcomeScreenState extends State<OutcomeScreen> {
           icon: new Icon(
             Icons.cancel,
             color: Colors.black,
-            size: 32,
           ),
           onPressed: () => Navigator.of(context).pop(),
         ),
@@ -84,7 +98,6 @@ class _OutcomeScreenState extends State<OutcomeScreen> {
             // action button
             icon: Icon(
               Icons.check_circle,
-              size: 32,
             ),
             onPressed: () {},
           ),
@@ -252,12 +265,112 @@ class _OutcomeScreenState extends State<OutcomeScreen> {
                     )),
                 Expanded(
                     flex: 2,
+                    child:  GestureDetector(
+                      child: AbsorbPointer(
+                          child: Container(
+                            alignment: Alignment.center,
+                            child: TextFormField(
+                              autofocus: false,
+//                                  focusNode:  FocusScope.of(context).requestFocus(new FocusNode()),
+                              keyboardType: TextInputType.datetime,
+//                                maxLength: 10,
+                              style: textStyle,
+                              controller: startdatecon,
+                              validator: (String value) {
+                                if (value.isEmpty) {
+                                  return 'Please Select Start Date';
+                                }
+                              },
+                              decoration: InputDecoration(
+                                border: InputBorder.none,
+//                                    labelStyle: labelStyle,
+                                hintText: 'Start Date',
+                                hintStyle: hintStyle,
+//                                    labelText: 'Agency Name'
+//                                    contentPadding: const EdgeInsets.only(bottom: -10.0)
+
+//                            filled: true,
+                              ),
+                            ),
+                          )),
+                      onTap: () {
+                        _selectDate(context);
+                      },
+                    )),
+                Expanded(
+                    flex: 2,
+                    child: GestureDetector(
+                      child: AbsorbPointer(
+                          child: Container(
+                            alignment: Alignment.center,
+                            child: TextFormField(
+                              autofocus: false,
+//                                  focusNode:  FocusScope.of(context).requestFocus(new FocusNode()),
+                              keyboardType: TextInputType.datetime,
+//                                maxLength: 10,
+                              style: textStyle,
+                              controller: starttimecon,
+                              validator: (String value) {
+                                if (value.isEmpty) {
+                                  return 'Please Select Start Time';
+                                }
+                              },
+                              decoration: InputDecoration(
+                                border: InputBorder.none,
+//                                    labelStyle: labelStyle,
+                                hintText: 'Start Time',
+                                hintStyle: hintStyle,
+//                                    labelText: 'Agency Name'
+//                                    contentPadding: const EdgeInsets.only(bottom: -10.0)
+
+//                            filled: true,
+                              ),
+                            ),
+                          )),
+                      onTap: () {
+                        _selectTime(context);
+                      },
+                    )),
+                Expanded(
+                    flex: 1,
+                    child: GestureDetector(
+                        child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: <Widget>[
+                        Container(
+                          child: IconTheme(
+                            data: new IconThemeData(
+                              color: Colors.grey,
+                            ),
+                            child: new Icon(Icons.arrow_forward_ios),
+                          ),
+                        )
+                      ],
+                    ))),
+              ],
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.all(_padding),
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                    flex: 2,
                     child: GestureDetector(
                       child: Padding(
                         padding: EdgeInsets.all(_circlePadding),
                         child: Text(
-                          '12-May 2014',
-                          style: textStyleTitle,
+                          'To?',
+                          style: textStyleBlue,
+                        ),
+                      ),
+                    )),
+                Expanded(
+                    flex: 2,
+                    child: GestureDetector(
+                      child: Padding(
+                        padding: EdgeInsets.all(_circlePadding),
+                        child: Text(''
                         ),
                       ),
                     )),
@@ -276,18 +389,43 @@ class _OutcomeScreenState extends State<OutcomeScreen> {
                     flex: 1,
                     child: GestureDetector(
                         child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: <Widget>[
-                        Container(
-                          child: IconTheme(
-                            data: new IconThemeData(
-                              color: Colors.grey,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: <Widget>[
+                            Container(
+                              child: IconTheme(
+                                data: new IconThemeData(
+                                  color: Colors.grey,
+                                ),
+                                child: new Icon(Icons.arrow_forward_ios),
+                              ),
+                            )
+                          ],
+                        ))),
+              ],
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.all(_padding),
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  flex: 1,
+                  child: GestureDetector(
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: <Widget>[
+                          Container(
+                            child: TextField(
+                              decoration: InputDecoration(
+                                  hintStyle: hintStyle,
+                                  labelStyle: textStyle,
+                                  border: InputBorder.none,
+                                  hintText: 'Subject'),
                             ),
-                            child: new Icon(Icons.arrow_forward_ios),
                           ),
-                        )
-                      ],
-                    ))),
+                        ],
+                      )),
+                ),
               ],
             ),
           ),
@@ -319,6 +457,49 @@ class _OutcomeScreenState extends State<OutcomeScreen> {
         ],
       ),
     );
+
+
+  }
+
+
+
+
+  Future<DateTime> _selectDate(BuildContext context) async {
+    final DateTime pickeddate = await showDatePicker(
+        context: context,
+        initialDate: selectedDate,
+        firstDate: DateTime(1901, 1),
+        lastDate: DateTime(2100));
+    if (pickeddate != null && pickeddate != selectedDate)
+      setState(() {
+        selectedDate = pickeddate;
+        var formatter = new DateFormat('dd-MM-yyyy');
+        startformat = formatter.format(pickeddate);
+        //  var formatter4 = new DateFormat('yyyy-MM-dd');
+        // formattedday = formatter4.format(picked);
+        //  print(formattedday); // // something like 2
+        startdatecon.value = TextEditingValue(text: startformat);
+      });
+  }
+
+  Future<void> _selectTime(BuildContext context) async {
+    final TimeOfDay pickedtime = await showTimePicker(
+      context: context,
+      initialTime: selectedTime,
+
+    );
+//    if (pickedtime != null && pickedtime != selectedTime)
+////      selectTime(picked);
+//    setState(() {
+//      selectedTime = pickedtime;
+//      var formatter = new DateFormat('dd-MM-yyyy');
+////      startformat = formatter.format(pickeddate);
+//      starttimeformat=selectedTime.format(context);
+//      //  var formatter4 = new DateFormat('yyyy-MM-dd');
+//      // formattedday = formatter4.format(picked);
+//      //  print(formattedday); // // something like 2
+//      starttimecon.value = TextEditingValue(text: starttimeformat);
+//    });
   }
 
   void _changeValue(bool value) {
@@ -326,4 +507,7 @@ class _OutcomeScreenState extends State<OutcomeScreen> {
       _value = value;
     });
   }
+
+
+
 }

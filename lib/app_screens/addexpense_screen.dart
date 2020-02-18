@@ -27,7 +27,6 @@ class AddExpenseScreenState extends State<AddExpenseScreen> {
   TextEditingController startdatecon = new TextEditingController();
   TextEditingController starttimecon = new TextEditingController();
 
-
   List<String> _checked = ["A", "B"];
   String _picked = "Customer";
 

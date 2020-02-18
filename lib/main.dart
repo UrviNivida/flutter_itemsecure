@@ -8,6 +8,8 @@ import 'package:flutter_itemsecure_dsr/app_screens/checkin_screen.dart';
 import 'package:flutter_itemsecure_dsr/app_screens/employee_info_screen.dart';
 import 'package:flutter_itemsecure_dsr/app_screens/expense_list_screen.dart';
 import 'package:flutter_itemsecure_dsr/app_screens/map_appointmentlist_screen.dart';
+import 'package:flutter_itemsecure_dsr/app_screens/outcome_screen.dart';
+import 'package:flutter_itemsecure_dsr/app_screens/settings_screen.dart';
 import 'package:flutter_itemsecure_dsr/utils/prefs_file.dart';
 
 import 'app_screens/login_screen.dart';
@@ -46,9 +48,11 @@ Future main() async {
 //      home: new Loginscreen()));
 //      home: new CheckInScreen()));
 //      home: new AddVisitScreen()));
-//      home: new ExpenseListScreen()));
+      home: new ExpenseListScreen()));
 //      home: new BottomNavBar()));
-      home: new AddExpenseScreen()));
+//      home: new AddExpenseScreen()));
+//      home: new OutcomeScreen()));
+//      home: new SettingsScreen()));
 
 }
 

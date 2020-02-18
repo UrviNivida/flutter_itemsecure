@@ -1,9 +1,101 @@
+//
+//
+//import 'package:flutter/cupertino.dart';
+//import 'package:flutter/material.dart';
+//import 'package:flutter_itemsecure_dsr/listing_data/Schedulelist.dart';
+//import 'package:flutter_itemsecure_dsr/model/ScheduleModel.dart';
+//import 'package:flutter_typeahead/flutter_typeahead.dart';
+//
+//class FormExample extends StatefulWidget {
+//  @override
+//  _FormExampleState createState() => _FormExampleState();
+//}
+//
+//class _FormExampleState extends State<FormExample> {
+//  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+//  final TextEditingController _typeAheadController = TextEditingController();
+//
+//  String _selectedCity;
+//  static List<ScheduleModel> schedulesearchname=Schedulelist.getschedule();
+//
+//  @override
+//  Widget build(BuildContext context) {
+//    return Material(
+//      child:  Form(
+//        key: this._formKey,
+//        child: Padding(
+//          padding: EdgeInsets.all(0.0),
+//          child: Column(
+//            children: <Widget>[
+//              Text('What is your favorite city?'),
+//              TypeAheadFormField(
+//                textFieldConfiguration: TextFieldConfiguration(
+//                  decoration: InputDecoration(labelText: 'City'),
+//                  controller: this._typeAheadController,
+//                ),
+//                suggestionsCallback: (pattern) {
+//                  return getSuggestions(pattern);
+////                return CitiesService.getSuggestions(pattern);
+//                },
+//                itemBuilder: (context, suggestion) {
+//                  return ListTile(
+//                    title: Text(suggestion),
+//                  );
+//                },
+//                transitionBuilder: (context, suggestionsBox, controller) {
+//                  return suggestionsBox;
+//                },
+//                onSuggestionSelected: (suggestion) {
+//                  this._typeAheadController.text = suggestion;
+//                },
+//                validator: (value) {
+//                  if (value.isEmpty) {
+//                    return 'Please select a city';
+//                  }
+//                },
+//                onSaved: (value) => this._selectedCity = value,
+//              ),
+//              SizedBox(
+//                height: 10.0,
+//              ),
+//              RaisedButton(
+//                child: Text('Submit'),
+//                onPressed: () {
+//                  if (this._formKey.currentState.validate()) {
+//                    this._formKey.currentState.save();
+//                    Scaffold.of(context).showSnackBar(SnackBar(
+//                        content:
+//                        Text('Your Favorite City is ${this._selectedCity}')));
+//                  }
+//                },
+//              )
+//            ],
+//          ),
+//        ),
+//      )
+//    );
+//  }
+//
+//
+//  static List<String> getSuggestions(String query) {
+//    List<String> matches = List();
+//    for(var i = 0; i < schedulesearchname.length; i++){
+//      matches.add(schedulesearchname[i].name);
+//    }
+//    matches.retainWhere((s) => s.toLowerCase().contains(query.toLowerCase()));
+//    return matches;
+//  }
+//}
+
+
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_itemsecure_dsr/listing_data/Schedulelist.dart';
 import 'package:flutter_itemsecure_dsr/model/ScheduleModel.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:intl/intl.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 // For changing the language
@@ -34,7 +126,10 @@ class AddVisitScreenState extends State<AddVisitScreen> {
   var _currentItemSelected;
   var _currencies = ['New', 'Existing'];
 
-  final List<ScheduleModel> scheduleing = Schedulelist.getschedule();
+  static List<ScheduleModel> scheduleing = Schedulelist.getschedule();
+  final TextEditingController _typeAheadController = TextEditingController();
+  String _selectedName;
+
 
   final format = DateFormat("yyyy-MM-dd");
 //  final format = TimeOfDayFormat("yyyy-MM-dd");
@@ -137,37 +232,34 @@ class AddVisitScreenState extends State<AddVisitScreen> {
               children: <Widget>[
                 Container(
                   alignment: Alignment.center,
-                  child: TextFormField(
-                    autofocus: false,
-//                                  focusNode:  FocusScope.of(context).requestFocus(new FocusNode()),
-                    keyboardType: TextInputType.text,
-//                                maxLength: 10,
-                    style: textStyle,
-                    controller: agencycon,
-                    validator: (String value) {
+                  child: TypeAheadFormField(
+                    textFieldConfiguration: TextFieldConfiguration(
+                      style: textStyle,
+                      decoration: InputDecoration(labelText: 'Customer',labelStyle: hintStyleDropdown,hintText: 'Select Customer Name'),
+                      controller: this._typeAheadController,
+                    ),
+                    suggestionsCallback: (pattern) {
+                      return getSuggestions(pattern);
+//                return CitiesService.getSuggestions(pattern);
+                    },
+                    itemBuilder: (context, suggestion) {
+                      return ListTile(
+                        title: Text(suggestion,style: textStyle,),
+                      );
+                    },
+                    transitionBuilder: (context, suggestionsBox, controller) {
+                      return suggestionsBox;
+                    },
+                    onSuggestionSelected: (suggestion) {
+                      this._typeAheadController.text = suggestion;
+                    },
+                    validator: (value) {
                       if (value.isEmpty) {
-                        return 'Please Enter Agency Name';
+                        return 'Please select a city';
                       }
                     },
-                    decoration: InputDecoration(
-                        enabledBorder: new UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.grey,
-                          ),
-                        ),
-                        focusedBorder: new UnderlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Theme.of(context).primaryColor),
-                        ),
-                        labelStyle: labelStyle,
-                        hintText: 'Enter Agency Name',
-                        hintStyle: hintStyle,
-                        labelText: 'Agency Name'
-//                                    contentPadding: const EdgeInsets.only(bottom: -10.0)
-
-//                            filled: true,
-                        ),
-                  ),
+                    onSaved: (value) => this._selectedName = value,
+                  )
                 ),
                 SizedBox(
                   height: _sizebox,
@@ -531,6 +623,16 @@ class AddVisitScreenState extends State<AddVisitScreen> {
     final dt = DateTime(now.year, now.month, now.day, tod.hour, tod.minute);
     final format = DateFormat.jm();  //"6:00 AM"
     return format.format(dt);
+  }
+
+
+  static List<String> getSuggestions(String query) {
+    List<String> matches = List();
+    for(var i = 0; i < scheduleing.length; i++){
+      matches.add(scheduleing[i].name);
+    }
+    matches.retainWhere((s) => s.toLowerCase().contains(query.toLowerCase()));
+    return matches;
   }
 
 }
