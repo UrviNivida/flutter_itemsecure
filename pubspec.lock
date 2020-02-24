@@ -185,7 +185,7 @@ packages:
       name: flutter_plugin_android_lifecycle
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.5"
+    version: "1.0.6"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -209,7 +209,7 @@ packages:
       name: google_maps_flutter
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.5.23+1"
+    version: "0.5.24+1"
   http:
     dependency: "direct main"
     description:
@@ -272,7 +272,7 @@ packages:
       name: path_provider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.6.0"
+    version: "1.6.1"
   pedantic:
     dependency: transitive
     description:
@@ -321,35 +321,35 @@ packages:
       name: shared_preferences
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.5.6+1"
+    version: "0.5.6+2"
   shared_preferences_macos:
     dependency: transitive
     description:
       name: shared_preferences_macos
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.1+5"
+    version: "0.0.1+6"
   shared_preferences_platform_interface:
     dependency: transitive
     description:
       name: shared_preferences_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.1"
+    version: "1.0.3"
   shared_preferences_web:
     dependency: transitive
     description:
       name: shared_preferences_web
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.1.2+3"
+    version: "0.1.2+4"
   simple_animations:
     dependency: "direct main"
     description:
       name: simple_animations
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.3.6"
+    version: "1.3.7"
   sky_engine:
     dependency: transitive
     description: flutter

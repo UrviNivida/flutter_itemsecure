@@ -12,8 +12,10 @@ import 'package:flutter_itemsecure_dsr/app_screens/outcome_screen.dart';
 import 'package:flutter_itemsecure_dsr/app_screens/settings_screen.dart';
 import 'package:flutter_itemsecure_dsr/utils/prefs_file.dart';
 
+import 'app_screens/dashboard_screen.dart';
 import 'app_screens/login_screen.dart';
 import 'app_screens/bottom_navigation_screen.dart';
+import 'app_screens/samplescreen.dart';
 
 //https://vimeo.com/372583791
 //https://pub.dev/packages/flutter_native_splash
@@ -38,6 +40,7 @@ Future main() async {
       theme: new ThemeData(
         primaryColor: const Color(0xFFF8C300),
         accentColor: const Color(0xFF212121),
+primaryColorDark: const Color(0xFFF8C300)
 //        textTheme: TextTheme(
 //          headline: TextStyle(fontSize: 72.0,
 //              fontWeight: FontWeight.bold),
@@ -47,12 +50,13 @@ Future main() async {
       ),
 //      home: new Loginscreen()));
 //      home: new CheckInScreen()));
-//      home: new AddVisitScreen()));
-      home: new ExpenseListScreen()));
+      home: new AddVisitScreen()));
+//      home: new ExpenseListScreen()));
 //      home: new BottomNavBar()));
 //      home: new AddExpenseScreen()));
 //      home: new OutcomeScreen()));
 //      home: new SettingsScreen()));
+//      home: new DashbaroadScreen()));
 
 }
 

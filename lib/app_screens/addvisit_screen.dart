@@ -87,8 +87,6 @@
 //  }
 //}
 
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
@@ -130,13 +128,19 @@ class AddVisitScreenState extends State<AddVisitScreen> {
   final TextEditingController _typeAheadController = TextEditingController();
   String _selectedName;
 
-
   final format = DateFormat("yyyy-MM-dd");
+
 //  final format = TimeOfDayFormat("yyyy-MM-dd");
-  String startformat = '',starttimeformat='';
+  String startformat = '', starttimeformat = '';
   DateTime selectedDate = DateTime.now();
   TimeOfDay selectedTime;
+
 //  final ValueChanged<TimeOfDay> selectTime;
+
+  final format1 = DateFormat("dd-MM-yyyy");
+  final timeFormat = DateFormat("h:mm a");
+  DateTime date;
+  TimeOfDay time;
 
   @override
   Widget build(BuildContext context) {
@@ -231,36 +235,41 @@ class AddVisitScreenState extends State<AddVisitScreen> {
             child: Column(
               children: <Widget>[
                 Container(
-                  alignment: Alignment.center,
-                  child: TypeAheadFormField(
-                    textFieldConfiguration: TextFieldConfiguration(
-                      style: textStyle,
-                      decoration: InputDecoration(labelText: 'Customer',labelStyle: hintStyleDropdown,hintText: 'Select Customer Name'),
-                      controller: this._typeAheadController,
-                    ),
-                    suggestionsCallback: (pattern) {
-                      return getSuggestions(pattern);
+                    alignment: Alignment.center,
+                    child: TypeAheadFormField(
+                      textFieldConfiguration: TextFieldConfiguration(
+                        style: textStyle,
+                        decoration: InputDecoration(
+                            labelText: 'Customer',
+                            labelStyle: hintStyleDropdown,
+                            hintText: 'Select Customer Name'),
+                        controller: this._typeAheadController,
+                      ),
+                      suggestionsCallback: (pattern) {
+                        return getSuggestions(pattern);
 //                return CitiesService.getSuggestions(pattern);
-                    },
-                    itemBuilder: (context, suggestion) {
-                      return ListTile(
-                        title: Text(suggestion,style: textStyle,),
-                      );
-                    },
-                    transitionBuilder: (context, suggestionsBox, controller) {
-                      return suggestionsBox;
-                    },
-                    onSuggestionSelected: (suggestion) {
-                      this._typeAheadController.text = suggestion;
-                    },
-                    validator: (value) {
-                      if (value.isEmpty) {
-                        return 'Please select a city';
-                      }
-                    },
-                    onSaved: (value) => this._selectedName = value,
-                  )
-                ),
+                      },
+                      itemBuilder: (context, suggestion) {
+                        return ListTile(
+                          title: Text(
+                            suggestion,
+                            style: textStyle,
+                          ),
+                        );
+                      },
+                      transitionBuilder: (context, suggestionsBox, controller) {
+                        return suggestionsBox;
+                      },
+                      onSuggestionSelected: (suggestion) {
+                        this._typeAheadController.text = suggestion;
+                      },
+                      validator: (value) {
+                        if (value.isEmpty) {
+                          return 'Please select a city';
+                        }
+                      },
+                      onSaved: (value) => this._selectedName = value,
+                    )),
                 SizedBox(
                   height: _sizebox,
                 ),
@@ -312,115 +321,118 @@ class AddVisitScreenState extends State<AddVisitScreen> {
                       ),
                     ),
                     Expanded(
-                      flex: 2,
-                      child: GestureDetector(
-                        child: AbsorbPointer(
-                            child: Container(
-                          alignment: Alignment.center,
-                          child: TextFormField(
-                            autofocus: false,
+                      flex: 1,
+                      child: DateTimeField(
+                        textAlign: TextAlign.center,
+                        format: format1,
+                        onShowPicker: (context, currentValue) {
+                          return showDatePicker(
+                              context: context,
+                              firstDate: DateTime(1900),
+                              initialDate: currentValue ?? DateTime.now(),
+                              lastDate: DateTime(2100));
+                        },
+                        resetIcon: null,
+                        autofocus: false,
 //                                  focusNode:  FocusScope.of(context).requestFocus(new FocusNode()),
-                            keyboardType: TextInputType.datetime,
+                        keyboardType: TextInputType.datetime,
 //                                maxLength: 10,
-                            style: textStyle,
-                            controller: startdatecon,
-                            validator: (String value) {
-                              if (value.isEmpty) {
-                                return 'Please Select Start Date';
-                              }
-                            },
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
+                        style: textStyle,
+                        controller: startdatecon,
+//                            validator: (String value) {
+//                              if (value.isEmpty) {
+//                                return 'Please Select Start Date';
+//                              }
+//                            },
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
 //                                    labelStyle: labelStyle,
-                              hintText: 'Start Date',
-                              hintStyle: hintStyle,
+                          hintText: 'Start Date',
+                          hintStyle: hintStyle,
 //                                    labelText: 'Agency Name'
 //                                    contentPadding: const EdgeInsets.only(bottom: -10.0)
-
 //                            filled: true,
-                            ),
-                          ),
-                        )),
-                        onTap: () {
-                          _selectDate(context);
-                        },
+                        ),
                       ),
 
-//                        TextFormField(
-//                          autofocus: false,
+//                      GestureDetector(
+//                        child: AbsorbPointer(
+//                            child: Container(
+//                          alignment: Alignment.center,
+//                          child: DateTimeField(
+//                            onShowPicker: (context, currentValue) {
+//                              return showDatePicker(
+//                                  context: context,
+//                                  firstDate: DateTime(1900),
+//                                  initialDate: currentValue ?? DateTime.now(),
+//                                  lastDate: DateTime(2100));
+//                            },
+//
+//                            format: format1,
+//                            autofocus: false,
 ////                                  focusNode:  FocusScope.of(context).requestFocus(new FocusNode()),
-//                          keyboardType: TextInputType.text,
+//                            keyboardType: TextInputType.datetime,
 ////                                maxLength: 10,
-//                          style: textStyle,
-//                          controller: startdatecon,
-//                          textAlign: TextAlign.center,
-//                          validator: (String value) {
-//                            if (value.isEmpty) {
-//                              return 'Please Select Start Date';
-//                            }
-//                          },
-//                          decoration: InputDecoration(
-//                            border: InputBorder.none,
+//                            style: textStyle,
+//                            controller: startdatecon,
+////                            validator: (String value) {
+////                              if (value.isEmpty) {
+////                                return 'Please Select Start Date';
+////                              }
+////                            },
+//                            decoration: InputDecoration(
+//                              border: InputBorder.none,
+////                                    labelStyle: labelStyle,
 //                              hintText: 'Start Date',
 //                              hintStyle: hintStyle,
+////                                    labelText: 'Agency Name'
+////                                    contentPadding: const EdgeInsets.only(bottom: -10.0)
+//
+////                            filled: true,
+//                            ),
 //                          ),
-//                        ),
+//                        )),
+//                        onTap: () {
+//                          _selectDate(context);
+//                        },
+//                      ),
                     ),
                     Expanded(
                       flex: 1,
-                      child: GestureDetector(
-                        child: AbsorbPointer(
-                            child: Container(
-                              alignment: Alignment.center,
-                              child: TextFormField(
-                                autofocus: false,
+                      child: DateTimeField(
+                        textAlign: TextAlign.center,
+                        resetIcon: null,
+                        format: timeFormat,
+                        onShowPicker: (context, currentValue) async {
+                          final time = await showTimePicker(
+                            context: context,
+                            initialTime: TimeOfDay.fromDateTime(currentValue ?? DateTime.now()),
+                          );
+                          return DateTimeField.convert(time);
+                        },
+                        autofocus: false,
 //                                  focusNode:  FocusScope.of(context).requestFocus(new FocusNode()),
-                                keyboardType: TextInputType.datetime,
+                        keyboardType: TextInputType.datetime,
 //                                maxLength: 10,
-                                style: textStyle,
-                                controller: starttimecon,
-                                validator: (String value) {
-                                  if (value.isEmpty) {
-                                    return 'Please Select Start Time';
-                                  }
-                                },
-                                decoration: InputDecoration(
-                                  border: InputBorder.none,
+                        style: textStyle,
+                        controller: starttimecon,
+//                                validator: (String value) {
+//                                  if (value.isEmpty) {
+//                                    return 'Please Select Start Time';
+//                                  }
+//                                },
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
 //                                    labelStyle: labelStyle,
-                                  hintText: 'Start Time',
-                                  hintStyle: hintStyle,
+                          hintText: 'Start Time',
+                          hintStyle: hintStyle,
 //                                    labelText: 'Agency Name'
 //                                    contentPadding: const EdgeInsets.only(bottom: -10.0)
 
 //                            filled: true,
-                                ),
-                              ),
-                            )),
-                        onTap: () {
-                          _selectTime(context);
-                        },
+                        ),
                       ),
-
-//                        TextFormField(
-//                          autofocus: false,
-////                                  focusNode:  FocusScope.of(context).requestFocus(new FocusNode()),
-//                          keyboardType: TextInputType.text,
-////                                maxLength: 10,
-//                          style: textStyle,
-//                          controller: startdatecon,
-//                          textAlign: TextAlign.center,
-//                          validator: (String value) {
-//                            if (value.isEmpty) {
-//                              return 'Please Select Start Date';
-//                            }
-//                          },
-//                          decoration: InputDecoration(
-//                            border: InputBorder.none,
-//                              hintText: 'Start Date',
-//                              hintStyle: hintStyle,
-//                          ),
-//                        ),
-                    ),
+                      ),
                   ],
                 ),
                 Row(
@@ -434,42 +446,43 @@ class AddVisitScreenState extends State<AddVisitScreen> {
                       ),
                     ),
                     Expanded(
-                      flex: 2,
+                      flex: 1,
                       child: Text(''),
                     ),
                     Expanded(
                       flex: 1,
-                      child: GestureDetector(
-                        child: AbsorbPointer(
-                            child: Container(
-                              alignment: Alignment.center,
-                              child: TextFormField(
-                                autofocus: false,
+                      child: DateTimeField(
+                        textAlign: TextAlign.center,
+                        resetIcon: null,
+                        format: timeFormat,
+                        onShowPicker: (context, currentValue) async {
+                          final time = await showTimePicker(
+                            context: context,
+                            initialTime: TimeOfDay.fromDateTime(currentValue ?? DateTime.now()),
+                          );
+                          return DateTimeField.convert(time);
+                        },
+                        autofocus: false,
 //                                  focusNode:  FocusScope.of(context).requestFocus(new FocusNode()),
-                                keyboardType: TextInputType.datetime,
+                        keyboardType: TextInputType.datetime,
 //                                maxLength: 10,
-                                style: textStyle,
-                                controller: endtimecon,
-                                validator: (String value) {
-                                  if (value.isEmpty) {
-                                    return 'Please Select End Time';
-                                  }
-                                },
-                                decoration: InputDecoration(
-                                  border: InputBorder.none,
+                        style: textStyle,
+                        controller: endtimecon,
+//                                validator: (String value) {
+//                                  if (value.isEmpty) {
+//                                    return 'Please Select Start Time';
+//                                  }
+//                                },
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
 //                                    labelStyle: labelStyle,
-                                  hintText: 'End Time',
-                                  hintStyle: hintStyle,
+                          hintText: 'Start Time',
+                          hintStyle: hintStyle,
 //                                    labelText: 'Agency Name'
 //                                    contentPadding: const EdgeInsets.only(bottom: -10.0)
 
 //                            filled: true,
-                                ),
-                              ),
-                            )),
-                        onTap: () {
-//                          _selectTime(context);
-                        },
+                        ),
                       ),
 
 //                        TextFormField(
@@ -602,7 +615,6 @@ class AddVisitScreenState extends State<AddVisitScreen> {
     final TimeOfDay pickedtime = await showTimePicker(
       context: context,
       initialTime: selectedTime,
-
     );
 //    if (pickedtime != null && pickedtime != selectedTime)
 ////      selectTime(picked);
@@ -621,18 +633,62 @@ class AddVisitScreenState extends State<AddVisitScreen> {
   String formatTimeOfDay(TimeOfDay tod) {
     final now = new DateTime.now();
     final dt = DateTime(now.year, now.month, now.day, tod.hour, tod.minute);
-    final format = DateFormat.jm();  //"6:00 AM"
+    final format = DateFormat.jm(); //"6:00 AM"
     return format.format(dt);
   }
 
-
   static List<String> getSuggestions(String query) {
     List<String> matches = List();
-    for(var i = 0; i < scheduleing.length; i++){
+    for (var i = 0; i < scheduleing.length; i++) {
       matches.add(scheduleing[i].name);
     }
     matches.retainWhere((s) => s.toLowerCase().contains(query.toLowerCase()));
     return matches;
   }
+}
 
+class BasicTimeField extends StatelessWidget {
+  final format = DateFormat("hh:mm a");
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(children: <Widget>[
+//
+      Text(
+        "Select Time",
+      ),
+      DateTimeField(
+        format: format,
+        onShowPicker: (context, currentValue) async {
+          final time = await showTimePicker(
+            context: context,
+            initialTime: TimeOfDay.fromDateTime(currentValue ?? DateTime.now()),
+          );
+          return DateTimeField.convert(time);
+        },
+      ),
+    ]);
+  }
+}
+
+class BasicDateField extends StatelessWidget {
+  final format = DateFormat("yyyy-MM-dd");
+  final format1 = DateFormat("dd-MM-yyyy");
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(children: <Widget>[
+      Text("Select Date"),
+      DateTimeField(
+        format: format1,
+        onShowPicker: (context, currentValue) {
+          return showDatePicker(
+              context: context,
+              firstDate: DateTime(1900),
+              initialDate: currentValue ?? DateTime.now(),
+              lastDate: DateTime(2100));
+        },
+      ),
+    ]);
+  }
 }

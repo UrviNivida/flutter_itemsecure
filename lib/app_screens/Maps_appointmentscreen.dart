@@ -1,11 +1,14 @@
+import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_itemsecure_dsr/adapters/Schdeulecard.dart';
 import 'package:flutter_itemsecure_dsr/model/ScheduleModel.dart';
 import 'package:flutter_itemsecure_dsr/listing_data/Schedulelist.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:solid_bottom_sheet/solid_bottom_sheet.dart';
 
 import 'NavigationBloc.dart';
+import 'package:intl/intl.dart';
 
 
 class Maps_appointmentscreen extends StatefulWidget with NavigationStates {
@@ -158,7 +161,16 @@ class MyAccountsPagenew extends State<Maps_appointmentscreen> {
                                       child: new Icon(Icons.attach_money),
                                     ))
                               ],
-                            )),
+                            ),
+                        onTap: ()
+                          {
+                            showDialog(
+                                context: context,
+                                builder: ((BuildContext context) {
+                                  return DynamicDialog();
+                                }));
+                          },
+                        ),
                       ),
                     ],
                   ),
@@ -292,5 +304,394 @@ class MyAccountsPagenew extends State<Maps_appointmentscreen> {
       )
           : Center(child: Text('No Items')),
     );
+  }
+}
+
+class DynamicDialog extends StatefulWidget {
+//  DynamicDialog({this.title});
+
+//  final String title;
+
+  @override
+  _DynamicDialogState createState() => _DynamicDialogState();
+}
+
+class _DynamicDialogState extends State<DynamicDialog> {
+  String _title;
+  String _typee;
+
+  final List<String> _dropdownValues = [
+    "All",
+    "Pending Approval by Manager",
+    "Pending Approval by Accounts",
+    "Approved",
+    "Rejected by Manager",
+    "Rejected by Accounts",
+    "Disbursed",
+  ];
+
+  final List<String> _dropdownValuestype = [
+    "New Customer",
+    "Existing Customer",
+    "Office",
+
+  ];
+
+  static List<ScheduleModel> scheduleing = Schedulelist.getschedule();
+  final TextEditingController _typeAheadController = TextEditingController();
+  String _selectedName;
+
+  @override
+  void initState() {
+//    _title = widget.title;
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    TextStyle hintStyleDropdown = TextStyle(
+        fontSize: 16.0,
+        fontWeight: FontWeight.w200,
+        fontFamily: 'Quicksand',
+        color: Theme.of(context).primaryColor);
+
+    TextStyle textStyle = TextStyle(
+        fontSize: 14.0,
+        fontWeight: FontWeight.w500,
+        fontFamily: 'Quicksand',
+        color: Colors.black);
+
+    TextStyle hintStyle = TextStyle(
+        fontSize: 14.0,
+        fontWeight: FontWeight.w200,
+        fontFamily: 'Quicksand',
+        color: Colors.grey[2]);
+
+    TextStyle labelStyle = TextStyle(
+        fontSize: 16.0,
+        fontWeight: FontWeight.w500,
+        fontFamily: 'Quicksand',
+        color: Colors.black);
+
+    final format1 = DateFormat("dd-MM-yyyy");
+    final timeFormat = DateFormat("h:mm a");
+    DateTime date;
+    TimeOfDay time;
+
+    return AlertDialog (
+
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(15),
+          )),
+      title: Text(
+        "Save Current Location",
+        textAlign: TextAlign.center,
+      ),
+      content: ListView(
+//        mainAxisSize: MainAxisSize.min,   ----------------->for column
+      shrinkWrap: true,
+        children: <Widget>[
+          DropdownButtonFormField<String>(
+            style: textStyle,
+            decoration: InputDecoration(
+//                                    contentPadding: EdgeInsets.all(_contentPadding),
+                contentPadding: EdgeInsets.all(0.0),
+                labelText: 'Select Type',
+                labelStyle: hintStyleDropdown,
+//                                    prefixIcon: Icon(Icons.apps),
+                border: UnderlineInputBorder(
+//                                      borderRadius: BorderRadius.circular(_borderradius),
+                )),
+            isExpanded: false,
+            items: _dropdownValuestype.map((String dropdownstringitem) {
+              return DropdownMenuItem<String>(
+                value: dropdownstringitem,
+                child: Text(
+                  dropdownstringitem,
+                  style: textStyle,
+                ),
+              );
+            }).toList(),
+            onChanged: (String newvalueuser) {
+              setState(() {
+                FocusScope.of(context).requestFocus(new FocusNode());
+                this._typee = newvalueuser;
+              });
+//              _onDropDownItemSelected(newvalueuser);
+            },
+            value: _typee,
+          ),
+          Padding(
+            padding: EdgeInsets.only(top: 10,bottom: 10),
+            child: Container(
+              alignment: Alignment.center,
+              child: TypeAheadFormField(
+                textFieldConfiguration: TextFieldConfiguration(
+                  style: textStyle,
+                  decoration: InputDecoration(
+                      labelText: 'Customer',
+                      labelStyle: hintStyleDropdown,
+                      hintText: 'Select Customer Name'),
+                  controller: this._typeAheadController,
+                ),
+                suggestionsCallback: (pattern) {
+                  return getSuggestions(pattern);
+//                return CitiesService.getSuggestions(pattern);
+                },
+                itemBuilder: (context, suggestion) {
+                  return ListTile(
+                    title: Text(
+                      suggestion,
+                      style: textStyle,
+                    ),
+                  );
+                },
+                transitionBuilder: (context, suggestionsBox, controller) {
+                  return suggestionsBox;
+                },
+                onSuggestionSelected: (suggestion) {
+                  this._typeAheadController.text = suggestion;
+                },
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return 'Please select a city';
+                  }
+                },
+                onSaved: (value) => this._selectedName = value,
+              ),
+            ),
+          ),
+//          for select type
+          Padding(
+            padding: EdgeInsets.only(top: 10,bottom: 10),
+            child: Container(
+              alignment: Alignment.center,
+              child: TextFormField(
+                  enabled: false,
+                  maxLines: 5,
+                  initialValue: 'B/25, Goverdhan Park-1, TP-13, Near Chhani Jakat Naka, Vadodara',
+                  autofocus: false,
+//                                  focusNode:  FocusScope.of(context).requestFocus(new FocusNode()),
+                  keyboardType: TextInputType.text,
+//                                maxLength: 10,
+                  style: textStyle,
+
+                  validator: (String value) {
+                    if (value.isEmpty) {
+                      return 'Please Enter Description';
+                    }
+                  },
+                  decoration: InputDecoration(
+                    enabled: false,
+                    enabledBorder: new UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                      ),
+                    ),
+                    focusedBorder: new UnderlineInputBorder(
+                      borderSide:
+                      BorderSide(color: Theme.of(context).primaryColor),
+                    ),
+                    labelStyle: hintStyleDropdown,
+                    hintText: 'Enter Description',
+                    hintStyle: hintStyle,
+                    labelText: 'Address',
+
+
+//                                    contentPadding: const EdgeInsets.only(bottom: -10.0)
+
+//                            filled: true,
+                  ),
+                ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(top: 10,bottom: 10),
+            child: Container(
+              alignment: Alignment.center,
+              child: TextFormField(
+                autofocus: false,
+//                                  focusNode:  FocusScope.of(context).requestFocus(new FocusNode()),
+                keyboardType: TextInputType.text,
+//                                maxLength: 10,
+                style: textStyle,
+
+//                validator: (String value) {
+//                  if (value.isEmpty) {
+//                    return 'Please Enter Description';
+//                  }
+//                },
+                decoration: InputDecoration(
+                  enabled: false,
+                  enabledBorder: new UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.grey,
+                    ),
+                  ),
+                  focusedBorder: new UnderlineInputBorder(
+                    borderSide:
+                    BorderSide(color: Theme.of(context).primaryColor),
+                  ),
+                  labelStyle: hintStyleDropdown,
+                  hintText: 'Enter Location Identifier',
+                  hintStyle: hintStyle,
+                  labelText: 'Location Identifier',
+
+
+//                                    contentPadding: const EdgeInsets.only(bottom: -10.0)
+
+//                            filled: true,
+                ),
+              ),
+            ),
+          ),
+          DropdownButtonFormField<String>(
+            style: textStyle,
+            decoration: InputDecoration(
+//                                    contentPadding: EdgeInsets.all(_contentPadding),
+                contentPadding: EdgeInsets.all(0.0),
+                labelText: 'Select Territory',
+                labelStyle: hintStyleDropdown,
+//                                    prefixIcon: Icon(Icons.apps),
+                border: UnderlineInputBorder(
+//                                      borderRadius: BorderRadius.circular(_borderradius),
+                )),
+            isExpanded: false,
+            items: _dropdownValues.map((String dropdownstringitem) {
+              return DropdownMenuItem<String>(
+                value: dropdownstringitem,
+                child: Text(
+                  dropdownstringitem,
+                  style: textStyle,
+                ),
+              );
+            }).toList(),
+            onChanged: (String newvalueuser) {
+              setState(() {
+                FocusScope.of(context).requestFocus(new FocusNode());
+                this._title = newvalueuser;
+              });
+//              _onDropDownItemSelected(newvalueuser);
+            },
+            value: _title,
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          DropdownButtonFormField<String>(
+            style: textStyle,
+            decoration: InputDecoration(
+//                                    contentPadding: EdgeInsets.all(_contentPadding),
+                contentPadding: EdgeInsets.all(0.0),
+                labelText: 'Select Industry',
+                labelStyle: hintStyleDropdown,
+//                                    prefixIcon: Icon(Icons.apps),
+                border: UnderlineInputBorder(
+//                                      borderRadius: BorderRadius.circular(_borderradius),
+                )),
+            isExpanded: false,
+            items: _dropdownValues.map((String dropdownstringitem) {
+              return DropdownMenuItem<String>(
+                value: dropdownstringitem,
+                child: Text(
+                  dropdownstringitem,
+                  style: textStyle,
+                ),
+              );
+            }).toList(),
+            onChanged: (String newvalueuser) {
+              setState(() {
+                FocusScope.of(context).requestFocus(new FocusNode());
+                this._title = newvalueuser;
+              });
+//              _onDropDownItemSelected(newvalueuser);
+            },
+            value: _title,
+          ),
+
+
+        ],
+      ),
+
+//      DropdownButton(
+//        items: _dropdownValues
+//            .map((value) => DropdownMenuItem(
+//          child: Text(value),
+//          value: value,
+//        )).toList(),
+//        onChanged: (String value) {
+//          setState(() {
+//            _title = value;
+//          });
+//        },
+//        value: _title,
+//        isExpanded: false,
+//        hint: Text('Select Number'),
+//      ),
+
+      actions: <Widget>[
+        GestureDetector(
+          onTap: ()=> Navigator.pop(context),
+          child: new Card(
+              elevation: 5.0,
+              color: Colors.black,
+//          onPressed: null,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(10.0),
+                  )),
+              child: Padding(
+                child: Text('Save',
+                    style: TextStyle(
+                        fontSize: 14, color: Theme.of(context).primaryColor)),
+                padding: EdgeInsets.only(
+                    top: 10.0, bottom: 10.0, right: 16.0, left: 16.0),
+              )),
+        ),
+        new GestureDetector(
+          onTap: () => Navigator.pop(context),
+          child: new Card(
+              color: Colors.black,
+              elevation: 5.0,
+//          onPressed: null,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(10.0),
+                  )),
+              child: Padding(
+                child: Text('Cancel',
+                    style: TextStyle(fontSize: 14, color: Colors.white)),
+                padding: EdgeInsets.all(10.0),
+              )),
+        )
+
+//        FlatButton(
+//            onPressed: () {
+////              final newText = 'Updated Title!';
+////              setState(() {
+////                _title = newText;
+////              });
+//            },
+//            child: Text('Filter')),
+//        FlatButton(
+//            onPressed: () {
+////              final newText = 'Updated Title!';
+////              setState(() {
+////                _title = newText;
+////              });
+//            },
+//            child: Text('Cancel')),
+      ],
+    );
+  }
+
+  static List<String> getSuggestions(String query) {
+    List<String> matches = List();
+    for (var i = 0; i < scheduleing.length; i++) {
+      matches.add(scheduleing[i].name);
+    }
+    matches.retainWhere((s) => s.toLowerCase().contains(query.toLowerCase()));
+    return matches;
   }
 }

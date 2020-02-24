@@ -1,3 +1,4 @@
+import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:easy_dialog/easy_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,13 +13,12 @@ import 'NavigationBloc.dart';
 import 'SideBar.dart';
 
 TextEditingController startdatecon = new TextEditingController();
-TextEditingController starttimecon = new TextEditingController();
+TextEditingController enddatecon = new TextEditingController();
 final format = DateFormat("yyyy-MM-dd");
 //  final format = TimeOfDayFormat("yyyy-MM-dd");
-String startformat = '',starttimeformat='';
+String startformat = '', starttimeformat = '';
 DateTime selectedDate = DateTime.now();
 TimeOfDay selectedTime;
-
 
 class ExpenseListScreen extends StatefulWidget {
   @override
@@ -26,8 +26,6 @@ class ExpenseListScreen extends StatefulWidget {
 }
 
 class ExpenseListScreenState extends State<ExpenseListScreen> {
-
-
   TextStyle textStyle = TextStyle(
       fontSize: 14.0,
       fontWeight: FontWeight.w500,
@@ -68,18 +66,16 @@ class ExpenseListScreenState extends State<ExpenseListScreen> {
       fontFamily: 'Quicksand',
       color: Colors.grey);
 
-
-
   final List<ScheduleModel> scheduleing = Schedulelist.getschedule();
 
-  var _currentItemSelected;
-  var _currencies=[] ;
-
-
+  @override
+  void initState() {
+    // store();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
@@ -104,7 +100,11 @@ class ExpenseListScreenState extends State<ExpenseListScreen> {
               IconButton(
                 icon: new Icon(Icons.filter_list),
                 onPressed: () {
-                  customFilterPopup();
+                  showDialog(
+                      context: context,
+                      builder: ((BuildContext context) {
+                        return DynamicDialog();
+                      }));
                 },
               )
             ],
@@ -242,297 +242,344 @@ class ExpenseListScreenState extends State<ExpenseListScreen> {
     );
   }
 
+  List<DropdownMenuItem<FilterCategory>> buildDropdownMenuItems(
+      List companies) {
+    List<DropdownMenuItem<FilterCategory>> items = List();
+    for (FilterCategory company in companies) {
+      items.add(
+        DropdownMenuItem(
+          value: company,
+          child: Text(company.name),
+        ),
+      );
+    }
+    return items;
+  }
 
-  Widget customFilterPopup()
-  {
+}
 
-//    var _currentItemSelected;
-    _currencies = ['All', 'Pending approval by manager','Pending Approval by accounts',
-    'Approved','Rejected by manager','Rejected by accounts','Disbursed'];
-    
+class FilterCategory {
+  int id;
+  String name;
+
+  FilterCategory(this.id, this.name);
+
+  static List<FilterCategory> getroles() {
+    return <FilterCategory>[
+      FilterCategory(0, 'Select Role'),
+      FilterCategory(4, 'Faculty'),
+      FilterCategory(5, 'Student'),
+    ];
+  }
+}
+
+class DynamicDialog extends StatefulWidget {
+//  DynamicDialog({this.title});
+
+//  final String title;
+
+  @override
+  _DynamicDialogState createState() => _DynamicDialogState();
+}
+
+class _DynamicDialogState extends State<DynamicDialog> {
+  String _title;
+
+  final List<String> _dropdownValues = [
+    "All",
+    "Pending Approval by Manager",
+    "Pending Approval by Accounts",
+    "Approved",
+    "Rejected by Manager",
+    "Rejected by Accounts",
+    "Disbursed",
+  ];
+
+  @override
+  void initState() {
+//    _title = widget.title;
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     TextStyle hintStyleDropdown = TextStyle(
         fontSize: 16.0,
         fontWeight: FontWeight.w200,
         fontFamily: 'Quicksand',
         color: Theme.of(context).primaryColor);
-    
-    return EasyDialog(
-        key: _otpKey,
-        cardColor: Colors.white,
-        closeButton: false,
-        cornerRadius: 10.0,
-//        fogOpacity: 0.1,
-        width: 300,
-        height: 234,
-        title: Text(
-          "Choose Filter",
-          style: TextStyle(fontWeight: FontWeight.bold),
-          textScaleFactor: 1.2,
-        ),
-//        descriptionPadding: EdgeInsets.only(left: 17.5, right: 17.5, bottom: 15.0),
-//        description: Text(
-//          "This is a custom dialog. Easy Dialog helps you easily create basic or custom dialogs.",
-//          textScaleFactor: 1.1,
-//          textAlign: TextAlign.center,
-//        ),
-//        topImage: NetworkImage(
-//            "https://raw.githubusercontent.com/ricardonior29/easy_dialog/master/example/assets/topImageblack.png"),
-        contentPadding: EdgeInsets.only(top: 12.0),
-        // Needed for the button design
-        contentList: [
-          Column(
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.all(7.0),
-                child: Row(
-                  children: <Widget>[
-                    Expanded(
-                      flex: 1,
-                      child: Text(
-                        'From:',
-                        style: hintStyleDropdown,
-                        textAlign: TextAlign.left,
-                      ),
-                    ),
-                    Expanded(
-                      flex: 2,
-                      child: GestureDetector(
-                        child: AbsorbPointer(
-                            child: Container(
-                              alignment: Alignment.center,
-                              child: TextFormField(
-                                textAlign: TextAlign.center,
-                                autofocus: false,
-//                                  focusNode:  FocusScope.of(context).requestFocus(new FocusNode()),
-                                keyboardType: TextInputType.datetime,
-//                                maxLength: 10,
-                                style: textStyle,
-                                controller: startdatecon,
-                                validator: (String value) {
-                                  if (value.isEmpty) {
-                                    return 'Please Select Start Date';
-                                  }
-                                },
-                                decoration: InputDecoration(
-                                  border: InputBorder.none,
-//                                    labelStyle: labelStyle,
-                                  hintText: 'From Date',
-                                  hintStyle: hintStyle,
-//                                    labelText: 'Agency Name'
-//                                    contentPadding: const EdgeInsets.only(bottom: -10.0)
 
-//                            filled: true,
-                                ),
-                              ),
-                            )),
-                        onTap: () {
-                          _selectDate(context);
-                        },
-                      ),
+    TextStyle textStyle = TextStyle(
+        fontSize: 14.0,
+        fontWeight: FontWeight.w500,
+        fontFamily: 'Quicksand',
+        color: Colors.black);
 
-//                        TextFormField(
-//                          autofocus: false,
-////                                  focusNode:  FocusScope.of(context).requestFocus(new FocusNode()),
-//                          keyboardType: TextInputType.text,
-////                                maxLength: 10,
-//                          style: textStyle,
-//                          controller: startdatecon,
-//                          textAlign: TextAlign.center,
-//                          validator: (String value) {
-//                            if (value.isEmpty) {
-//                              return 'Please Select Start Date';
-//                            }
-//                          },
-//                          decoration: InputDecoration(
-//                            border: InputBorder.none,
-//                              hintText: 'Start Date',
-//                              hintStyle: hintStyle,
-//                          ),
-//                        ),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Text(
-                        'To:',
-                        style: hintStyleDropdown,
-                        textAlign: TextAlign.left,
-                      ),
-                    ),
-                    Expanded(
-                      flex: 2,
-                      child: GestureDetector(
-                        child: AbsorbPointer(
-                            child: Container(
-                              alignment: Alignment.center,
-                              child: TextFormField(
-                                textAlign: TextAlign.center,
-                                autofocus: false,
-//                                  focusNode:  FocusScope.of(context).requestFocus(new FocusNode()),
-                                keyboardType: TextInputType.datetime,
-//                                maxLength: 10,
-                                style: textStyle,
-                                controller: startdatecon,
-                                validator: (String value) {
-                                  if (value.isEmpty) {
-                                    return 'Please Select Start Date';
-                                  }
-                                },
-                                decoration: InputDecoration(
-                                  border: InputBorder.none,
-//                                    labelStyle: labelStyle,
-                                  hintText: 'To Date',
-                                  hintStyle: hintStyle,
-//                                    labelText: 'Agency Name'
-//                                    contentPadding: const EdgeInsets.only(bottom: -10.0)
+    TextStyle hintStyle = TextStyle(
+        fontSize: 14.0,
+        fontWeight: FontWeight.w200,
+        fontFamily: 'Quicksand',
+        color: Colors.grey[2]);
 
-//                            filled: true,
-                                ),
-                              ),
-                            )),
-                        onTap: () {
-                          _selectDate(context);
-                        },
-                      ),
+    TextStyle labelStyle = TextStyle(
+        fontSize: 16.0,
+        fontWeight: FontWeight.w500,
+        fontFamily: 'Quicksand',
+        color: Colors.black);
 
-//                        TextFormField(
-//                          autofocus: false,
-////                                  focusNode:  FocusScope.of(context).requestFocus(new FocusNode()),
-//                          keyboardType: TextInputType.text,
-////                                maxLength: 10,
-//                          style: textStyle,
-//                          controller: startdatecon,
-//                          textAlign: TextAlign.center,
-//                          validator: (String value) {
-//                            if (value.isEmpty) {
-//                              return 'Please Select Start Date';
-//                            }
-//                          },
-//                          decoration: InputDecoration(
-//                            border: InputBorder.none,
-//                              hintText: 'Start Date',
-//                              hintStyle: hintStyle,
-//                          ),
-//                        ),
-                    ),
+    final format1 = DateFormat("dd-MM-yyyy");
+    final timeFormat = DateFormat("h:mm a");
+    DateTime date;
+    TimeOfDay time;
 
-                  ],
+    return AlertDialog(
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+        Radius.circular(15),
+      )),
+      title: Text(
+        "Choose Filter",
+        textAlign: TextAlign.center,
+      ),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+//          Text(
+//            "Choose Filter",
+//            style: TextStyle(fontWeight: FontWeight.bold),
+//            textScaleFactor: 1.2,
+//          ),
+          Padding(
+            padding: EdgeInsets.all(0.0),
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  flex: 1,
+                  child: Text(
+                    'From:',
+                    style: hintStyleDropdown,
+                    textAlign: TextAlign.right,
+                  ),
                 ),
-              ),
-              
-              SizedBox(
-                height: 0,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                    vertical: 8.0, horizontal: 10),
-                child: Container(
-                  alignment: Alignment.center,
-//                       width: 220.0,
-                  child: DropdownButtonFormField<String>(
-                    style: textStyle,
-                    decoration: InputDecoration(
-//                                    contentPadding: EdgeInsets.all(_contentPadding),
-                        contentPadding: EdgeInsets.all(0.0),
-                        labelText: 'Filter By',
-                        labelStyle: hintStyleDropdown,
-//                                    prefixIcon: Icon(Icons.apps),
-                        border: UnderlineInputBorder(
-//                                      borderRadius: BorderRadius.circular(_borderradius),
-                        )),
-                    isExpanded: false,
-                    items: _currencies.map((var dropdownstringitem) {
-                      return DropdownMenuItem<String>(
-                        value: dropdownstringitem,
-                        child: Text(
-                          dropdownstringitem,
-                          style: textStyle,
-                        ),
-                      );
-                    }).toList(),
-                    onChanged: (String newvalueuser) {
-                      setState(() {
-                        _onDropDownItemSelected(newvalueuser);
-                        print(_currentItemSelected);
-                      });
+                Expanded(
+                  flex: 2,
+                  child: DateTimeField(
+                    textAlign: TextAlign.center,
+                    format: format1,
+                    onShowPicker: (context, currentValue) {
+                      return showDatePicker(
+                          context: context,
+                          firstDate: DateTime(1900),
+                          initialDate: currentValue ?? DateTime.now(),
+                          lastDate: DateTime(2100));
                     },
-                    value: _currentItemSelected,
+                    resetIcon: null,
+                    autofocus: false,
+//                                  focusNode:  FocusScope.of(context).requestFocus(new FocusNode()),
+                    keyboardType: TextInputType.datetime,
+//                                maxLength: 10,
+                    style: textStyle,
+                    controller: startdatecon,
+//                            validator: (String value) {
+//                              if (value.isEmpty) {
+//                                return 'Please Select Start Date';
+//                              }
+//                            },
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+//                                    labelStyle: labelStyle,
+                      hintText: 'Start Date',
+                      hintStyle: hintStyle,
+//                                    labelText: 'Agency Name'
+//                                    contentPadding: const EdgeInsets.only(bottom: -10.0)
+//                            filled: true,
+                    ),
+                  ),
+
+//                        TextFormField(
+//                          autofocus: false,
+////                                  focusNode:  FocusScope.of(context).requestFocus(new FocusNode()),
+//                          keyboardType: TextInputType.text,
+////                                maxLength: 10,
+//                          style: textStyle,
+//                          controller: startdatecon,
+//                          textAlign: TextAlign.center,
+//                          validator: (String value) {
+//                            if (value.isEmpty) {
+//                              return 'Please Select Start Date';
+//                            }
+//                          },
+//                          decoration: InputDecoration(
+//                            border: InputBorder.none,
+//                              hintText: 'Start Date',
+//                              hintStyle: hintStyle,
+//                          ),
+//                        ),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.all(0.0),
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  flex: 1,
+                  child: Text(
+                    'To:',
+                    style: hintStyleDropdown,
+                    textAlign: TextAlign.right,
                   ),
                 ),
-              ),
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    flex: 1,
-                    child: Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                          color: Theme.of(context).primaryColor,
-                          borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(10.0),
-                              bottomRight: Radius.circular(0.0))),
-                      child: FlatButton(
-                        onPressed: () {},
-                        child: Text(
-                          "Filter",
-                          style: labelStyle,
-//                          textScaleFactor: 1.3,
-                        ),
-                      ),
+                Expanded(
+                  flex: 2,
+                  child: DateTimeField(
+                    textAlign: TextAlign.center,
+                    format: format1,
+                    onShowPicker: (context, currentValue) {
+                      return showDatePicker(
+                          context: context,
+                          firstDate: DateTime(1900),
+                          initialDate: currentValue ?? DateTime.now(),
+                          lastDate: DateTime(2100));
+                    },
+                    resetIcon: null,
+                    autofocus: false,
+//                                  focusNode:  FocusScope.of(context).requestFocus(new FocusNode()),
+                    keyboardType: TextInputType.datetime,
+//                                maxLength: 10,
+                    style: textStyle,
+                    controller: enddatecon,
+//                            validator: (String value) {
+//                              if (value.isEmpty) {
+//                                return 'Please Select Start Date';
+//                              }
+//                            },
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+//                                    labelStyle: labelStyle,
+                      hintText: 'To Date',
+                      hintStyle: hintStyle,
+//                                    labelText: 'Agency Name'
+//                                    contentPadding: const EdgeInsets.only(bottom: -10.0)
+//                            filled: true,
                     ),
                   ),
-                  Expanded(
-                    flex: 1,
-                    child: Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                          color: Colors.grey,
-                          borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(0.0),
-                              bottomRight:
-                              Radius.circular(10.0))),
-                      child: FlatButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        child: Text(
-                          "Cancel",
-                          style: labelStyle,
-//                          textScaleFactor: 1.3,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              )
-            ],
-          )
-        ]).show(context);
-  }
 
-  void _onDropDownItemSelected(String newValueSelected) {
-    setState(() {
-      FocusScope.of(context).requestFocus(new FocusNode());
-      this._currentItemSelected = newValueSelected;
-    });
-  }
+//                        TextFormField(
+//                          autofocus: false,
+////                                  focusNode:  FocusScope.of(context).requestFocus(new FocusNode()),
+//                          keyboardType: TextInputType.text,
+////                                maxLength: 10,
+//                          style: textStyle,
+//                          controller: startdatecon,
+//                          textAlign: TextAlign.center,
+//                          validator: (String value) {
+//                            if (value.isEmpty) {
+//                              return 'Please Select Start Date';
+//                            }
+//                          },
+//                          decoration: InputDecoration(
+//                            border: InputBorder.none,
+//                              hintText: 'Start Date',
+//                              hintStyle: hintStyle,
+//                          ),
+//                        ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 0,
+          ),
+          DropdownButton(
+            items: _dropdownValues
+                .map((value) => DropdownMenuItem(
+                      child: Text(value,style: textStyle,),
+                      value: value,
+                    ))
+                .toList(),
+            onChanged: (String value) {
+              setState(() {
+                _title = value;
+              });
+            },
+            value: _title,
+            isExpanded: true,
+            hint: Text('Select Status',style: hintStyle,),
+          ),
+        ],
+      ),
 
+//      DropdownButton(
+//        items: _dropdownValues
+//            .map((value) => DropdownMenuItem(
+//          child: Text(value),
+//          value: value,
+//        )).toList(),
+//        onChanged: (String value) {
+//          setState(() {
+//            _title = value;
+//          });
+//        },
+//        value: _title,
+//        isExpanded: false,
+//        hint: Text('Select Number'),
+//      ),
 
-  Future<Null> _selectDate(BuildContext context) async {
-    final DateTime pickeddate = await showDatePicker(
-        context: context,
-        initialDate: selectedDate,
-        firstDate: DateTime(1901, 1),
-        lastDate: DateTime(2100));
-    if (pickeddate != null && pickeddate != selectedDate)
-      setState(() {
-        selectedDate = pickeddate;
-        var formatter = new DateFormat('dd-MM-yyyy');
-        startformat = formatter.format(pickeddate);
-        //  var formatter4 = new DateFormat('yyyy-MM-dd');
-        // formattedday = formatter4.format(picked);
-        //  print(formattedday); // // something like 2
-        startdatecon.value = TextEditingValue(text: startformat);
-      });
+      actions: <Widget>[
+        GestureDetector(
+    onTap: ()=> Navigator.pop(context),
+          child: new Card(
+              elevation: 5.0,
+              color: Colors.black,
+//          onPressed: null,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(
+                Radius.circular(10.0),
+              )),
+              child: Padding(
+                child: Text('Filter',
+                    style: TextStyle(
+                        fontSize: 14, color: Theme.of(context).primaryColor)),
+                padding: EdgeInsets.only(
+                    top: 10.0, bottom: 10.0, right: 16.0, left: 16.0),
+              )),
+        ),
+        new GestureDetector(
+          onTap: () => Navigator.pop(context),
+          child: new Card(
+              color: Colors.black,
+              elevation: 5.0,
+//          onPressed: null,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(
+                Radius.circular(10.0),
+              )),
+              child: Padding(
+                child: Text('Cancel',
+                    style: TextStyle(fontSize: 14, color: Colors.white)),
+                padding: EdgeInsets.all(10.0),
+              )),
+        )
+
+//        FlatButton(
+//            onPressed: () {
+////              final newText = 'Updated Title!';
+////              setState(() {
+////                _title = newText;
+////              });
+//            },
+//            child: Text('Filter')),
+//        FlatButton(
+//            onPressed: () {
+////              final newText = 'Updated Title!';
+////              setState(() {
+////                _title = newText;
+////              });
+//            },
+//            child: Text('Cancel')),
+      ],
+    );
   }
 }
-

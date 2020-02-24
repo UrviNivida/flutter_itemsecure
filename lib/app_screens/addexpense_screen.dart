@@ -40,6 +40,12 @@ class AddExpenseScreenState extends State<AddExpenseScreen> {
   String startformat = '',starttimeformat='';
   DateTime selectedDate = DateTime.now();
   TimeOfDay selectedTime;
+
+
+  final format1 = DateFormat("dd-MM-yyyy");
+  final timeFormat = DateFormat("h:mm a");
+  DateTime date;
+  TimeOfDay time;
 //  final ValueChanged<TimeOfDay> selectTime;
 
   @override
@@ -295,116 +301,118 @@ class AddExpenseScreenState extends State<AddExpenseScreen> {
                                   ),
                                 ),
                                 Expanded(
-                                  flex: 2,
-                                  child: GestureDetector(
-                                    child: AbsorbPointer(
-                                        child: Container(
-                                          alignment: Alignment.center,
-                                          child: TextFormField(
-                                            autofocus: false,
+                                  flex: 1,
+                                  child: DateTimeField(
+                                    textAlign: TextAlign.center,
+                                    format: format1,
+                                    onShowPicker: (context, currentValue) {
+                                      return showDatePicker(
+                                          context: context,
+                                          firstDate: DateTime(1900),
+                                          initialDate: currentValue ?? DateTime.now(),
+                                          lastDate: DateTime(2100));
+                                    },
+                                    resetIcon: null,
+                                    autofocus: false,
 //                                  focusNode:  FocusScope.of(context).requestFocus(new FocusNode()),
-                                            keyboardType: TextInputType.datetime,
+                                    keyboardType: TextInputType.datetime,
 //                                maxLength: 10,
-                                            style: textStyle,
-                                            controller: startdatecon,
-                                            validator: (String value) {
-                                              if (value.isEmpty) {
-                                                return 'Please Select Start Date';
-                                              }
-                                            },
-                                            decoration: InputDecoration(
-                                              border: InputBorder.none,
+                                    style: textStyle,
+                                    controller: startdatecon,
+//                            validator: (String value) {
+//                              if (value.isEmpty) {
+//                                return 'Please Select Start Date';
+//                              }
+//                            },
+                                    decoration: InputDecoration(
+                                      border: InputBorder.none,
 //                                    labelStyle: labelStyle,
-                                              hintText: 'Start Date',
-                                              hintStyle: hintStyle,
+                                      hintText: 'Start Date',
+                                      hintStyle: hintStyle,
 //                                    labelText: 'Agency Name'
 //                                    contentPadding: const EdgeInsets.only(bottom: -10.0)
-
 //                            filled: true,
-                                            ),
-                                          ),
-                                        )),
-                                    onTap: () {
-                                      _selectDate(context);
-                                    },
+                                    ),
                                   ),
 
-//                        TextFormField(
-//                          autofocus: false,
+//                      GestureDetector(
+//                        child: AbsorbPointer(
+//                            child: Container(
+//                          alignment: Alignment.center,
+//                          child: DateTimeField(
+//                            onShowPicker: (context, currentValue) {
+//                              return showDatePicker(
+//                                  context: context,
+//                                  firstDate: DateTime(1900),
+//                                  initialDate: currentValue ?? DateTime.now(),
+//                                  lastDate: DateTime(2100));
+//                            },
+//
+//                            format: format1,
+//                            autofocus: false,
 ////                                  focusNode:  FocusScope.of(context).requestFocus(new FocusNode()),
-//                          keyboardType: TextInputType.text,
+//                            keyboardType: TextInputType.datetime,
 ////                                maxLength: 10,
-//                          style: textStyle,
-//                          controller: startdatecon,
-//                          textAlign: TextAlign.center,
-//                          validator: (String value) {
-//                            if (value.isEmpty) {
-//                              return 'Please Select Start Date';
-//                            }
-//                          },
-//                          decoration: InputDecoration(
-//                            border: InputBorder.none,
+//                            style: textStyle,
+//                            controller: startdatecon,
+////                            validator: (String value) {
+////                              if (value.isEmpty) {
+////                                return 'Please Select Start Date';
+////                              }
+////                            },
+//                            decoration: InputDecoration(
+//                              border: InputBorder.none,
+////                                    labelStyle: labelStyle,
 //                              hintText: 'Start Date',
 //                              hintStyle: hintStyle,
+////                                    labelText: 'Agency Name'
+////                                    contentPadding: const EdgeInsets.only(bottom: -10.0)
+//
+////                            filled: true,
+//                            ),
 //                          ),
-//                        ),
+//                        )),
+//                        onTap: () {
+//                          _selectDate(context);
+//                        },
+//                      ),
                                 ),
                                 Expanded(
                                   flex: 1,
-                                  child: GestureDetector(
-                                    child: AbsorbPointer(
-                                        child: Container(
-                                          alignment: Alignment.center,
-                                          child: TextFormField(
-                                            autofocus: false,
+                                  child: DateTimeField(
+                                    textAlign: TextAlign.center,
+                                    resetIcon: null,
+                                    format: timeFormat,
+                                    onShowPicker: (context, currentValue) async {
+                                      final time = await showTimePicker(
+                                        context: context,
+                                        initialTime: TimeOfDay.fromDateTime(currentValue ?? DateTime.now()),
+                                      );
+                                      return DateTimeField.convert(time);
+                                    },
+                                    autofocus: false,
 //                                  focusNode:  FocusScope.of(context).requestFocus(new FocusNode()),
-                                            keyboardType: TextInputType.datetime,
+                                    keyboardType: TextInputType.datetime,
 //                                maxLength: 10,
-                                            style: textStyle,
-                                            controller: starttimecon,
-                                            validator: (String value) {
-                                              if (value.isEmpty) {
-                                                return 'Please Select Start Time';
-                                              }
-                                            },
-                                            decoration: InputDecoration(
-                                              border: InputBorder.none,
+                                    style: textStyle,
+                                    controller: starttimecon,
+//                                validator: (String value) {
+//                                  if (value.isEmpty) {
+//                                    return 'Please Select Start Time';
+//                                  }
+//                                },
+                                    decoration: InputDecoration(
+                                      border: InputBorder.none,
 //                                    labelStyle: labelStyle,
-                                              hintText: 'Start Time',
-                                              hintStyle: hintStyle,
+                                      hintText: 'Start Time',
+                                      hintStyle: hintStyle,
 //                                    labelText: 'Agency Name'
 //                                    contentPadding: const EdgeInsets.only(bottom: -10.0)
 
 //                            filled: true,
-                                            ),
-                                          ),
-                                        )),
-                                    onTap: () {
-                                      _selectTime(context);
-                                    },
+                                    ),
                                   ),
-
-//                        TextFormField(
-//                          autofocus: false,
-////                                  focusNode:  FocusScope.of(context).requestFocus(new FocusNode()),
-//                          keyboardType: TextInputType.text,
-////                                maxLength: 10,
-//                          style: textStyle,
-//                          controller: startdatecon,
-//                          textAlign: TextAlign.center,
-//                          validator: (String value) {
-//                            if (value.isEmpty) {
-//                              return 'Please Select Start Date';
-//                            }
-//                          },
-//                          decoration: InputDecoration(
-//                            border: InputBorder.none,
-//                              hintText: 'Start Date',
-//                              hintStyle: hintStyle,
-//                          ),
-//                        ),
                                 ),
-
                               ],
                             ),
                             SizedBox(
@@ -561,44 +569,6 @@ class AddExpenseScreenState extends State<AddExpenseScreen> {
       FocusScope.of(context).requestFocus(new FocusNode());
       this._currentItemSelected = newValueSelected;
     });
-  }
-
-  Future<Null> _selectDate(BuildContext context) async {
-    final DateTime pickeddate = await showDatePicker(
-        context: context,
-        initialDate: selectedDate,
-        firstDate: DateTime(1901, 1),
-        lastDate: DateTime(2100));
-    if (pickeddate != null && pickeddate != selectedDate)
-      setState(() {
-        selectedDate = pickeddate;
-        var formatter = new DateFormat('dd-MM-yyyy');
-        startformat = formatter.format(pickeddate);
-        //  var formatter4 = new DateFormat('yyyy-MM-dd');
-        // formattedday = formatter4.format(picked);
-        //  print(formattedday); // // something like 2
-        startdatecon.value = TextEditingValue(text: startformat);
-      });
-  }
-
-  Future<void> _selectTime(BuildContext context) async {
-    final TimeOfDay pickedtime = await showTimePicker(
-      context: context,
-      initialTime: selectedTime,
-
-    );
-//    if (pickedtime != null && pickedtime != selectedTime)
-////      selectTime(picked);
-//    setState(() {
-//      selectedTime = pickedtime;
-//      var formatter = new DateFormat('dd-MM-yyyy');
-////      startformat = formatter.format(pickeddate);
-//      starttimeformat=selectedTime.format(context);
-//      //  var formatter4 = new DateFormat('yyyy-MM-dd');
-//      // formattedday = formatter4.format(picked);
-//      //  print(formattedday); // // something like 2
-//      starttimecon.value = TextEditingValue(text: starttimeformat);
-//    });
   }
 
   String formatTimeOfDay(TimeOfDay tod) {
