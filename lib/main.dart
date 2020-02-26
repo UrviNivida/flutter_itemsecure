@@ -17,10 +17,11 @@ import 'app_screens/dashboard_screen.dart';
 import 'app_screens/login_screen.dart';
 import 'app_screens/bottom_navigation_screen.dart';
 import 'app_screens/samplescreen.dart';
+import 'app_screens/teamprofile_screen.dart';
+import 'app_screens/todayvisits_screen.dart';
 
 //https://vimeo.com/372583791
 //https://pub.dev/packages/flutter_native_splash
-
 
 //Column
 //
@@ -31,46 +32,46 @@ import 'app_screens/samplescreen.dart';
 //mainAxisAlignment: MainAxisAlignment.center => Center Row contents horizontally,
 //    crossAxisAlignment: CrossAxisAlignment.center => Center Row contents vertically,
 
-void main() => runApp(MaterialApp(
-  theme: ThemeData(
-    primarySwatch: Colors.blue,
-  ),
-  home: Loginscreen(),
-));
+//void main() => runApp(MaterialApp(
+//  theme: ThemeData(
+//    primarySwatch: Colors.blue,
+//  ),
+//  home: Loginscreen(),
+//));
 
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
-
-//Future main() async {
-//  WidgetsFlutterBinding.ensureInitialized();
-//  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-//
-//  runApp(new MaterialApp(
-//      title: 'FluterSplashDemo',
-//      debugShowCheckedModeBanner: false,
-//      theme: new ThemeData(
-//        primaryColor: const Color(0xFFF8C300),
-//        accentColor: const Color(0xFF212121),
-//primaryColorDark: const Color(0xFFF8C300)
-////        textTheme: TextTheme(
-////          headline: TextStyle(fontSize: 72.0,
-////              fontWeight: FontWeight.bold),
-////          title: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
-////          body1: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
-////        ),
-//      ),
+  runApp(new MaterialApp(
+      title: 'FluterSplashDemo',
+      debugShowCheckedModeBanner: false,
+      theme: new ThemeData(
+          primaryColor: const Color(0xFFF8C300),
+          accentColor: const Color(0xFF212121),
+          primaryColorDark: const Color(0xFFF8C300)
+//        textTheme: TextTheme(
+//          headline: TextStyle(fontSize: 72.0,
+//              fontWeight: FontWeight.bold),
+//          title: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
+//          body1: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
+//        ),
+          ),
 //      home: new Loginscreen()));
-////      home: new SplashScreen()));
-////      home: new CheckInScreen()));
-////      home: new AddVisitScreen()));
-////      home: new ExpenseListScreen()));
-////      home: new BottomNavBar()));
-////      home: new AddExpenseScreen()));
-////      home: new OutcomeScreen()));
-////      home: new SettingsScreen()));
-////      home: new DashbaroadScreen()));
-////      home: new MyTeamScreen()));
-//
-//}
+//      home: new SplashScreen()));
+//      home: new CheckInScreen()));
+//      home: new AddVisitScreen()));
+//      home: new ExpenseListScreen()));
+//      home: new BottomNavBar()));
+//      home: new AddExpenseScreen()));
+//      home: new OutcomeScreen()));
+//      home: new SettingsScreen()));
+//      home: new DashbaroadScreen()));
+//      home: new MyTeamScreen()));
+//      home: new MainCollapsingToolbar()));
+//      home: new BarChartSample3()));
+      home: new TodayVisitsScreen()));
+}
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -103,7 +104,6 @@ class SplashScreenState extends State<SplashScreen> {
     }
   }
 
-
   @override
   void initState() {
     super.initState();
@@ -123,13 +123,13 @@ class SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      body: new Stack(
-        fit: StackFit.expand,
-        children: <Widget>[new Image.asset('images/splashscreen.png'),]
+      body: new Stack(fit: StackFit.expand, children: <Widget>[
+        new Image.asset('images/splashscreen.png'),
+      ]
 //        children: <Widget>[
 //          new Image.asset('images/splashscreen.png'),
 //        ],
-      ),
+          ),
     );
   }
 
