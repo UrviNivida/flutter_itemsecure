@@ -8,6 +8,7 @@ import 'package:flutter_itemsecure_dsr/app_screens/checkin_screen.dart';
 import 'package:flutter_itemsecure_dsr/app_screens/employee_info_screen.dart';
 import 'package:flutter_itemsecure_dsr/app_screens/expense_list_screen.dart';
 import 'package:flutter_itemsecure_dsr/app_screens/map_appointmentlist_screen.dart';
+import 'package:flutter_itemsecure_dsr/app_screens/myteam_screen.dart';
 import 'package:flutter_itemsecure_dsr/app_screens/outcome_screen.dart';
 import 'package:flutter_itemsecure_dsr/app_screens/settings_screen.dart';
 import 'package:flutter_itemsecure_dsr/utils/prefs_file.dart';
@@ -30,35 +31,46 @@ import 'app_screens/samplescreen.dart';
 //mainAxisAlignment: MainAxisAlignment.center => Center Row contents horizontally,
 //    crossAxisAlignment: CrossAxisAlignment.center => Center Row contents vertically,
 
-Future main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+void main() => runApp(MaterialApp(
+  theme: ThemeData(
+    primarySwatch: Colors.blue,
+  ),
+  home: Loginscreen(),
+));
 
-  runApp(new MaterialApp(
-      title: 'FluterSplashDemo',
-      debugShowCheckedModeBanner: false,
-      theme: new ThemeData(
-        primaryColor: const Color(0xFFF8C300),
-        accentColor: const Color(0xFF212121),
-primaryColorDark: const Color(0xFFF8C300)
-//        textTheme: TextTheme(
-//          headline: TextStyle(fontSize: 72.0,
-//              fontWeight: FontWeight.bold),
-//          title: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
-//          body1: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
-//        ),
-      ),
+
+
+//Future main() async {
+//  WidgetsFlutterBinding.ensureInitialized();
+//  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+//
+//  runApp(new MaterialApp(
+//      title: 'FluterSplashDemo',
+//      debugShowCheckedModeBanner: false,
+//      theme: new ThemeData(
+//        primaryColor: const Color(0xFFF8C300),
+//        accentColor: const Color(0xFF212121),
+//primaryColorDark: const Color(0xFFF8C300)
+////        textTheme: TextTheme(
+////          headline: TextStyle(fontSize: 72.0,
+////              fontWeight: FontWeight.bold),
+////          title: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
+////          body1: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
+////        ),
+//      ),
 //      home: new Loginscreen()));
-//      home: new CheckInScreen()));
-      home: new AddVisitScreen()));
-//      home: new ExpenseListScreen()));
-//      home: new BottomNavBar()));
-//      home: new AddExpenseScreen()));
-//      home: new OutcomeScreen()));
-//      home: new SettingsScreen()));
-//      home: new DashbaroadScreen()));
-
-}
+////      home: new SplashScreen()));
+////      home: new CheckInScreen()));
+////      home: new AddVisitScreen()));
+////      home: new ExpenseListScreen()));
+////      home: new BottomNavBar()));
+////      home: new AddExpenseScreen()));
+////      home: new OutcomeScreen()));
+////      home: new SettingsScreen()));
+////      home: new DashbaroadScreen()));
+////      home: new MyTeamScreen()));
+//
+//}
 
 class SplashScreen extends StatefulWidget {
   @override

@@ -10,7 +10,6 @@ import 'package:solid_bottom_sheet/solid_bottom_sheet.dart';
 import 'NavigationBloc.dart';
 import 'package:intl/intl.dart';
 
-
 class Maps_appointmentscreen extends StatefulWidget with NavigationStates {
   @override
   State<StatefulWidget> createState() {
@@ -31,12 +30,11 @@ class MyAccountsPagenew extends State<Maps_appointmentscreen> {
       fontFamily: 'Quicksand',
       color: Colors.black);
 
-
-
   final List<ScheduleModel> scheduleing = Schedulelist.getschedule();
   GoogleMapController myMapController;
   final Set<Marker> _markers = new Set();
   static const LatLng _mainLocation = const LatLng(22.317498, 73.164598);
+
   Set<Marker> myMarker() {
     setState(() {
       _markers.add(Marker(
@@ -46,7 +44,7 @@ class MyAccountsPagenew extends State<Maps_appointmentscreen> {
         infoWindow: InfoWindow(
           title: 'Nivida Web Solutions Pvt. Ltd.',
           snippet:
-          '305, Privilege Avenue, Opp. isha hospital, Behind atlantis Sarabhai campus, Sarabhai Rd, Vadiwadi, Vadodara, Gujarat 390023',
+              '305, Privilege Avenue, Opp. isha hospital, Behind atlantis Sarabhai campus, Sarabhai Rd, Vadiwadi, Vadodara, Gujarat 390023',
         ),
         icon: BitmapDescriptor.defaultMarker,
       ));
@@ -59,76 +57,76 @@ class MyAccountsPagenew extends State<Maps_appointmentscreen> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-        body: Column(
-            children: <Widget>[
-              Expanded(
-                flex: 1,
-                child: Padding(
-                  padding: EdgeInsets.all(_padding),
-                  child: Row(
-                    children: <Widget>[
-                      Expanded(
-                        flex: 1,
-                        child: GestureDetector(
-                            child: Stack(
-                              alignment: Alignment.center,
-                              children: <Widget>[
-                                Container(
-                                  child: Image(
-                                    image: AssetImage('images/yellowcircle.png'),
-                                    width: _imagewidth,
-                                    height: _imageheight,
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                                Container(
-                                    child: IconTheme(
-                                      data: new IconThemeData(
-                                        color: Colors.white,
-                                      ),
-                                      child: new Icon(Icons.group),
-                                    ))
-                              ],
-                            )),
-                      ),
-                      Expanded(
-                        flex: 1,
-                        child: GestureDetector(
-                            child: Stack(
-                              alignment: Alignment.center,
-                              children: <Widget>[
-                                Container(
-                                  child: Image(
-                                    image: AssetImage('images/yellowcircle.png'),
-                                    width: _imagewidth,
-                                    height: _imageheight,
-                                    color: Theme.of(context).primaryColor,
-                                  ),
-                                ),
-                                Container(
-                                    child: IconTheme(
-                                      data: new IconThemeData(
-                                        color: Colors.white,
-                                      ),
-                                      child: new Icon(Icons.add_call),
-                                    ))
-                              ],
-                            )),
-                      ),
-                      Expanded(
-                        flex: 1,
-                        child: GestureDetector(
-                            child: Stack(
-                              alignment: Alignment.center,
-                              children: <Widget>[
-                                Container(
-                                  child: Image(
-                                    image: AssetImage('images/smile_fill.png'),
-                                    width: _imagewidth,
-                                    height: _imageheight,
-                                    color: Theme.of(context).primaryColor,
-                                  ),
-                                ),
+      body: Column(
+        children: <Widget>[
+          Expanded(
+            flex: 1,
+            child: Padding(
+              padding: EdgeInsets.all(_padding),
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    flex: 1,
+                    child: GestureDetector(
+                        child: Stack(
+                      alignment: Alignment.center,
+                      children: <Widget>[
+                        Container(
+                          child: Image(
+                            image: AssetImage('images/yellowcircle.png'),
+                            width: _imagewidth,
+                            height: _imageheight,
+                            color: Colors.grey,
+                          ),
+                        ),
+                        Container(
+                            child: IconTheme(
+                          data: new IconThemeData(
+                            color: Colors.white,
+                          ),
+                          child: new Icon(Icons.group),
+                        ))
+                      ],
+                    )),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: GestureDetector(
+                        child: Stack(
+                      alignment: Alignment.center,
+                      children: <Widget>[
+                        Container(
+                          child: Image(
+                            image: AssetImage('images/yellowcircle.png'),
+                            width: _imagewidth,
+                            height: _imageheight,
+                            color: Theme.of(context).primaryColor,
+                          ),
+                        ),
+                        Container(
+                            child: IconTheme(
+                          data: new IconThemeData(
+                            color: Colors.white,
+                          ),
+                          child: new Icon(Icons.add_call),
+                        ))
+                      ],
+                    )),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: GestureDetector(
+                        child: Stack(
+                      alignment: Alignment.center,
+                      children: <Widget>[
+                        Container(
+                          child: Image(
+                            image: AssetImage('images/smile_fill.png'),
+                            width: _imagewidth,
+                            height: _imageheight,
+                            color: Theme.of(context).primaryColor,
+                          ),
+                        ),
 //                          Container(
 //                              child: IconTheme(
 //                                data: new IconThemeData(
@@ -136,53 +134,49 @@ class MyAccountsPagenew extends State<Maps_appointmentscreen> {
 //                                ),
 //                                child: new Icon(Icons.group),
 //                              ))
-                              ],
-                            )),
-                      ),
-                      Expanded(
-                        flex: 1,
-                        child: GestureDetector(
-                            child: Stack(
-                              alignment: Alignment.center,
-                              children: <Widget>[
-                                Container(
-                                  child: Image(
-                                    image: AssetImage('images/yellowcircle.png'),
-                                    width: _imagewidth,
-                                    height: _imageheight,
-                                    color: Theme.of(context).primaryColor,
-                                  ),
-                                ),
-                                Container(
-                                    child: IconTheme(
-                                      data: new IconThemeData(
-                                        color: Colors.white,
-                                      ),
-                                      child: new Icon(Icons.attach_money),
-                                    ))
-                              ],
-                            ),
-                        onTap: ()
-                          {
-                            showDialog(
-                                context: context,
-                                builder: ((BuildContext context) {
-                                  return DynamicDialog();
-                                }));
-                          },
-                        ),
-                      ),
-                    ],
+                      ],
+                    )),
                   ),
-                ),
+                  Expanded(
+                    flex: 1,
+                    child: GestureDetector(
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: <Widget>[
+                          Container(
+                            child: Image(
+                              image: AssetImage('images/yellowcircle.png'),
+                              width: _imagewidth,
+                              height: _imageheight,
+                              color: Theme.of(context).primaryColor,
+                            ),
+                          ),
+                          Container(
+                              child: IconTheme(
+                            data: new IconThemeData(
+                              color: Colors.white,
+                            ),
+                            child: new Icon(Icons.attach_money),
+                          ))
+                        ],
+                      ),
+                      onTap: () {
+                        showDialog(
+                            context: context,
+                            builder: ((BuildContext context) {
+                              return DynamicDialog();
+                            }));
+                      },
+                    ),
+                  ),
+                ],
               ),
-              Expanded(
-                  flex: 8,
-                  child: _tabSection(context)),
-//              Expanded(flex: 1,child: )
-            ],
+            ),
           ),
-
+          Expanded(flex: 8, child: _tabSection(context)),
+//              Expanded(flex: 1,child: )
+        ],
+      ),
       bottomSheet: SolidBottomSheet(
         maxHeight: 400,
         headerBar: Container(
@@ -196,7 +190,10 @@ class MyAccountsPagenew extends State<Maps_appointmentscreen> {
                   flex: 4,
                   child: Container(
                     alignment: Alignment.centerLeft,
-                    child: Text('5 Scheduled meetings',style: textStyle,),
+                    child: Text(
+                      '5 Scheduled meetings',
+                      style: textStyle,
+                    ),
                   ),
                 ),
                 Expanded(
@@ -215,13 +212,14 @@ class MyAccountsPagenew extends State<Maps_appointmentscreen> {
           color: Colors.white,
           child: _buildAppointmentList(),
         ),
-      ),);
+      ),
+    );
   }
 
   Widget _tabSection(BuildContext context) {
     return Container(
 //      height: 520,
-      height: MediaQuery.of(context).size.height/1.28,
+      height: MediaQuery.of(context).size.height / 1.28,
       width: MediaQuery.of(context).size.width,
       child: Stack(
         children: <Widget>[
@@ -278,30 +276,30 @@ class MyAccountsPagenew extends State<Maps_appointmentscreen> {
       height: 295,
       child: scheduleing.length > 0
           ? ListView.builder(
-        itemCount: scheduleing.length,
-        itemBuilder: (BuildContext context, int index) {
-          return Dismissible(
-            onDismissed: (DismissDirection direction) {
-              setState(() {
-                scheduleing.removeAt(index);
-              });
-            },
-            secondaryBackground: Container(
-              child: Center(
-                child: Text(
-                  'Delete',
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
-              color: Colors.red,
-            ),
-            background: Container(),
-            child: Schdeulecard(scheduleModel: scheduleing[index]),
-            key: UniqueKey(),
-            direction: DismissDirection.endToStart,
-          );
-        },
-      )
+              itemCount: scheduleing.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Dismissible(
+                  onDismissed: (DismissDirection direction) {
+                    setState(() {
+                      scheduleing.removeAt(index);
+                    });
+                  },
+                  secondaryBackground: Container(
+                    child: Center(
+                      child: Text(
+                        'Delete',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                    color: Colors.red,
+                  ),
+                  background: Container(),
+                  child: Schdeulecard(scheduleModel: scheduleing[index]),
+                  key: UniqueKey(),
+                  direction: DismissDirection.endToStart,
+                );
+              },
+            )
           : Center(child: Text('No Items')),
     );
   }
@@ -334,8 +332,12 @@ class _DynamicDialogState extends State<DynamicDialog> {
     "New Customer",
     "Existing Customer",
     "Office",
-
   ];
+
+  bool isCustomerSelect = false;
+  bool isLocationIdentifier = false;
+  bool isTerritory = true;
+  bool isIndustry = true;
 
   static List<ScheduleModel> scheduleing = Schedulelist.getschedule();
   final TextEditingController _typeAheadController = TextEditingController();
@@ -378,19 +380,18 @@ class _DynamicDialogState extends State<DynamicDialog> {
     DateTime date;
     TimeOfDay time;
 
-    return AlertDialog (
-
+    return AlertDialog(
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
-            Radius.circular(15),
-          )),
+        Radius.circular(15),
+      )),
       title: Text(
         "Save Current Location",
         textAlign: TextAlign.center,
       ),
       content: ListView(
 //        mainAxisSize: MainAxisSize.min,   ----------------->for column
-      shrinkWrap: true,
+        shrinkWrap: true,
         children: <Widget>[
           DropdownButtonFormField<String>(
             style: textStyle,
@@ -402,7 +403,7 @@ class _DynamicDialogState extends State<DynamicDialog> {
 //                                    prefixIcon: Icon(Icons.apps),
                 border: UnderlineInputBorder(
 //                                      borderRadius: BorderRadius.circular(_borderradius),
-                )),
+                    )),
             isExpanded: false,
             items: _dropdownValuestype.map((String dropdownstringitem) {
               return DropdownMenuItem<String>(
@@ -417,111 +418,96 @@ class _DynamicDialogState extends State<DynamicDialog> {
               setState(() {
                 FocusScope.of(context).requestFocus(new FocusNode());
                 this._typee = newvalueuser;
+
+                if (newvalueuser == 'Select Type') {
+                  isCustomerSelect = false;
+                  isLocationIdentifier = false;
+                  isTerritory = true;
+                  isIndustry = true;
+                } else if (newvalueuser == 'New Customer') {
+                  isCustomerSelect = true;
+                  isLocationIdentifier = true;
+                  isTerritory = true;
+                  isIndustry = true;
+                } else if (newvalueuser == 'Existing Customer') {
+                  isCustomerSelect = true;
+                  isLocationIdentifier = false;
+                  isTerritory = false;
+                  isIndustry = false;
+                } else if (newvalueuser == 'Office') {
+                  isCustomerSelect = false;
+                  isLocationIdentifier = false;
+                  isTerritory = false;
+                  isIndustry = false;
+                }
               });
 //              _onDropDownItemSelected(newvalueuser);
             },
             value: _typee,
           ),
-          Padding(
-            padding: EdgeInsets.only(top: 10,bottom: 10),
-            child: Container(
-              alignment: Alignment.center,
-              child: TypeAheadFormField(
-                textFieldConfiguration: TextFieldConfiguration(
-                  style: textStyle,
-                  decoration: InputDecoration(
-                      labelText: 'Customer',
-                      labelStyle: hintStyleDropdown,
-                      hintText: 'Select Customer Name'),
-                  controller: this._typeAheadController,
-                ),
-                suggestionsCallback: (pattern) {
-                  return getSuggestions(pattern);
+          Visibility(
+            visible: isCustomerSelect,
+            child: Padding(
+              padding: EdgeInsets.only(top: 10, bottom: 10),
+              child: Container(
+                alignment: Alignment.center,
+                child: TypeAheadFormField(
+                  textFieldConfiguration: TextFieldConfiguration(
+                    style: textStyle,
+                    decoration: InputDecoration(
+                        labelText: 'Customer',
+                        labelStyle: hintStyleDropdown,
+                        hintText: 'Select Customer Name'),
+                    controller: this._typeAheadController,
+                  ),
+                  suggestionsCallback: (pattern) {
+                    return getSuggestions(pattern);
 //                return CitiesService.getSuggestions(pattern);
-                },
-                itemBuilder: (context, suggestion) {
-                  return ListTile(
-                    title: Text(
-                      suggestion,
-                      style: textStyle,
-                    ),
-                  );
-                },
-                transitionBuilder: (context, suggestionsBox, controller) {
-                  return suggestionsBox;
-                },
-                onSuggestionSelected: (suggestion) {
-                  this._typeAheadController.text = suggestion;
-                },
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return 'Please select a city';
-                  }
-                },
-                onSaved: (value) => this._selectedName = value,
+                  },
+                  itemBuilder: (context, suggestion) {
+                    return ListTile(
+                      title: Text(
+                        suggestion,
+                        style: textStyle,
+                      ),
+                    );
+                  },
+                  transitionBuilder: (context, suggestionsBox, controller) {
+                    return suggestionsBox;
+                  },
+                  onSuggestionSelected: (suggestion) {
+                    this._typeAheadController.text = suggestion;
+                  },
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Please select a city';
+                    }
+                  },
+                  onSaved: (value) => this._selectedName = value,
+                ),
               ),
             ),
           ),
-//          for select type
           Padding(
-            padding: EdgeInsets.only(top: 10,bottom: 10),
+            padding: EdgeInsets.only(top: 10, bottom: 10),
             child: Container(
               alignment: Alignment.center,
               child: TextFormField(
-                  enabled: false,
-                  maxLines: 5,
-                  initialValue: 'B/25, Goverdhan Park-1, TP-13, Near Chhani Jakat Naka, Vadodara',
-                  autofocus: false,
-//                                  focusNode:  FocusScope.of(context).requestFocus(new FocusNode()),
-                  keyboardType: TextInputType.text,
-//                                maxLength: 10,
-                  style: textStyle,
-
-                  validator: (String value) {
-                    if (value.isEmpty) {
-                      return 'Please Enter Description';
-                    }
-                  },
-                  decoration: InputDecoration(
-                    enabled: false,
-                    enabledBorder: new UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.grey,
-                      ),
-                    ),
-                    focusedBorder: new UnderlineInputBorder(
-                      borderSide:
-                      BorderSide(color: Theme.of(context).primaryColor),
-                    ),
-                    labelStyle: hintStyleDropdown,
-                    hintText: 'Enter Description',
-                    hintStyle: hintStyle,
-                    labelText: 'Address',
-
-
-//                                    contentPadding: const EdgeInsets.only(bottom: -10.0)
-
-//                            filled: true,
-                  ),
-                ),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(top: 10,bottom: 10),
-            child: Container(
-              alignment: Alignment.center,
-              child: TextFormField(
+                enabled: false,
+                maxLines: 5,
+                initialValue:
+                    'B/25, Goverdhan Park-1, TP-13, Near Chhani Jakat Naka, Vadodara',
                 autofocus: false,
 //                                  focusNode:  FocusScope.of(context).requestFocus(new FocusNode()),
                 keyboardType: TextInputType.text,
 //                                maxLength: 10,
                 style: textStyle,
 
-//                validator: (String value) {
-//                  if (value.isEmpty) {
-//                    return 'Please Enter Description';
-//                  }
-//                },
+                validator: (String value) {
+                  if (value.isEmpty) {
+                    return 'Please Enter Description';
+                  }
+                },
                 decoration: InputDecoration(
                   enabled: false,
                   enabledBorder: new UnderlineInputBorder(
@@ -531,13 +517,12 @@ class _DynamicDialogState extends State<DynamicDialog> {
                   ),
                   focusedBorder: new UnderlineInputBorder(
                     borderSide:
-                    BorderSide(color: Theme.of(context).primaryColor),
+                        BorderSide(color: Theme.of(context).primaryColor),
                   ),
                   labelStyle: hintStyleDropdown,
-                  hintText: 'Enter Location Identifier',
+                  hintText: 'Enter Description',
                   hintStyle: hintStyle,
-                  labelText: 'Location Identifier',
-
+                  labelText: 'Address',
 
 //                                    contentPadding: const EdgeInsets.only(bottom: -10.0)
 
@@ -546,71 +531,117 @@ class _DynamicDialogState extends State<DynamicDialog> {
               ),
             ),
           ),
-          DropdownButtonFormField<String>(
-            style: textStyle,
-            decoration: InputDecoration(
-//                                    contentPadding: EdgeInsets.all(_contentPadding),
-                contentPadding: EdgeInsets.all(0.0),
-                labelText: 'Select Territory',
-                labelStyle: hintStyleDropdown,
-//                                    prefixIcon: Icon(Icons.apps),
-                border: UnderlineInputBorder(
-//                                      borderRadius: BorderRadius.circular(_borderradius),
-                )),
-            isExpanded: false,
-            items: _dropdownValues.map((String dropdownstringitem) {
-              return DropdownMenuItem<String>(
-                value: dropdownstringitem,
-                child: Text(
-                  dropdownstringitem,
+          Visibility(
+            visible: isLocationIdentifier,
+            child: Padding(
+              padding: EdgeInsets.only(top: 10, bottom: 10),
+              child: Container(
+                alignment: Alignment.center,
+                child: TextFormField(
+                  autofocus: false,
+//                                  focusNode:  FocusScope.of(context).requestFocus(new FocusNode()),
+                  keyboardType: TextInputType.text,
+//                                maxLength: 10,
                   style: textStyle,
+
+//                validator: (String value) {
+//                  if (value.isEmpty) {
+//                    return 'Please Enter Description';
+//                  }
+//                },
+                  decoration: InputDecoration(
+                    enabled: false,
+                    enabledBorder: new UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                      ),
+                    ),
+                    focusedBorder: new UnderlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Theme.of(context).primaryColor),
+                    ),
+                    labelStyle: hintStyleDropdown,
+                    hintText: 'Enter Location Identifier',
+                    hintStyle: hintStyle,
+                    labelText: 'Location Identifier',
+
+//                                    contentPadding: const EdgeInsets.only(bottom: -10.0)
+
+//                            filled: true,
+                  ),
                 ),
-              );
-            }).toList(),
-            onChanged: (String newvalueuser) {
-              setState(() {
-                FocusScope.of(context).requestFocus(new FocusNode());
-                this._title = newvalueuser;
-              });
+              ),
+            ),
+          ),
+          Visibility(
+            visible: isTerritory,
+            child: DropdownButtonFormField<String>(
+              style: textStyle,
+              decoration: InputDecoration(
+//                                    contentPadding: EdgeInsets.all(_contentPadding),
+                  contentPadding: EdgeInsets.all(0.0),
+                  labelText: 'Select Territory',
+                  labelStyle: hintStyleDropdown,
+//                                    prefixIcon: Icon(Icons.apps),
+                  border: UnderlineInputBorder(
+//                                      borderRadius: BorderRadius.circular(_borderradius),
+                      )),
+              isExpanded: false,
+              items: _dropdownValues.map((String dropdownstringitem) {
+                return DropdownMenuItem<String>(
+                  value: dropdownstringitem,
+                  child: Text(
+                    dropdownstringitem,
+                    style: textStyle,
+                  ),
+                );
+              }).toList(),
+              onChanged: (String newvalueuser) {
+                setState(() {
+                  FocusScope.of(context).requestFocus(new FocusNode());
+                  this._title = newvalueuser;
+                });
 //              _onDropDownItemSelected(newvalueuser);
-            },
-            value: _title,
+              },
+              value: _title,
+            ),
           ),
           SizedBox(
             height: 10,
           ),
-          DropdownButtonFormField<String>(
-            style: textStyle,
-            decoration: InputDecoration(
+          Visibility(
+            visible: isIndustry,
+            child: DropdownButtonFormField<String>(
+              style: textStyle,
+              decoration: InputDecoration(
 //                                    contentPadding: EdgeInsets.all(_contentPadding),
-                contentPadding: EdgeInsets.all(0.0),
-                labelText: 'Select Industry',
-                labelStyle: hintStyleDropdown,
+                  contentPadding: EdgeInsets.all(0.0),
+                  labelText: 'Select Industry',
+                  labelStyle: hintStyleDropdown,
 //                                    prefixIcon: Icon(Icons.apps),
-                border: UnderlineInputBorder(
+                  border: UnderlineInputBorder(
 //                                      borderRadius: BorderRadius.circular(_borderradius),
-                )),
-            isExpanded: false,
-            items: _dropdownValues.map((String dropdownstringitem) {
-              return DropdownMenuItem<String>(
-                value: dropdownstringitem,
-                child: Text(
-                  dropdownstringitem,
-                  style: textStyle,
-                ),
-              );
-            }).toList(),
-            onChanged: (String newvalueuser) {
-              setState(() {
-                FocusScope.of(context).requestFocus(new FocusNode());
-                this._title = newvalueuser;
-              });
+                      )),
+              isExpanded: false,
+              items: _dropdownValues.map((String dropdownstringitem) {
+                return DropdownMenuItem<String>(
+                  value: dropdownstringitem,
+                  child: Text(
+                    dropdownstringitem,
+                    style: textStyle,
+                  ),
+                );
+              }).toList(),
+              onChanged: (String newvalueuser) {
+                setState(() {
+                  FocusScope.of(context).requestFocus(new FocusNode());
+                  this._title = newvalueuser;
+                });
 //              _onDropDownItemSelected(newvalueuser);
-            },
-            value: _title,
+              },
+              value: _title,
+            ),
           ),
-
-
         ],
       ),
 
@@ -632,15 +663,15 @@ class _DynamicDialogState extends State<DynamicDialog> {
 
       actions: <Widget>[
         GestureDetector(
-          onTap: ()=> Navigator.pop(context),
+          onTap: () => Navigator.pop(context),
           child: new Card(
               elevation: 5.0,
               color: Colors.black,
 //          onPressed: null,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(
-                    Radius.circular(10.0),
-                  )),
+                Radius.circular(10.0),
+              )),
               child: Padding(
                 child: Text('Save',
                     style: TextStyle(
@@ -657,8 +688,8 @@ class _DynamicDialogState extends State<DynamicDialog> {
 //          onPressed: null,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(
-                    Radius.circular(10.0),
-                  )),
+                Radius.circular(10.0),
+              )),
               child: Padding(
                 child: Text('Cancel',
                     style: TextStyle(fontSize: 14, color: Colors.white)),

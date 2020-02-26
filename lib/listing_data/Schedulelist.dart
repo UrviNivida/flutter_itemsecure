@@ -49,6 +49,20 @@ class Schedulelist {
         statusexp: 'Pending Approval by Accounts',
         rupees: '56.0',
       ),
+      ScheduleModel(
+        title: 'ABC Consultansts',
+        name: 'Andheri East',
+        date: '9:30 AM',
+        statusexp: 'Pending Approval by Accounts',
+        rupees: '56.0',
+      ),
+      ScheduleModel(
+        title: 'ABC Consultansts',
+        name: 'Andheri East',
+        date: '9:30 AM',
+        statusexp: 'Pending Approval by Accounts',
+        rupees: '56.0',
+      ),
     ];
   }
 
