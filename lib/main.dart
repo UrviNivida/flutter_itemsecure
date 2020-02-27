@@ -57,7 +57,7 @@ Future main() async {
 //          body1: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
 //        ),
           ),
-//      home: new Loginscreen()));
+      home: new Loginscreen()));
 //      home: new SplashScreen()));
 //      home: new CheckInScreen()));
 //      home: new AddVisitScreen()));
@@ -70,7 +70,7 @@ Future main() async {
 //      home: new MyTeamScreen()));
 //      home: new MainCollapsingToolbar()));
 //      home: new BarChartSample3()));
-      home: new TodayVisitsScreen()));
+//      home: new TodayVisitsScreen()));
 }
 
 class SplashScreen extends StatefulWidget {

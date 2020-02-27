@@ -8,6 +8,7 @@ class Prefs {
   final String _kNotificationsPrefs = "allowNotifications";
   final String _kSortingOrderPrefs = "sortOrder";
   final String _LoggedIn = "0";
+  final String _SelectedDate = "0";
 
 
   getLoginData(String key) async {
@@ -32,6 +33,16 @@ class Prefs {
   Future<bool> setLoggedIn(String value) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.setString(_LoggedIn, value);
+  }
+
+  Future<String> getSelectedDate() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString(_SelectedDate) ?? '0';
+  }
+
+  Future<bool> setSelectedDate(String value) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.setString(_SelectedDate, value);
   }
 
 

@@ -339,7 +339,6 @@ class _DynamicDialogState extends State<DynamicDialog> {
     // Printing all selected items on Terminal screen.
     print(holder_1);
     // Here you will get all your selected Checkbox items.
-
     // Clear array after use.
     holder_1.clear();
   }

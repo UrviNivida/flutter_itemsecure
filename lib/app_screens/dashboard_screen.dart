@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_itemsecure_dsr/app_screens/message_screen.dart';
 import 'package:flutter_itemsecure_dsr/app_screens/navigation_drawer.dart';
+import 'package:flutter_itemsecure_dsr/utils/prefs_file.dart';
 
 import 'Maps_appointmentscreen.dart';
 import 'NavigationBloc.dart';
 import 'SideBar.dart';
 import 'package:intl/intl.dart';
+
+import 'select_datewisefilter.dart';
 
 
 class DashbaroadScreen extends StatefulWidget {
@@ -21,6 +25,85 @@ class DashbaroadScreenState extends State<DashbaroadScreen> {
       fontFamily: 'Quicksand',
       color: Colors.black);
 
+  Prefs _prefs = new Prefs();
+  String _selectedDate='';
+  DateTime _CurrentDateTime;
+  String _CurrentDate='';
+  String toBeSet='21564545';
+  TextEditingController todaytext= new TextEditingController();
+
+  @override
+  void initState() {
+//    _getPrefsData();
+    // TODO: implement initState
+    super.initState();
+    _getPrefsData();
+  }
+
+  Future _getPrefsData() async {
+    _selectedDate = await _prefs.getSelectedDate();
+
+
+
+    setState(() {
+      _CurrentDateTime = DateTime.now();
+      _CurrentDate = DateFormat('yMMMd').format(_CurrentDateTime);
+//      print("_selectedDate urvi-->"+_selectedDate);
+//      print("_CurrentDate urvi-->"+_CurrentDate);
+//      if (_selectedDate == _CurrentDate) {
+//        toBeSet='Today';
+//      } else {
+//        toBeSet=_selectedDate;
+//      }
+      TodayText();
+    });
+
+  }
+
+  Widget TodayText() {
+    if (_selectedDate == _CurrentDate) {
+      return GestureDetector(
+        onTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return select_datewisefilter();
+          }));
+        },
+        child: Row(
+          children: <Widget>[
+            Text(
+              'Today',
+              style: headStyle,
+              textAlign: TextAlign.left,
+            ),
+            Icon(
+                Icons.arrow_drop_down
+            )
+          ],
+        ),
+      );
+    } else {
+      return GestureDetector(
+        onTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return select_datewisefilter();
+          }));
+        },
+        child: Row(
+          children: <Widget>[
+            Text(
+              _selectedDate,
+              style: headStyle,
+              textAlign: TextAlign.left,
+            ),
+            Icon(
+                Icons.arrow_drop_down
+            )
+          ],
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -32,10 +115,28 @@ class DashbaroadScreenState extends State<DashbaroadScreen> {
             onPressed: () => Scaffold.of(context).openDrawer(),
           ),
         ),
-        title: Text(
-          'Today',
-          style: headStyle,
-          textAlign: TextAlign.left,
+        title: GestureDetector(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return select_datewisefilter();
+            }));
+          },
+          child: TodayText(),
+
+//          Row(
+//            children: <Widget>[
+//              Text(
+//                toBeSet,
+//                style: headStyle,
+//                textAlign: TextAlign.left,
+//              ),
+//              Icon(
+//                  Icons.arrow_drop_down
+//              )
+//            ],
+//          ),
+
+
         ),
         actions: <Widget>[
           Row(
@@ -47,7 +148,12 @@ class DashbaroadScreenState extends State<DashbaroadScreen> {
                 child: Stack(
                   children: [
                     GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                                return message_screen();
+                              }));
+                        },
                         child: Icon(
                           Icons.message,
                           color: Colors.black,
@@ -117,5 +223,7 @@ class DashbaroadScreenState extends State<DashbaroadScreen> {
 
     );
   }
+
+
 }
 

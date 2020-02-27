@@ -1,6 +1,7 @@
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_itemsecure_dsr/adapters/Schdeulecard.dart';
+import 'package:flutter_itemsecure_dsr/app_screens/addvisit_screen.dart';
 import 'package:flutter_itemsecure_dsr/model/ScheduleModel.dart';
 import 'package:flutter_itemsecure_dsr/listing_data/Schedulelist.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
@@ -27,6 +28,11 @@ class MyAccountsPagenew extends State<Maps_appointmentscreen> {
   TextStyle textStyle = TextStyle(
       fontSize: 14.0,
       fontWeight: FontWeight.w700,
+      fontFamily: 'Quicksand',
+      color: Colors.black);
+  TextStyle textStyletab = TextStyle(
+      fontSize: 14.0,
+      fontWeight: FontWeight.w500,
       fontFamily: 'Quicksand',
       color: Colors.black);
 
@@ -60,9 +66,9 @@ class MyAccountsPagenew extends State<Maps_appointmentscreen> {
       body: Column(
         children: <Widget>[
           Expanded(
-            flex: 1,
+            flex: 0,
             child: Padding(
-              padding: EdgeInsets.all(_padding),
+              padding: EdgeInsets.all(5),
               child: Row(
                 children: <Widget>[
                   Expanded(
@@ -87,7 +93,14 @@ class MyAccountsPagenew extends State<Maps_appointmentscreen> {
                           child: new Icon(Icons.group),
                         ))
                       ],
-                    )),
+                    ),
+                    onTap: (){
+                      showDialog(
+                          context: context,
+                          builder: ((BuildContext context) {
+                            return DynamicDialogCheckout();
+                          }));
+                    },),
                   ),
                   Expanded(
                     flex: 1,
@@ -117,63 +130,93 @@ class MyAccountsPagenew extends State<Maps_appointmentscreen> {
                     flex: 1,
                     child: GestureDetector(
                         child: Stack(
-                      alignment: Alignment.center,
-                      children: <Widget>[
-                        Container(
-                          child: Image(
-                            image: AssetImage('images/smile_fill.png'),
-                            width: _imagewidth,
-                            height: _imageheight,
-                            color: Theme.of(context).primaryColor,
-                          ),
+                          alignment: Alignment.center,
+                          children: <Widget>[
+                            Container(
+                              child: Image(
+                                image: AssetImage('images/yellowcircle.png'),
+                                width: _imagewidth,
+                                height: _imageheight,
+                                color: Theme.of(context).primaryColor,
+                              ),
+                            ),
+                            Container(
+                                child: IconTheme(
+                                  data: new IconThemeData(
+                                    color: Colors.white,
+                                  ),
+                                  child: new Icon(Icons.business_center),
+                                ))
+                          ],
                         ),
-//                          Container(
-//                              child: IconTheme(
-//                                data: new IconThemeData(
-//                                  color: Colors.white,
-//                                ),
-//                                child: new Icon(Icons.group),
-//                              ))
-                      ],
-                    )),
+                    onTap: ()
+                      {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                              return AddVisitScreen();
+                            }));
+                      },),
                   ),
                   Expanded(
                     flex: 1,
                     child: GestureDetector(
-                      child: Stack(
-                        alignment: Alignment.center,
-                        children: <Widget>[
-                          Container(
-                            child: Image(
-                              image: AssetImage('images/yellowcircle.png'),
-                              width: _imagewidth,
-                              height: _imageheight,
-                              color: Theme.of(context).primaryColor,
+                        child: Stack(
+                          alignment: Alignment.center,
+                          children: <Widget>[
+                            Container(
+                              child: Image(
+                                image: AssetImage('images/yellowcircle.png'),
+                                width: _imagewidth,
+                                height: _imageheight,
+                                color: Theme.of(context).primaryColor,
+                              ),
                             ),
-                          ),
-                          Container(
-                              child: IconTheme(
-                            data: new IconThemeData(
-                              color: Colors.white,
-                            ),
-                            child: new Icon(Icons.attach_money),
-                          ))
-                        ],
-                      ),
-                      onTap: () {
-                        showDialog(
-                            context: context,
-                            builder: ((BuildContext context) {
-                              return DynamicDialog();
-                            }));
-                      },
-                    ),
+                            Container(
+                                child: IconTheme(
+                                  data: new IconThemeData(
+                                    color: Colors.white,
+                                  ),
+                                  child: new Icon(Icons.pin_drop),
+                                ))
+                          ],
+                        )),
                   ),
                 ],
               ),
             ),
           ),
-          Expanded(flex: 8, child: _tabSection(context)),
+          Expanded(
+            flex: 0,
+            child: Padding(
+              padding: EdgeInsets.all(3),
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    flex: 1,
+                    child: GestureDetector(
+                      child:Text('Check-In',style: textStyletab,textAlign: TextAlign.center,),
+                      ),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: GestureDetector(
+                        child: Text('Busy',style: textStyletab,textAlign: TextAlign.center,),),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: GestureDetector(
+                        child: Text('Visits',style: textStyletab,textAlign: TextAlign.center,),),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: GestureDetector(
+                        child: Text('Pin',style: textStyletab,textAlign: TextAlign.center,),),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Expanded(flex: 10, child: _tabSection(context)),
 //              Expanded(flex: 1,child: )
         ],
       ),
@@ -199,7 +242,7 @@ class MyAccountsPagenew extends State<Maps_appointmentscreen> {
                 Expanded(
                   flex: 1,
                   child: Container(
-                    child: Icon(Icons.refresh),
+                    child: Icon(Icons.schedule),
                   ),
                 )
               ],
@@ -724,5 +767,263 @@ class _DynamicDialogState extends State<DynamicDialog> {
     }
     matches.retainWhere((s) => s.toLowerCase().contains(query.toLowerCase()));
     return matches;
+  }
+}
+
+class DynamicDialogCheckout extends StatefulWidget {
+//  DynamicDialog({this.title});
+
+//  final String title;
+
+  @override
+  _DynamicDialogCheckoutState createState() => _DynamicDialogCheckoutState();
+}
+
+class _DynamicDialogCheckoutState extends State<DynamicDialog> {
+  String _title;
+  String _typee;
+
+  final List<String> _dropdownValues = [
+    "All",
+    "Pending Approval by Manager",
+    "Pending Approval by Accounts",
+    "Approved",
+    "Rejected by Manager",
+    "Rejected by Accounts",
+    "Disbursed",
+  ];
+
+  final List<String> _dropdownValuestype = [
+    "New Customer",
+    "Existing Customer",
+    "Office",
+  ];
+
+  bool isCustomerSelect = false;
+  bool isLocationIdentifier = false;
+  bool isTerritory = true;
+  bool isIndustry = true;
+
+  static List<ScheduleModel> scheduleing = Schedulelist.getschedule();
+  final TextEditingController _typeAheadController = TextEditingController();
+  String _selectedName;
+
+  String _picked = "Any";
+
+  Map<String, bool> numbers = {
+    'One': false,
+    'Two': false,
+    'Three': false,
+    'Four': false,
+    'Five': false,
+    'Six': false,
+    'Seven': false,
+  };
+  var holder_1 = [];
+
+  @override
+  void initState() {
+//    _title = widget.title;
+    super.initState();
+  }
+
+  getItems() {
+    numbers.forEach((key, value) {
+      if (value == true) {
+        holder_1.add(key);
+      }
+    });
+
+    // Printing all selected items on Terminal screen.
+    print(holder_1);
+    // Here you will get all your selected Checkbox items.
+    // Clear array after use.
+    holder_1.clear();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    TextStyle headstyle = TextStyle(
+        fontSize: 16.0,
+        fontWeight: FontWeight.w700,
+        fontFamily: 'Quicksand',
+        color: Theme.of(context).primaryColor);
+
+    TextStyle textStyle = TextStyle(
+        fontSize: 14.0,
+        fontWeight: FontWeight.w500,
+        fontFamily: 'Quicksand',
+        color: Colors.black);
+
+    TextStyle hintStyle = TextStyle(
+        fontSize: 14.0,
+        fontWeight: FontWeight.w200,
+        fontFamily: 'Quicksand',
+        color: Colors.grey[2]);
+
+    TextStyle labelStyle = TextStyle(
+        fontSize: 16.0,
+        fontWeight: FontWeight.w500,
+        fontFamily: 'Quicksand',
+        color: Colors.black);
+
+    return AlertDialog(
+      titlePadding: EdgeInsets.all(10.0),
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(15),
+          )),
+      title: Text(
+        "Check-Out",
+        textAlign: TextAlign.center,
+      ),
+      content: Column(
+        mainAxisSize: MainAxisSize.min, //----------------->for column
+//        shrinkWrap: true,
+        children: <Widget>[
+          Container(
+//            height: 10.0,
+            child: Row(
+          children: <Widget>[
+            Text('From : ',style: headstyle,),
+            Text('Urvi Suthar Pre-wedding',style: headstyle,),
+        ],
+      )
+
+
+          ),
+          const MySeparator(color: Colors.grey),
+          Expanded(
+            child: ListView(
+              children: numbers.keys.map((String key) {
+                return new CheckboxListTile(
+                  title: new Text(key,style: textStyle,),
+                  value: numbers[key],
+                  activeColor: Theme.of(context).accentColor,
+                  checkColor: Colors.white,
+                  onChanged: (bool value) {
+                    setState(() {
+                      numbers[key] = value;
+                    });
+                  },
+                );
+              }).toList(),
+            ),
+          )
+        ],
+      ),
+      actions: <Widget>[
+        GestureDetector(
+          onTap: () => Navigator.pop(context),
+          child: new Card(
+              elevation: 5.0,
+              color: Colors.black,
+//          onPressed: null,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(10.0),
+                  )),
+              child: Padding(
+                child: Text('Clear',
+                    style: TextStyle(
+                        fontSize: 14, color: Colors.white)),
+                padding: EdgeInsets.only(
+                    top: 10.0, bottom: 10.0, right: 16.0, left: 16.0),
+              )),
+        ),
+        GestureDetector(
+          onTap: () => Navigator.pop(context),
+          child: new Card(
+              elevation: 5.0,
+              color: Colors.black,
+//          onPressed: null,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(10.0),
+                  )),
+              child: Padding(
+                child: Text('Filter',
+                    style: TextStyle(
+                        fontSize: 14, color: Theme.of(context).primaryColor)),
+                padding: EdgeInsets.only(
+                    top: 10.0, bottom: 10.0, right: 16.0, left: 16.0),
+              )),
+        ),
+        new GestureDetector(
+          onTap: () => Navigator.pop(context),
+          child: new Card(
+              color: Colors.black,
+              elevation: 5.0,
+//          onPressed: null,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(10.0),
+                  )),
+              child: Padding(
+                child: Text('Cancel',
+                    style: TextStyle(fontSize: 14, color: Colors.white)),
+                padding: EdgeInsets.all(10.0),
+              )),
+        )
+
+//        FlatButton(
+//            onPressed: () {
+////              final newText = 'Updated Title!';
+////              setState(() {
+////                _title = newText;
+////              });
+//            },
+//            child: Text('Filter')),
+//        FlatButton(
+//            onPressed: () {
+////              final newText = 'Updated Title!';
+////              setState(() {
+////                _title = newText;
+////              });
+//            },
+//            child: Text('Cancel')),
+      ],
+    );
+  }
+
+  static List<String> getSuggestions(String query) {
+    List<String> matches = List();
+    for (var i = 0; i < scheduleing.length; i++) {
+      matches.add(scheduleing[i].name);
+    }
+    matches.retainWhere((s) => s.toLowerCase().contains(query.toLowerCase()));
+    return matches;
+  }
+}
+
+class MySeparator extends StatelessWidget {
+  final double height;
+  final Color color;
+
+  const MySeparator({this.height = 1, this.color = Colors.black});
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        final boxWidth = constraints.constrainWidth();
+        final dashWidth = 4.0;
+        final dashHeight = height;
+        final dashCount = (boxWidth / (2 * dashWidth)).floor();
+        return Flex(
+          children: List.generate(dashCount, (_) {
+            return SizedBox(
+              width: dashWidth,
+              height: dashHeight,
+              child: DecoratedBox(
+                decoration: BoxDecoration(color: color),
+              ),
+            );
+          }),
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          direction: Axis.horizontal,
+        );
+      },
+    );
   }
 }
