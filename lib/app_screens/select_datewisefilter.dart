@@ -57,7 +57,7 @@ class select_datewisefilterState extends State<select_datewisefilter>
         actions: <Widget>[
           IconButton(
             // action button
-            icon: Icon(Icons.add_circle),
+            icon: Icon(Icons.check_circle),
             onPressed: () {
 
               print("formattedDate-->"+formattedDate);

@@ -2,6 +2,8 @@ import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_itemsecure_dsr/adapters/Schdeulecard.dart';
 import 'package:flutter_itemsecure_dsr/app_screens/addvisit_screen.dart';
+import 'package:flutter_itemsecure_dsr/app_screens/appointment_detail_screen.dart';
+import 'package:flutter_itemsecure_dsr/app_screens/checkin_screen.dart';
 import 'package:flutter_itemsecure_dsr/model/ScheduleModel.dart';
 import 'package:flutter_itemsecure_dsr/listing_data/Schedulelist.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
@@ -48,11 +50,18 @@ class MyAccountsPagenew extends State<Maps_appointmentscreen> {
         markerId: MarkerId(_mainLocation.toString()),
         position: _mainLocation,
         infoWindow: InfoWindow(
+          onTap: (){
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) {
+                  return AppointmentDetailScreen();
+                }));
+          },
           title: 'Nivida Web Solutions Pvt. Ltd.',
           snippet:
               '305, Privilege Avenue, Opp. isha hospital, Behind atlantis Sarabhai campus, Sarabhai Rd, Vadiwadi, Vadodara, Gujarat 390023',
         ),
         icon: BitmapDescriptor.defaultMarker,
+
       ));
     });
 
@@ -95,11 +104,18 @@ class MyAccountsPagenew extends State<Maps_appointmentscreen> {
                       ],
                     ),
                     onTap: (){
-                      showDialog(
-                          context: context,
-                          builder: ((BuildContext context) {
-                            return DynamicDialogCheckout();
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                            return CheckInScreen();
                           }));
+
+//                          WHEN ALREADY CHECKEDIN
+//                      showDialog(
+//                          context: context,
+//                          builder: ((BuildContext context) {
+//                            return DynamicDialogCheckout();
+//                          }));
+
                     },),
                   ),
                   Expanded(
@@ -179,7 +195,16 @@ class MyAccountsPagenew extends State<Maps_appointmentscreen> {
                                   child: new Icon(Icons.pin_drop),
                                 ))
                           ],
-                        )),
+                        ),
+                    onTap: ()
+                      {
+                        showDialog(
+                            context: context,
+                            builder: ((BuildContext context) {
+                              return DynamicDialog();
+                            }));
+                      },
+                    ),
                   ),
                 ],
               ),
@@ -375,6 +400,7 @@ class _DynamicDialogState extends State<DynamicDialog> {
     "New Customer",
     "Existing Customer",
     "Office",
+    "Home",
   ];
 
   bool isCustomerSelect = false;
@@ -478,6 +504,12 @@ class _DynamicDialogState extends State<DynamicDialog> {
                   isTerritory = false;
                   isIndustry = false;
                 } else if (newvalueuser == 'Office') {
+                  isCustomerSelect = false;
+                  isLocationIdentifier = false;
+                  isTerritory = false;
+                  isIndustry = false;
+                }
+                else if (newvalueuser == 'Home') {
                   isCustomerSelect = false;
                   isLocationIdentifier = false;
                   isTerritory = false;
@@ -779,7 +811,7 @@ class DynamicDialogCheckout extends StatefulWidget {
   _DynamicDialogCheckoutState createState() => _DynamicDialogCheckoutState();
 }
 
-class _DynamicDialogCheckoutState extends State<DynamicDialog> {
+class _DynamicDialogCheckoutState extends State<DynamicDialogCheckout> {
   String _title;
   String _typee;
 
@@ -797,6 +829,7 @@ class _DynamicDialogCheckoutState extends State<DynamicDialog> {
     "New Customer",
     "Existing Customer",
     "Office",
+    "Home",
   ];
 
   bool isCustomerSelect = false;

@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_itemsecure_dsr/app_screens/dashboard_screen.dart';
+import 'package:flutter_itemsecure_dsr/app_screens/myteam_screen.dart';
+import 'package:flutter_itemsecure_dsr/app_screens/settings_screen.dart';
 import 'package:xlive_switch/xlive_switch.dart';
+
+import 'expense_list_screen.dart';
+import 'profile_screen.dart';
 
 class NavigationDrawerScreen extends StatefulWidget {
   @override
@@ -49,6 +55,11 @@ class NavigationDrawerScreenState extends State<NavigationDrawerScreen> {
 
   @override
   Widget build(BuildContext context) {
+    TextStyle rupeestyle = TextStyle(
+        fontSize: 24.0,
+        fontWeight: FontWeight.w600,
+//        fontFamily: 'Quicksand',
+        color: Colors.black);
     TextStyle headStyleYellow = TextStyle(
         fontSize: 16.0,
         fontWeight: FontWeight.w700,
@@ -127,6 +138,13 @@ class NavigationDrawerScreenState extends State<NavigationDrawerScreen> {
                 ),
                 radius: 30,
               ),
+              onTap: (){
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) {
+                      return profile_screen();
+                    }));
+
+              },
             ),
             Divider(
               height: 5,
@@ -168,6 +186,23 @@ class NavigationDrawerScreenState extends State<NavigationDrawerScreen> {
             ),
             ListTile(
               leading: Icon(
+                Icons.group_work,
+                color: Colors.black,
+              ),
+              title: Text(
+                "My Team",
+                style: navStyle,
+              ),
+              onTap: (){
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) {
+                      return MyTeamScreen();
+                    }));
+
+              },
+            ),
+            ListTile(
+              leading: Icon(
                 Icons.card_travel,
                 color: Colors.black,
               ),
@@ -175,7 +210,13 @@ class NavigationDrawerScreenState extends State<NavigationDrawerScreen> {
                 "Visit",
                 style: navStyle,
               ),
-              onTap: () {},
+              onTap: (){
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) {
+                      return DashbaroadScreen();
+                    }));
+
+              },
             ),
             ListTile(
               leading: Icon(
@@ -189,26 +230,36 @@ class NavigationDrawerScreenState extends State<NavigationDrawerScreen> {
               onTap: () {},
             ),
             ListTile(
-              leading: Icon(
-                Icons.attach_money,
-                color: Colors.black,
+              leading: Text(
+                '₹',
+                style: rupeestyle,textAlign: TextAlign.center
               ),
               title: Text(
                 "Expenses",
                 style: navStyle,
               ),
-              onTap: () {},
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) {
+                      return ExpenseListScreen();
+                    }));
+              },
             ),
             ListTile(
               leading: Icon(
-                Icons.help_outline,
+                Icons.settings,
                 color: Colors.black,
               ),
               title: Text(
-                "Tips",
+                "Settings",
                 style: navStyle,
               ),
-              onTap: () {},
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) {
+                      return SettingsScreen();
+                    }));
+              },
             ),
             Divider(
               height: 5,

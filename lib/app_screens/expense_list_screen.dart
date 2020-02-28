@@ -11,6 +11,7 @@ import 'package:intl/intl.dart';
 
 import 'NavigationBloc.dart';
 import 'SideBar.dart';
+import 'addexpense_screen.dart';
 
 TextEditingController startdatecon = new TextEditingController();
 TextEditingController enddatecon = new TextEditingController();
@@ -95,7 +96,10 @@ class ExpenseListScreenState extends State<ExpenseListScreen> {
             children: <Widget>[
               IconButton(
                 icon: new Icon(Icons.add),
-                onPressed: () {},
+                onPressed: () {Navigator.push(context,
+                    MaterialPageRoute(builder: (context) {
+                      return AddExpenseScreen();
+                    }));},
               ),
               IconButton(
                 icon: new Icon(Icons.filter_list),

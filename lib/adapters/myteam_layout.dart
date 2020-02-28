@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_itemsecure_dsr/app_screens/teamprofile_screen.dart';
 
 import '../model/ScheduleModel.dart';
 
@@ -40,6 +41,13 @@ class MyTeamLayout extends StatelessWidget {
           child: Column(
             children: <Widget>[
               ListTile(
+                onTap: ()
+                  {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                          return TeamProfileScreen();
+                        }));
+                  },
                 leading: CircleAvatar(
                   child: Icon(
                     Icons.perm_identity,

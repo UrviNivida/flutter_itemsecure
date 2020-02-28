@@ -98,6 +98,8 @@ import 'package:flutter_itemsecure_dsr/model/ScheduleModel.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:intl/intl.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
+
+import 'profile_screen.dart';
 // For changing the language
 
 class SettingsScreen extends StatefulWidget {
@@ -207,6 +209,12 @@ class SettingsScreenState extends State<SettingsScreen> {
                   ),
                 ),
               ),
+              onTap: (){
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) {
+                      return profile_screen();
+                    }));
+              },
             ),
             GestureDetector(
               child: Padding(

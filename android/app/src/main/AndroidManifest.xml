@@ -37,6 +37,10 @@
 <!--            android:name="io.flutter.embedding.android.SplashScreenDrawable"-->
 <!--            android:resource="@drawable/splashscreen"-->
 <!--            />-->
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />

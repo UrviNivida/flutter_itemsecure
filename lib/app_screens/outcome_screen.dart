@@ -443,12 +443,36 @@ class _OutcomeScreenState extends State<OutcomeScreen> {
                     alignment: Alignment.center,
                     children: <Widget>[
                       Container(
-                        child: TextField(
+                        child:TextFormField(
+                          autofocus: false,
+//                                  focusNode:  FocusScope.of(context).requestFocus(new FocusNode()),
+                          keyboardType: TextInputType.text,
+//                                maxLength: 10,
+                          style: textStyle,
+//                          controller: subjectcon,
+                          validator: (String value) {
+                            if (value.isEmpty) {
+                              return 'Please Enter Subject';
+                            }
+                          },
                           decoration: InputDecoration(
-                              hintStyle: hintStyle,
+                              enabledBorder: new UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.grey,
+                                ),
+                              ),
+                              focusedBorder: new UnderlineInputBorder(
+                                borderSide:
+                                BorderSide(color: Theme.of(context).primaryColor),
+                              ),
                               labelStyle: textStyle,
-                              border: InputBorder.none,
-                              hintText: 'Subject'),
+                              hintText: 'Enter Subject',
+                              hintStyle: hintStyle,
+                              labelText: 'Subject'
+//                                    contentPadding: const EdgeInsets.only(bottom: -10.0)
+
+//                            filled: true,
+                          ),
                         ),
                       ),
                     ],
@@ -468,12 +492,35 @@ class _OutcomeScreenState extends State<OutcomeScreen> {
                     alignment: Alignment.center,
                     children: <Widget>[
                       Container(
-                        child: TextField(
+                        child: TextFormField(
+                          autofocus: false,
+//                                  focusNode:  FocusScope.of(context).requestFocus(new FocusNode()),
+                          keyboardType: TextInputType.text,
+//                                maxLength: 10,
+                          style: textStyle,
+//                          controller: descriptioncon,
+                          validator: (String value) {
+                            if (value.isEmpty) {
+                              return 'Please Enter Description';
+                            }
+                          },
                           decoration: InputDecoration(
-                              hintStyle: hintStyle,
+                              enabledBorder: new UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.grey,
+                                ),
+                              ),
+                              focusedBorder: new UnderlineInputBorder(
+                                borderSide:
+                                BorderSide(color: Theme.of(context).primaryColor),
+                              ),
                               labelStyle: textStyle,
-                              border: InputBorder.none,
-                              hintText: 'Description'),
+                              hintText: 'Enter Description',
+                              hintStyle: hintStyle,
+                              labelText: 'Description'
+//                                    contentPadding: const EdgeInsets.only(bottom: -10.0)
+//                            filled: true,
+                          ),
                         ),
                       ),
                     ],

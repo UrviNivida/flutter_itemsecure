@@ -4,6 +4,8 @@ import 'package:flutter_itemsecure_dsr/app_screens/chat_screen.dart';
 import 'add_message_screen.dart';
 import 'package:intl/intl.dart';
 
+import 'navigation_drawer.dart';
+
 
 class message_screen extends StatefulWidget {
   @override
@@ -29,8 +31,11 @@ class message_screenState extends State<message_screen> {
     return Scaffold(
         appBar: AppBar(
           titleSpacing: 3.0,
-          leading: new IconButton(
-            icon: new Icon(Icons.menu, color: Colors.black),
+          leading: Builder(
+            builder: (context) => IconButton(
+              icon: new Icon(Icons.menu),
+              onPressed: () => Scaffold.of(context).openDrawer(),
+            ),
           ),
           title: Text("Message", style: headStyle),
           automaticallyImplyLeading: false,
@@ -51,6 +56,7 @@ class message_screenState extends State<message_screen> {
             ),
           ],
         ),
+        drawer: new NavigationDrawerScreen(),
         body: Container(
           height: 80,
           child: Card(

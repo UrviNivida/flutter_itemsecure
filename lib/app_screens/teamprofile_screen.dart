@@ -1,12 +1,18 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_itemsecure_dsr/adapters/todayvisit_layout.dart';
+import 'package:flutter_itemsecure_dsr/app_screens/expense_list_screen.dart';
+import 'package:flutter_itemsecure_dsr/app_screens/punchinmap_screen.dart';
+import 'package:flutter_itemsecure_dsr/app_screens/todayvisits_screen.dart';
 
-class MainCollapsingToolbar extends StatefulWidget {
+import 'currentLocation_screen.dart';
+
+class TeamProfileScreen extends StatefulWidget {
   @override
-  _MainCollapsingToolbarState createState() => _MainCollapsingToolbarState();
+  _TeamProfileScreenState createState() => _TeamProfileScreenState();
 }
 
-class _MainCollapsingToolbarState extends State<MainCollapsingToolbar> {
+class _TeamProfileScreenState extends State<TeamProfileScreen> {
   TextStyle headStyleName = TextStyle(
       fontSize: 18.0,
       fontWeight: FontWeight.w700,
@@ -56,6 +62,22 @@ class _MainCollapsingToolbarState extends State<MainCollapsingToolbar> {
               expandedHeight: 300.0,
               floating: false,
               pinned: true,
+              actions: <Widget>[
+                IconButton(
+                  // action button
+                  icon: Icon(
+                    Icons.info,
+                  ),
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: ((BuildContext context) {
+                          return Clickedialog();
+                        }));
+                  },
+                ),
+              ],
+              automaticallyImplyLeading: false,
 //              bottom: PreferredSize(
 //                preferredSize: Size.fromHeight(50),
 //                child: Container(),
@@ -68,11 +90,9 @@ class _MainCollapsingToolbarState extends State<MainCollapsingToolbar> {
 //                    brightness: Brightness.light,
                     elevation: 0.0,
                     leading: new IconButton(
-                      icon: new Icon(
-                        Icons.cancel,
-                        color: Colors.black,
-                      ),
-                      onPressed: () => Navigator.of(context).pop(),
+                      alignment: Alignment.centerRight,
+                      icon: new Icon(Icons.cancel),
+                      onPressed: () => Navigator.of(context).pop(null),
                     ),
                     title: Row(
                       children: <Widget>[
@@ -121,10 +141,16 @@ class _MainCollapsingToolbarState extends State<MainCollapsingToolbar> {
                         // action button
                         icon: Icon(
                           Icons.info,
+                          color: Colors.black,
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          showDialog(
+                              context: context,
+                              builder: ((BuildContext context) {
+                                return Clickedialog();
+                              }));
+                        },
                       ),
-
                     ],
                     automaticallyImplyLeading: false,
                   ),
@@ -134,6 +160,22 @@ class _MainCollapsingToolbarState extends State<MainCollapsingToolbar> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
+//                        ListTile(
+//                          leading: new IconButton(
+//                            icon: new Icon(
+//                              Icons.cancel,
+//                              color: Colors.black,
+//                            ),
+//                            onPressed: () => Navigator.of(context).pop(),
+//                          ),
+//                          trailing: IconButton(
+//                            // action button
+//                            icon: Icon(
+//                              Icons.info,
+//                              color: Colors.black,
+//                            ), onPressed: () => Navigator.of(context).pop(),
+//                          ),
+//                        ),
                         AppBar(
                           elevation: 0.0,
                           leading: new IconButton(
@@ -144,26 +186,6 @@ class _MainCollapsingToolbarState extends State<MainCollapsingToolbar> {
                             onPressed: () => Navigator.of(context).pop(),
                           ),
                           automaticallyImplyLeading: false,
-                          actions: <Widget>[
-                            IconButton(
-                              // action button
-                              icon: Icon(
-                                Icons.info,
-                              ),
-                              onPressed: () {},
-                            ),
-//          PopupMenuButton<Choice>( // overflow menu
-//            onSelected: _select,
-//            itemBuilder: (BuildContext context) {
-//              return choices.skip(2).map<PopupMenuItem<Choice>>((Choice choice) {
-//                return PopupMenuItem<Choice>(
-//                  value: choice,
-//                  child: Text(choice.title),
-//                );
-//              }).toList();
-//            },
-//          ),
-                          ],
                         ),
                         GestureDetector(
                           onTap: () {
@@ -223,8 +245,8 @@ class _MainCollapsingToolbarState extends State<MainCollapsingToolbar> {
 //          onPressed: null,
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.all(
-                                        Radius.circular(25.0),
-                                      )),
+                                    Radius.circular(25.0),
+                                  )),
                                   child: Padding(
                                     child: Row(
                                       children: <Widget>[
@@ -249,8 +271,8 @@ class _MainCollapsingToolbarState extends State<MainCollapsingToolbar> {
 //          onPressed: null,
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.all(
-                                        Radius.circular(25.0),
-                                      )),
+                                    Radius.circular(25.0),
+                                  )),
                                   child: Padding(
                                     child: Row(
                                       children: <Widget>[
@@ -321,7 +343,13 @@ class _MainCollapsingToolbarState extends State<MainCollapsingToolbar> {
                                   ],
                                 )
                               ],
-                            ))
+                            ),
+                        onTap: (){
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                                return currentLocation_screen();
+                              }));
+                        },)
                       ],
                     ),
                   ),
@@ -392,7 +420,13 @@ class _MainCollapsingToolbarState extends State<MainCollapsingToolbar> {
                                   ],
                                 )
                               ],
-                            ))
+                            ),
+                        onTap: (){
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                                return punchin_screen();
+                              }));
+                        },)
                       ],
                     ),
                   ),
@@ -463,7 +497,13 @@ class _MainCollapsingToolbarState extends State<MainCollapsingToolbar> {
                                   ],
                                 )
                               ],
-                            ))
+                            ),
+                          onTap: (){
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                                  return TodayVisitsScreen();
+                                }));
+                          },)
                       ],
                     ),
                   ),
@@ -547,7 +587,13 @@ class _MainCollapsingToolbarState extends State<MainCollapsingToolbar> {
                                   ],
                                 )
                               ],
-                            ))
+                            ),
+                          onTap: (){
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                                  return ExpenseListScreen();
+                                }));
+                          },)
                       ],
                     ),
                   ),
@@ -584,7 +630,11 @@ class _MainCollapsingToolbarState extends State<MainCollapsingToolbar> {
               Container(
                 child: Padding(
                   padding: EdgeInsets.all(10.0),
-                  child: Text('Visits this week',textAlign: TextAlign.center,style: headStyleName,),
+                  child: Text(
+                    'Visits this week',
+                    textAlign: TextAlign.center,
+                    style: headStyleName,
+                  ),
                 ),
               ),
               Card(
@@ -603,11 +653,11 @@ class _MainCollapsingToolbarState extends State<MainCollapsingToolbar> {
                         tooltipPadding: const EdgeInsets.all(0),
                         tooltipBottomMargin: 8,
                         getTooltipItem: (
-                            BarChartGroupData group,
-                            int groupIndex,
-                            BarChartRodData rod,
-                            int rodIndex,
-                            ) {
+                          BarChartGroupData group,
+                          int groupIndex,
+                          BarChartRodData rod,
+                          int rodIndex,
+                        ) {
                           return BarTooltipItem(
                             rod.y.round().toString(),
                             TextStyle(
@@ -690,6 +740,135 @@ class _MainCollapsingToolbarState extends State<MainCollapsingToolbar> {
                   ),
                 ),
               )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class Clickedialog extends StatefulWidget {
+//  DynamicDialog({this.title});
+
+//  final String title;
+
+  @override
+  Clickedialog_sate createState() => Clickedialog_sate();
+}
+
+class Clickedialog_sate extends State<Clickedialog> {
+  @override
+  Widget build(BuildContext context) {
+    TextStyle textStyle = TextStyle(
+        fontSize: 14.0,
+        fontWeight: FontWeight.w500,
+        fontFamily: 'Quicksand',
+        color: Colors.black);
+    TextStyle textStyleTitle = TextStyle(
+        fontSize: 14.0,
+        fontFamily: 'Quicksand',
+        fontWeight: FontWeight.w500,
+        color: const Color(0xFFF8C300));
+    var _imageheight = 30.0;
+    var _imagewidth = 30.0;
+    return Container(
+      height: 250,
+      child: AlertDialog(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+          Radius.circular(15),
+        )),
+        content: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              Row(
+                children: <Widget>[
+                  Expanded(
+                    flex: 5,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          "Khushali Thakkar",
+                          style: textStyle,
+                        ),
+                        Text(
+                          "Manager",
+                          style: textStyle,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                      flex: 1,
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: Icon(
+                          Icons.cancel,
+                          color: Colors.black,
+                        ),
+                      )),
+                ],
+              ),
+              SizedBox(
+                height: 12.0,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      "Report To",
+                      style: textStyle,
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      "Urvi Suthar",
+                      style: textStyleTitle,
+                    ),
+                  ),
+                ],
+              ),
+              Container(
+                margin: const EdgeInsets.only(left: 5.0, right: 5.0),
+                child: Divider(
+                  height: 10,
+                  thickness: 0.5,
+                  color: Colors.grey.withOpacity(0.5),
+//                        indent: 10,
+//                        endIndent: 10,
+                ),
+              ),
+              SizedBox(
+                height: 10.0,
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      "Team",
+                      style: textStyle,
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      "Khushali Thakkar",
+                      style: textStyleTitle,
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         ),

@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_itemsecure_dsr/app_screens/appointment_detail_screen.dart';
 
 import '../model/ScheduleModel.dart';
 
@@ -70,39 +71,47 @@ class Schdeulecard extends StatelessWidget {
 //      ),
 //    );
 
-    return Card(
-      child: Row(children: <Widget>[
-        Expanded(
-          flex: 1,
-          child: Icon(
-            Icons.menu,
+    return GestureDetector(
+      child:   Card(
+        child: Row(children: <Widget>[
+          Expanded(
+            flex: 1,
+            child: Icon(
+              Icons.menu,
+            ),
           ),
-        ),
-        Expanded(
-          flex: 7,
-          child: Column(
-            children: <Widget>[
-              ListTile(
-                title: Text(
-                  scheduleModel.title,
-                  style: headStyle,
-                ),
-                subtitle: Text(
-                  scheduleModel.name,
-                  style: textStyle,
-                ),
-                trailing: Text(scheduleModel.date,style: textStyleTime,),
-              )
-            ],
+          Expanded(
+            flex: 7,
+            child: Column(
+              children: <Widget>[
+                ListTile(
+                  title: Text(
+                    scheduleModel.title,
+                    style: headStyle,
+                  ),
+                  subtitle: Text(
+                    scheduleModel.name,
+                    style: textStyle,
+                  ),
+                  trailing: Text(scheduleModel.date,style: textStyleTime,),
+                )
+              ],
+            ),
           ),
-        ),
-        Expanded(
-          flex: 1,
-          child: Icon(
-            Icons.arrow_right,
+          Expanded(
+            flex: 1,
+            child: Icon(
+              Icons.arrow_right,
+            ),
           ),
-        ),
-      ]),
+        ]),
+      ),
+      onTap: (){
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) {
+              return AppointmentDetailScreen();
+            }));
+      },
     );
 
   }
