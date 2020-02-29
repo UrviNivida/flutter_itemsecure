@@ -4,6 +4,7 @@ import 'package:flutter_itemsecure_dsr/adapters/Schdeulecard.dart';
 import 'package:flutter_itemsecure_dsr/app_screens/addvisit_screen.dart';
 import 'package:flutter_itemsecure_dsr/app_screens/appointment_detail_screen.dart';
 import 'package:flutter_itemsecure_dsr/app_screens/checkin_screen.dart';
+import 'package:flutter_itemsecure_dsr/app_screens/expense_list_screen.dart';
 import 'package:flutter_itemsecure_dsr/model/ScheduleModel.dart';
 import 'package:flutter_itemsecure_dsr/listing_data/Schedulelist.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
@@ -50,18 +51,16 @@ class MyAccountsPagenew extends State<Maps_appointmentscreen> {
         markerId: MarkerId(_mainLocation.toString()),
         position: _mainLocation,
         infoWindow: InfoWindow(
-          onTap: (){
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) {
-                  return AppointmentDetailScreen();
-                }));
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return AppointmentDetailScreen();
+            }));
           },
           title: 'Nivida Web Solutions Pvt. Ltd.',
           snippet:
               '305, Privilege Avenue, Opp. isha hospital, Behind atlantis Sarabhai campus, Sarabhai Rd, Vadiwadi, Vadodara, Gujarat 390023',
         ),
         icon: BitmapDescriptor.defaultMarker,
-
       ));
     });
 
@@ -83,40 +82,40 @@ class MyAccountsPagenew extends State<Maps_appointmentscreen> {
                   Expanded(
                     flex: 1,
                     child: GestureDetector(
-                        child: Stack(
-                      alignment: Alignment.center,
-                      children: <Widget>[
-                        Container(
-                          child: Image(
-                            image: AssetImage('images/yellowcircle.png'),
-                            width: _imagewidth,
-                            height: _imageheight,
-                            color: Colors.grey,
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: <Widget>[
+                          Container(
+                            child: Image(
+                              image: AssetImage('images/yellowcircle.png'),
+                              width: _imagewidth,
+                              height: _imageheight,
+                              color: Colors.grey,
+                            ),
                           ),
-                        ),
-                        Container(
-                            child: IconTheme(
-                          data: new IconThemeData(
-                            color: Colors.white,
-                          ),
-                          child: new Icon(Icons.group),
-                        ))
-                      ],
-                    ),
-                    onTap: (){
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                            return CheckInScreen();
-                          }));
+                          Container(
+                              child: IconTheme(
+                            data: new IconThemeData(
+                              color: Colors.white,
+                            ),
+                            child: new Icon(Icons.group),
+                          ))
+                        ],
+                      ),
+                      onTap: () {
+//                        Navigator.push(context,
+//                            MaterialPageRoute(builder: (context) {
+//                          return CheckInScreen();
+//                        }));
 
 //                          WHEN ALREADY CHECKEDIN
-//                      showDialog(
-//                          context: context,
-//                          builder: ((BuildContext context) {
-//                            return DynamicDialogCheckout();
-//                          }));
-
-                    },),
+                      showDialog(
+                          context: context,
+                          builder: ((BuildContext context) {
+                            return DynamicDialogCheckout();
+                          }));
+                      },
+                    ),
                   ),
                   Expanded(
                     flex: 1,
@@ -145,59 +144,58 @@ class MyAccountsPagenew extends State<Maps_appointmentscreen> {
                   Expanded(
                     flex: 1,
                     child: GestureDetector(
-                        child: Stack(
-                          alignment: Alignment.center,
-                          children: <Widget>[
-                            Container(
-                              child: Image(
-                                image: AssetImage('images/yellowcircle.png'),
-                                width: _imagewidth,
-                                height: _imageheight,
-                                color: Theme.of(context).primaryColor,
-                              ),
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: <Widget>[
+                          Container(
+                            child: Image(
+                              image: AssetImage('images/yellowcircle.png'),
+                              width: _imagewidth,
+                              height: _imageheight,
+                              color: Theme.of(context).primaryColor,
                             ),
-                            Container(
-                                child: IconTheme(
-                                  data: new IconThemeData(
-                                    color: Colors.white,
-                                  ),
-                                  child: new Icon(Icons.business_center),
-                                ))
-                          ],
-                        ),
-                    onTap: ()
-                      {
+                          ),
+                          Container(
+                              child: IconTheme(
+                            data: new IconThemeData(
+                              color: Colors.white,
+                            ),
+                            child: new Icon(Icons.business_center),
+                          ))
+                        ],
+                      ),
+                      onTap: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
-                              return AddVisitScreen();
-                            }));
-                      },),
+                          return AddVisitScreen();
+                        }));
+                      },
+                    ),
                   ),
                   Expanded(
                     flex: 1,
                     child: GestureDetector(
-                        child: Stack(
-                          alignment: Alignment.center,
-                          children: <Widget>[
-                            Container(
-                              child: Image(
-                                image: AssetImage('images/yellowcircle.png'),
-                                width: _imagewidth,
-                                height: _imageheight,
-                                color: Theme.of(context).primaryColor,
-                              ),
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: <Widget>[
+                          Container(
+                            child: Image(
+                              image: AssetImage('images/yellowcircle.png'),
+                              width: _imagewidth,
+                              height: _imageheight,
+                              color: Theme.of(context).primaryColor,
                             ),
-                            Container(
-                                child: IconTheme(
-                                  data: new IconThemeData(
-                                    color: Colors.white,
-                                  ),
-                                  child: new Icon(Icons.pin_drop),
-                                ))
-                          ],
-                        ),
-                    onTap: ()
-                      {
+                          ),
+                          Container(
+                              child: IconTheme(
+                            data: new IconThemeData(
+                              color: Colors.white,
+                            ),
+                            child: new Icon(Icons.pin_drop),
+                          ))
+                        ],
+                      ),
+                      onTap: () {
                         showDialog(
                             context: context,
                             builder: ((BuildContext context) {
@@ -219,23 +217,42 @@ class MyAccountsPagenew extends State<Maps_appointmentscreen> {
                   Expanded(
                     flex: 1,
                     child: GestureDetector(
-                      child:Text('Check-In',style: textStyletab,textAlign: TextAlign.center,),
+                      child: Text(
+                        'Check-In',
+                        style: textStyletab,
+                        textAlign: TextAlign.center,
                       ),
+                    ),
                   ),
                   Expanded(
                     flex: 1,
                     child: GestureDetector(
-                        child: Text('Busy',style: textStyletab,textAlign: TextAlign.center,),),
+                      child: Text(
+                        'Busy',
+                        style: textStyletab,
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
                   ),
                   Expanded(
                     flex: 1,
                     child: GestureDetector(
-                        child: Text('Visits',style: textStyletab,textAlign: TextAlign.center,),),
+                      child: Text(
+                        'Visits',
+                        style: textStyletab,
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
                   ),
                   Expanded(
                     flex: 1,
                     child: GestureDetector(
-                        child: Text('Pin',style: textStyletab,textAlign: TextAlign.center,),),
+                      child: Text(
+                        'Pin',
+                        style: textStyletab,
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -508,8 +525,7 @@ class _DynamicDialogState extends State<DynamicDialog> {
                   isLocationIdentifier = false;
                   isTerritory = false;
                   isIndustry = false;
-                }
-                else if (newvalueuser == 'Home') {
+                } else if (newvalueuser == 'Home') {
                   isCustomerSelect = false;
                   isLocationIdentifier = false;
                   isTerritory = false;
@@ -860,20 +876,6 @@ class _DynamicDialogCheckoutState extends State<DynamicDialogCheckout> {
     super.initState();
   }
 
-  getItems() {
-    numbers.forEach((key, value) {
-      if (value == true) {
-        holder_1.add(key);
-      }
-    });
-
-    // Printing all selected items on Terminal screen.
-    print(holder_1);
-    // Here you will get all your selected Checkbox items.
-    // Clear array after use.
-    holder_1.clear();
-  }
-
   @override
   Widget build(BuildContext context) {
     TextStyle headstyle = TextStyle(
@@ -888,9 +890,9 @@ class _DynamicDialogCheckoutState extends State<DynamicDialogCheckout> {
         fontFamily: 'Quicksand',
         color: Colors.black);
 
-    TextStyle hintStyle = TextStyle(
+    TextStyle titlestyle = TextStyle(
         fontSize: 14.0,
-        fontWeight: FontWeight.w200,
+        fontWeight: FontWeight.w700,
         fontFamily: 'Quicksand',
         color: Colors.grey[2]);
 
@@ -900,12 +902,19 @@ class _DynamicDialogCheckoutState extends State<DynamicDialogCheckout> {
         fontFamily: 'Quicksand',
         color: Colors.black);
 
+    final format1 = DateFormat("dd-MM-yyyy");
+    final timeFormat = DateFormat("h:mm a");
+    DateTime date;
+    TimeOfDay time;
+    TextEditingController endtimecon = new TextEditingController();
+    TextEditingController starttimecon = new TextEditingController();
+
     return AlertDialog(
       titlePadding: EdgeInsets.all(10.0),
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
-            Radius.circular(15),
-          )),
+        Radius.circular(15),
+      )),
       title: Text(
         "Check-Out",
         textAlign: TextAlign.center,
@@ -916,33 +925,129 @@ class _DynamicDialogCheckoutState extends State<DynamicDialogCheckout> {
         children: <Widget>[
           Container(
 //            height: 10.0,
-            child: Row(
-          children: <Widget>[
-            Text('From : ',style: headstyle,),
-            Text('Urvi Suthar Pre-wedding',style: headstyle,),
-        ],
-      )
+              child: Row(
+            children: <Widget>[
+              Text(
+                'From : ',
+                style: titlestyle,
+              ),
+              Expanded(
+                child: Text(
+                  'Urvi Suthar Pre-wedding',
+                  style: textStyle,
+                ),
+              ),
 
-
+            ],
+          )),
+          SizedBox(
+            height: 10.0,
           ),
           const MySeparator(color: Colors.grey),
-          Expanded(
-            child: ListView(
-              children: numbers.keys.map((String key) {
-                return new CheckboxListTile(
-                  title: new Text(key,style: textStyle,),
-                  value: numbers[key],
-                  activeColor: Theme.of(context).accentColor,
-                  checkColor: Colors.white,
-                  onChanged: (bool value) {
-                    setState(() {
-                      numbers[key] = value;
-                    });
+          Row(
+            children: <Widget>[
+              Expanded(
+                flex: 1,
+                child: Text(
+                  'Visit Starts',
+                  style: titlestyle,
+                  textAlign: TextAlign.left,
+                ),
+              ),
+              Expanded(
+                flex: 1,
+                child: Text(''),
+              ),
+              Expanded(
+                flex: 1,
+                child: DateTimeField(
+                  textAlign: TextAlign.center,
+                  resetIcon: null,
+                  format: timeFormat,
+                  onShowPicker: (context, currentValue) async {
+                    final time = await showTimePicker(
+                      context: context,
+                      initialTime: TimeOfDay.fromDateTime(currentValue ?? DateTime.now()),
+                    );
+                    return DateTimeField.convert(time);
                   },
-                );
-              }).toList(),
-            ),
-          )
+                  autofocus: false,
+//                                  focusNode:  FocusScope.of(context).requestFocus(new FocusNode()),
+                  keyboardType: TextInputType.datetime,
+//                                maxLength: 10,
+                  style: textStyle,
+                  controller: starttimecon,
+//                                validator: (String value) {
+//                                  if (value.isEmpty) {
+//                                    return 'Please Select Start Time';
+//                                  }
+//                                },
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+//                                    labelStyle: labelStyle,
+                    hintText: 'Start Time',
+                    hintStyle: textStyle,
+//                                    labelText: 'Agency Name'
+//                                    contentPadding: const EdgeInsets.only(bottom: -10.0)
+
+//                            filled: true,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Row(
+            children: <Widget>[
+              Expanded(
+                flex: 1,
+                child: Text(
+                  'Visit Ends',
+                  style: titlestyle,
+                  textAlign: TextAlign.left,
+                ),
+              ),
+              Expanded(
+                flex: 1,
+                child: Text(''),
+              ),
+              Expanded(
+                flex: 1,
+                child: DateTimeField(
+                  textAlign: TextAlign.center,
+                  resetIcon: null,
+                  format: timeFormat,
+                  onShowPicker: (context, currentValue) async {
+                    final time = await showTimePicker(
+                      context: context,
+                      initialTime: TimeOfDay.fromDateTime(currentValue ?? DateTime.now()),
+                    );
+                    return DateTimeField.convert(time);
+                  },
+                  autofocus: false,
+//                                  focusNode:  FocusScope.of(context).requestFocus(new FocusNode()),
+                  keyboardType: TextInputType.datetime,
+//                                maxLength: 10,
+                  style: textStyle,
+                  controller: endtimecon,
+//                                validator: (String value) {
+//                                  if (value.isEmpty) {
+//                                    return 'Please Select Start Time';
+//                                  }
+//                                },
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+//                                    labelStyle: labelStyle,
+                    hintText: 'End Time',
+                    hintStyle: textStyle,
+//                                    labelText: 'Agency Name'
+//                                    contentPadding: const EdgeInsets.only(bottom: -10.0)
+
+//                            filled: true,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ],
       ),
       actions: <Widget>[
@@ -954,28 +1059,10 @@ class _DynamicDialogCheckoutState extends State<DynamicDialogCheckout> {
 //          onPressed: null,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(
-                    Radius.circular(10.0),
-                  )),
-              child: Padding(
-                child: Text('Clear',
-                    style: TextStyle(
-                        fontSize: 14, color: Colors.white)),
-                padding: EdgeInsets.only(
-                    top: 10.0, bottom: 10.0, right: 16.0, left: 16.0),
+                Radius.circular(10.0),
               )),
-        ),
-        GestureDetector(
-          onTap: () => Navigator.pop(context),
-          child: new Card(
-              elevation: 5.0,
-              color: Colors.black,
-//          onPressed: null,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(10.0),
-                  )),
               child: Padding(
-                child: Text('Filter',
+                child: Text('Check-out',
                     style: TextStyle(
                         fontSize: 14, color: Theme.of(context).primaryColor)),
                 padding: EdgeInsets.only(
@@ -990,8 +1077,8 @@ class _DynamicDialogCheckoutState extends State<DynamicDialogCheckout> {
 //          onPressed: null,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(
-                    Radius.circular(10.0),
-                  )),
+                Radius.circular(10.0),
+              )),
               child: Padding(
                 child: Text('Cancel',
                     style: TextStyle(fontSize: 14, color: Colors.white)),
