@@ -110,7 +110,7 @@ class _ChatScreenState extends State<chat_screen>
       appBar: AppBar(
         automaticallyImplyLeading: true,
         leading: new IconButton(
-          icon: new Icon(Icons.arrow_back_ios, color: Colors.black), onPressed: () {},
+          icon: new Icon(Icons.cancel, color: Colors.black), onPressed: () {Navigator.of(context).pop(true);},
         ),
         iconTheme: IconThemeData(color: Colors.white),
         centerTitle: true,

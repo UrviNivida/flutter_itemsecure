@@ -128,7 +128,7 @@ class MyAccountsPagenew extends State<Maps_appointmentscreen> {
                             image: AssetImage('images/yellowcircle.png'),
                             width: _imagewidth,
                             height: _imageheight,
-                            color: Theme.of(context).primaryColor,
+                            color: Colors.grey,
                           ),
                         ),
                         Container(
@@ -238,7 +238,7 @@ class MyAccountsPagenew extends State<Maps_appointmentscreen> {
                     flex: 1,
                     child: GestureDetector(
                       child: Text(
-                        'Visits',
+                        'Add Visit',
                         style: textStyletab,
                         textAlign: TextAlign.center,
                       ),
@@ -265,7 +265,7 @@ class MyAccountsPagenew extends State<Maps_appointmentscreen> {
       bottomSheet: SolidBottomSheet(
         maxHeight: 400,
         headerBar: Container(
-          color: Colors.grey[300],
+          color: Theme.of(context).primaryColor,
           height: 50,
           child: Padding(
             padding: EdgeInsets.only(left: 20.0),
@@ -284,7 +284,12 @@ class MyAccountsPagenew extends State<Maps_appointmentscreen> {
                 Expanded(
                   flex: 1,
                   child: Container(
-                    child: Icon(Icons.schedule),
+                    child: Image(
+                      image: AssetImage('images/finger.png'),
+//                      width: 32.0,
+//                      height: 32.0,
+                      color: Colors.black,
+                    ),
                   ),
                 )
               ],

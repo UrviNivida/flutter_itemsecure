@@ -86,7 +86,7 @@ class _AppointmentDetailState extends State<AppointmentDetailScreen> {
         appBar: AppBar(
           leading: new IconButton(
             icon: new Icon(
-              Icons.arrow_back_ios,
+              Icons.cancel,
               color: Colors.black,
             ),
             onPressed: () => Navigator.of(context).pop(),
@@ -164,7 +164,7 @@ class _AppointmentDetailState extends State<AppointmentDetailScreen> {
                                 image: AssetImage('images/yellowcircle.png'),
                                 width: _imagewidth,
                                 height: _imageheight,
-                                color: Theme.of(context).primaryColor,
+                                color: Colors.grey,
                               ),
                             ),
                             Container(

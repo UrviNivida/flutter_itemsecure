@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_itemsecure_dsr/app_screens/dashboard_screen.dart';
+import 'package:flutter_itemsecure_dsr/app_screens/message_screen.dart';
 import 'package:flutter_itemsecure_dsr/app_screens/myteam_screen.dart';
 import 'package:flutter_itemsecure_dsr/app_screens/settings_screen.dart';
 import 'package:xlive_switch/xlive_switch.dart';
@@ -52,6 +53,7 @@ class NavigationDrawerScreenState extends State<NavigationDrawerScreen> {
   }
 
   bool _value = true;
+  bool _valueTimeout = false;
 
   @override
   Widget build(BuildContext context) {
@@ -67,6 +69,7 @@ class NavigationDrawerScreenState extends State<NavigationDrawerScreen> {
         color: Theme.of(context).primaryColor);
 
     print(_value);
+    print(_valueTimeout);
 
     void _changeValue(bool value) {
       setState(() {
@@ -108,6 +111,51 @@ class NavigationDrawerScreenState extends State<NavigationDrawerScreen> {
                   ],
                 ),
               ) ??
+              false;
+        }
+      });
+    }
+
+    void _changeValueTimeOut(bool valueTimeout) {
+      setState(() {
+        _valueTimeout = valueTimeout;
+        if (_valueTimeout == false) {
+          print("renturn 11");
+          return null;
+        } else {
+          print("renturn 22");
+          return showDialog(
+            context: context,
+            builder: (context) => new AlertDialog(
+              title: new Text('Item Secure',
+                  style: TextStyle(
+                    fontSize: 16.0,
+                    color: Theme.of(context).primaryColor,
+                  )),
+              content: new Text(
+                'Enabling Time-Out will disable location tracking until you resume back. The Time-Out time will be deducted from your productive hours',
+                style: TextStyle(fontSize: 14.0),
+              ),
+              actions: <Widget>[
+                new FlatButton(
+                  onPressed: () => Navigator.of(context).pop(false),
+                  child: new Text('No'),
+                  textColor: Colors.grey,
+                ),
+                new FlatButton(
+/*          Navigator.of(context).pop(true)*/
+                  onPressed: () {
+                    setState(() {
+                      _valueTimeout == true;
+                      Navigator.of(context).pop(true);
+                    });
+                  },
+                  child: new Text('Yes'),
+                  textColor: Theme.of(context).primaryColor,
+                ),
+              ],
+            ),
+          ) ??
               false;
         }
       });
@@ -184,6 +232,37 @@ class NavigationDrawerScreenState extends State<NavigationDrawerScreen> {
 //                        indent: 10,
 //                        endIndent: 10,
             ),
+            Padding(
+              padding: EdgeInsets.all(0.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Expanded(
+                    flex: 5,
+                    child: Text(
+                      'No Time-Outs Today',
+                      style: textStylePunch,
+                    ),
+                  ),
+                  Expanded(
+                      flex: 1,
+                      child: Container(
+                        alignment: Alignment.centerRight,
+                        child: XlivSwitch(
+                          value: _valueTimeout,
+                          onChanged: _changeValueTimeOut,
+                        ),
+                      ))
+                ],
+              ),
+            ),
+            Divider(
+              height: 5,
+              thickness: 0.5,
+              color: Colors.white.withOpacity(0.5),
+//                        indent: 10,
+//                        endIndent: 10,
+            ),
             ListTile(
               leading: Icon(
                 Icons.group_work,
@@ -226,7 +305,12 @@ class NavigationDrawerScreenState extends State<NavigationDrawerScreen> {
                 "Message",
                 style: navStyle,
               ),
-              onTap: () {},
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) {
+                      return message_screen();
+                    }));
+              },
             ),
             ListTile(
               leading: Text(

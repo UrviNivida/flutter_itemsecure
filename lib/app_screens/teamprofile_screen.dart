@@ -1,11 +1,15 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+//import 'package:flutter_dialpad/flutter_dialpad.dart';
 import 'package:flutter_itemsecure_dsr/adapters/todayvisit_layout.dart';
 import 'package:flutter_itemsecure_dsr/app_screens/expense_list_screen.dart';
 import 'package:flutter_itemsecure_dsr/app_screens/punchinmap_screen.dart';
 import 'package:flutter_itemsecure_dsr/app_screens/todayvisits_screen.dart';
 
+
+import 'chat_screen.dart';
 import 'currentLocation_screen.dart';
+import 'package:intl/intl.dart';
 
 class TeamProfileScreen extends StatefulWidget {
   @override
@@ -127,7 +131,7 @@ class _TeamProfileScreenState extends State<TeamProfileScreen> {
                                 ),
                                 subtitle: Text(
                                   'Designation',
-                                  textDirection: TextDirection.ltr,
+//                                  textDirection: TextDirection.ltr,
                                   style: textStyle,
                                 ),
                               )
@@ -183,7 +187,8 @@ class _TeamProfileScreenState extends State<TeamProfileScreen> {
                               Icons.cancel,
                               color: Colors.black,
                             ),
-                            onPressed: () => Navigator.of(context).pop(),
+                            onPressed: () => Navigator.of(context).pop(true),
+//                            onPressed: () => Navigator.of(context).pop(),
                           ),
                           automaticallyImplyLeading: false,
                         ),
@@ -238,7 +243,13 @@ class _TeamProfileScreenState extends State<TeamProfileScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             new GestureDetector(
-                              onTap: () => Navigator.pop(context),
+//                              onTap: () => DialPad(
+//                                  enableDtmf: true,
+//                                  backspaceButtonIconColor: Colors.red,
+//                                  makeCall: (number){
+//                                    print(number);
+//                                  }
+//                              ),
                               child: new Card(
                                   color: Colors.black,
                                   elevation: 10.0,
@@ -264,7 +275,18 @@ class _TeamProfileScreenState extends State<TeamProfileScreen> {
                                   )),
                             ),
                             new GestureDetector(
-                              onTap: () => Navigator.pop(context),
+                              onTap: () {
+                                DateTime now = DateTime.now();
+                                String formattedDate =
+                                DateFormat('EEE d MMM kk:mm').format(now);
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => chat_screen(
+                                            name: 'ABC XYZ',
+                                            formattedDate: formattedDate)));
+                                print('ABC XYZ');
+                              },
                               child: new Card(
                                   color: Colors.black,
                                   elevation: 10.0,
@@ -348,6 +370,7 @@ class _TeamProfileScreenState extends State<TeamProfileScreen> {
                           Navigator.push(context,
                               MaterialPageRoute(builder: (context) {
                                 return currentLocation_screen();
+//                                return MapPage();
                               }));
                         },)
                       ],

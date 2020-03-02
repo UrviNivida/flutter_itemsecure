@@ -1,3 +1,92 @@
+//import 'dart:async';
+//import 'package:flutter/cupertino.dart';
+//import 'package:flutter/material.dart';
+//import 'package:google_maps_flutter/google_maps_flutter.dart';
+//
+//class MapPage extends StatefulWidget {
+//  @override
+//  State<StatefulWidget> createState() => MapPageState();
+//}
+//
+//class MapPageState extends State<MapPage> {
+//  BitmapDescriptor pinLocationIcon;
+//  Set<Marker> _markers = {};
+//  Completer<GoogleMapController> _controller = Completer();
+//
+////
+////  static const LatLng _mainLocation = const LatLng(22.317498, 73.164598);
+////  ImageBitmap bitmapImage;
+//
+//  @override
+//  void initState() {
+//    super.initState();
+//    setCustomMapPin();
+//  }
+//
+//  void setCustomMapPin() async {
+//    pinLocationIcon = await BitmapDescriptor.fromAssetImage(
+//        ImageConfiguration(devicePixelRatio: 2.5), 'images/smile_fill.png');
+////        'assets/destination_map_marker.png');
+//  }
+//
+//  @override
+//  Widget build(BuildContext context) {
+//    LatLng pinPosition = LatLng(22.317498, 73.164598);
+//
+//    // these are the minimum required values to set
+//    // the camera position
+//    CameraPosition initialLocation =
+//        CameraPosition(zoom: 16, bearing: 30, target: pinPosition);
+//
+//    return GoogleMap(
+//        myLocationEnabled: true,
+//        compassEnabled: true,
+//        markers: _markers,
+//        initialCameraPosition: initialLocation,
+//        onMapCreated: (GoogleMapController controller) {
+////          controller.setMapStyle(Utils.mapStyles);
+//          _controller.complete(controller);
+//          setState(() async {
+//            _markers.add(
+////                Marker(
+////
+////                  // This marker id can be anything that uniquely identifies each marker.
+////                  markerId: MarkerId(_mainLocation.toString()),
+////                  position: _mainLocation,
+////                  infoWindow: InfoWindow(
+////                    onTap: () {
+//////                      Navigator.push(context, MaterialPageRoute(builder: (context) {
+//////                        return AppointmentDetailScreen();
+//////                      }));
+////                    },
+////                    title: 'Nivida Web Solutions Pvt. Ltd.',
+////                    snippet:
+////                    '305, Privilege Avenue, Opp. isha hospital, Behind atlantis Sarabhai campus, Sarabhai Rd, Vadiwadi, Vadodara, Gujarat 390023',
+////                  ),
+//////                  icon: BitmapDescriptor.defaultMarker,
+////                  icon: await getMarkerIcon("path/to/your/image.png", Size(150.0, 150.0)),
+////                )
+//
+//                Marker(
+//              markerId: MarkerId(pinPosition.toString()),
+//              position: pinPosition,
+//              icon: pinLocationIcon,
+//              infoWindow: InfoWindow(
+//                onTap: () {
+////                      Navigator.push(context, MaterialPageRoute(builder: (context) {
+////                        return AppointmentDetailScreen();
+////                      }));
+//                },
+//                title: 'Nivida Web Solutions Pvt. Ltd.',
+//                snippet:
+//                    '305, Privilege Avenue, Opp. isha hospital, Behind atlantis Sarabhai campus, Sarabhai Rd, Vadiwadi, Vadodara, Gujarat 390023',
+//              ),
+//            ));
+//          });
+//        });
+//  }
+//}
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';

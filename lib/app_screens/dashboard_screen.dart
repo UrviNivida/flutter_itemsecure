@@ -61,7 +61,7 @@ class DashbaroadScreenState extends State<DashbaroadScreen> {
   }
 
   Widget TodayText() {
-    if (_selectedDate == _CurrentDate) {
+    if (_selectedDate == _CurrentDate || _selectedDate=='0') {
       return GestureDetector(
         onTap: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
