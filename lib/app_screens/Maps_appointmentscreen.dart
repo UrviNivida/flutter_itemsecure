@@ -1,3 +1,6 @@
+//import 'dart:html';
+import 'dart:math';
+
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_itemsecure_dsr/adapters/Schdeulecard.dart';
@@ -67,6 +70,159 @@ class MyAccountsPagenew extends State<Maps_appointmentscreen> {
     return _markers;
   }
 
+  bool isBuzy = true;
+  bool isCheckin = false;
+
+  Widget BuzyImage() {
+    BuzyText();
+    if (isBuzy == true) {
+      // BuzyText();
+      return Stack(
+        alignment: Alignment.center,
+        children: <Widget>[
+          Container(
+            child: Image(
+              image: AssetImage('images/yellowcircle.png'),
+              width: _imagewidth,
+              height: _imageheight,
+              color: Colors.grey,
+            ),
+          ),
+          Container(
+              child: IconTheme(
+            data: new IconThemeData(
+              color: Colors.white,
+            ),
+            child: new Icon(Icons.add_call),
+          ))
+        ],
+      );
+    } else {
+      return Stack(
+        alignment: Alignment.center,
+        children: <Widget>[
+          Container(
+            child: Image(
+              image: AssetImage('images/yellowcircle.png'),
+              width: _imagewidth,
+              height: _imageheight,
+              color: Theme.of(context).primaryColor,
+            ),
+          ),
+          Container(
+              child: IconTheme(
+            data: new IconThemeData(
+              color: Colors.white,
+            ),
+            child: new Icon(Icons.add_call),
+          ))
+        ],
+      );
+    }
+  }
+
+  Widget BuzyText() {
+    if (isBuzy == true) {
+      return Expanded(
+        flex: 1,
+        child: GestureDetector(
+          child: Text(
+            'Busy',
+            style: textStyletab,
+            textAlign: TextAlign.center,
+          ),
+        ),
+      );
+    } else {
+      return Expanded(
+        flex: 1,
+        child: GestureDetector(
+          child: Text(
+            'Free',
+            style: textStyletab,
+            textAlign: TextAlign.center,
+          ),
+        ),
+      );
+    }
+  }
+
+  Widget CheckInImage() {
+    CheckInText();
+    if (isCheckin == true) {
+      return Stack(
+        alignment: Alignment.center,
+        children: <Widget>[
+          Container(
+            child: Image(
+              image: AssetImage('images/yellowcircle.png'),
+              width: _imagewidth,
+              height: _imageheight,
+              color: Theme.of(context).primaryColor,
+            ),
+          ),
+          Container(
+              child: IconTheme(
+            data: new IconThemeData(
+              color: Colors.white,
+            ),
+            child: new Icon(Icons.group),
+          ))
+        ],
+      );
+    } else {
+      return Stack(
+        alignment: Alignment.center,
+        children: <Widget>[
+          Container(
+            child: Image(
+              image: AssetImage('images/yellowcircle.png'),
+              width: _imagewidth,
+              height: _imageheight,
+              color: Colors.grey,
+            ),
+          ),
+          Container(
+              child: IconTheme(
+            data: new IconThemeData(
+              color: Colors.white,
+            ),
+            child: new Icon(Icons.group),
+          ))
+        ],
+      );
+    }
+  }
+
+  Widget CheckInText() {
+    if(isCheckin==true)
+      {
+        return Expanded(
+          flex: 1,
+          child: GestureDetector(
+            child: Text(
+              'Check-Out',
+              style: textStyletab,
+              textAlign: TextAlign.center,
+            ),
+          ),
+        );
+      }
+    else{
+      return Expanded(
+        flex: 1,
+        child: GestureDetector(
+          child: Text(
+            'Check-In',
+            style: textStyletab,
+            textAlign: TextAlign.center,
+          ),
+        ),
+      );
+    }
+
+  }
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -82,64 +238,57 @@ class MyAccountsPagenew extends State<Maps_appointmentscreen> {
                   Expanded(
                     flex: 1,
                     child: GestureDetector(
-                      child: Stack(
-                        alignment: Alignment.center,
-                        children: <Widget>[
-                          Container(
-                            child: Image(
-                              image: AssetImage('images/yellowcircle.png'),
-                              width: _imagewidth,
-                              height: _imageheight,
-                              color: Colors.grey,
-                            ),
-                          ),
-                          Container(
-                              child: IconTheme(
-                            data: new IconThemeData(
-                              color: Colors.white,
-                            ),
-                            child: new Icon(Icons.group),
-                          ))
-                        ],
-                      ),
+                      child: CheckInImage(),
                       onTap: () {
+                        setState(() {
+                          if (isCheckin == true) {
+                            isCheckin = false;
+                            showDialog(
+                                context: context,
+                                builder: ((BuildContext context) {
+                                  return DynamicDialogCheckout();
+                                }));
+                          } else {
+                            isCheckin = true;
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return CheckInScreen();
+                            }));
+                          }
+
+                          CheckInImage();
+                        });
+
+
+
 //                        Navigator.push(context,
 //                            MaterialPageRoute(builder: (context) {
 //                          return CheckInScreen();
 //                        }));
 
 //                          WHEN ALREADY CHECKEDIN
-                      showDialog(
-                          context: context,
-                          builder: ((BuildContext context) {
-                            return DynamicDialogCheckout();
-                          }));
+//                      showDialog(
+//                          context: context,
+//                          builder: ((BuildContext context) {
+//                            return DynamicDialogCheckout();
+//                          }));
                       },
                     ),
                   ),
                   Expanded(
                     flex: 1,
                     child: GestureDetector(
-                        child: Stack(
-                      alignment: Alignment.center,
-                      children: <Widget>[
-                        Container(
-                          child: Image(
-                            image: AssetImage('images/yellowcircle.png'),
-                            width: _imagewidth,
-                            height: _imageheight,
-                            color: Colors.grey,
-                          ),
-                        ),
-                        Container(
-                            child: IconTheme(
-                          data: new IconThemeData(
-                            color: Colors.white,
-                          ),
-                          child: new Icon(Icons.add_call),
-                        ))
-                      ],
-                    )),
+                        onTap: () {
+                          setState(() {
+                            if (isBuzy == true) {
+                              isBuzy = false;
+                            } else {
+                              isBuzy = true;
+                            }
+                            BuzyImage();
+                          });
+                        },
+                        child: BuzyImage()),
                   ),
                   Expanded(
                     flex: 1,
@@ -214,26 +363,8 @@ class MyAccountsPagenew extends State<Maps_appointmentscreen> {
               padding: EdgeInsets.all(3),
               child: Row(
                 children: <Widget>[
-                  Expanded(
-                    flex: 1,
-                    child: GestureDetector(
-                      child: Text(
-                        'Check-In',
-                        style: textStyletab,
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: GestureDetector(
-                      child: Text(
-                        'Busy',
-                        style: textStyletab,
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ),
+                  CheckInText(),
+                  BuzyText(),
                   Expanded(
                     flex: 1,
                     child: GestureDetector(
@@ -942,7 +1073,6 @@ class _DynamicDialogCheckoutState extends State<DynamicDialogCheckout> {
                   style: textStyle,
                 ),
               ),
-
             ],
           )),
           SizedBox(
@@ -972,7 +1102,8 @@ class _DynamicDialogCheckoutState extends State<DynamicDialogCheckout> {
                   onShowPicker: (context, currentValue) async {
                     final time = await showTimePicker(
                       context: context,
-                      initialTime: TimeOfDay.fromDateTime(currentValue ?? DateTime.now()),
+                      initialTime: TimeOfDay.fromDateTime(
+                          currentValue ?? DateTime.now()),
                     );
                     return DateTimeField.convert(time);
                   },
@@ -1024,7 +1155,8 @@ class _DynamicDialogCheckoutState extends State<DynamicDialogCheckout> {
                   onShowPicker: (context, currentValue) async {
                     final time = await showTimePicker(
                       context: context,
-                      initialTime: TimeOfDay.fromDateTime(currentValue ?? DateTime.now()),
+                      initialTime: TimeOfDay.fromDateTime(
+                          currentValue ?? DateTime.now()),
                     );
                     return DateTimeField.convert(time);
                   },
