@@ -1,108 +1,259 @@
-import 'package:fl_chart/fl_chart.dart';
+
+import 'dart:async';
+//import 'dart:html';
+//import 'dart:html';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class BarChartSample3 extends StatefulWidget {
+class StopWatchApp extends StatefulWidget{
   @override
-  State<StatefulWidget> createState() => BarChartSample3State();
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return StopWatchAppState();
+  }
+
 }
 
-class BarChartSample3State extends State<BarChartSample3> {
+class StopWatchAppState extends State<StopWatchApp>
+{
+  bool startispressed=true;
+  bool stopispressed=true;
+  bool resetispressed=true;
+  String stoptimetodisplay = "00:00:00";
+  var swatch = Stopwatch();
+  final dur = const Duration(seconds: 1);
+  void starttimer()
+  {
+    Timer(dur,keeprunning);
+  }
+
+  void keeprunning() {
+
+    if(swatch.isRunning)
+    {
+      starttimer();
+//        Timer(dur,keeprunning);
+    }
+    setState(() {
+      stoptimetodisplay =swatch.elapsed.inHours.toString().padLeft(2,"0") + ":"
+          + (swatch.elapsed.inMinutes%60).toString().padLeft(2,"0") + ":"
+          + (swatch.elapsed.inSeconds%60).toString().padLeft(2,"0");
+    });
+  }
+
+
+
+
+  void startstopwatch()
+  {
+    setState(() {
+      stopispressed=false;
+      startispressed=false;
+    });
+    swatch.start();
+    starttimer();
+//      Timer(dur,keeprunning);
+  }
+
+  void stopsstopwatch()
+  {
+
+    setState(() {
+      stopispressed=true;
+      resetispressed=false;
+      startispressed=true;
+    });
+    swatch.stop();
+  }
+
+  void resetwatch()
+  {
+
+    setState(() {
+      startispressed=true;
+      resetispressed=true;
+    });
+    swatch.reset();
+    stoptimetodisplay="00:00:00";
+  }
+
   @override
   Widget build(BuildContext context) {
-    return AspectRatio(
-      aspectRatio: 1.7,
-      child: Card(
-        elevation: 0,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
-        color: const Color(0xff2c4260),
-        child: BarChart(
-          BarChartData(
-            alignment: BarChartAlignment.spaceAround,
-            maxY: 20,
-            barTouchData: BarTouchData(
-              enabled: false,
-              touchTooltipData: BarTouchTooltipData(
-                tooltipBgColor: Colors.transparent,
-                tooltipPadding: const EdgeInsets.all(0),
-                tooltipBottomMargin: 8,
-                getTooltipItem: (
-                    BarChartGroupData group,
-                    int groupIndex,
-                    BarChartRodData rod,
-                    int rodIndex,
-                    ) {
-                  return BarTooltipItem(
-                    rod.y.round().toString(),
-                    TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  );
-                },
-              ),
-            ),
-            titlesData: FlTitlesData(
-              show: true,
-              bottomTitles: SideTitles(
-                showTitles: true,
-                textStyle: TextStyle(
-                    color: const Color(0xff7589a2), fontWeight: FontWeight.bold, fontSize: 14),
-                margin: 20,
-                getTitles: (double value) {
-                  switch (value.toInt()) {
-                    case 0:
-                      return 'Mn';
-                    case 1:
-                      return 'Te';
-                    case 2:
-                      return 'Wd';
-                    case 3:
-                      return 'Tu';
-                    case 4:
-                      return 'Fr';
-                    case 5:
-                      return 'St';
-                    case 6:
-                      return 'Sn';
-                    default:
-                      return '';
-                  }
-                },
-              ),
-              leftTitles: const SideTitles(showTitles: false),
-            ),
-            borderData: FlBorderData(
-              show: false,
-            ),
-            barGroups: [
-              BarChartGroupData(
-                  x: 0,
-                  barRods: [BarChartRodData(y: 8, color: Colors.lightBlueAccent)],
-                  showingTooltipIndicators: [0]),
-              BarChartGroupData(
-                  x: 1,
-                  barRods: [BarChartRodData(y: 10, color: Colors.lightBlueAccent)],
-                  showingTooltipIndicators: [0]),
-              BarChartGroupData(
-                  x: 2,
-                  barRods: [BarChartRodData(y: 14, color: Colors.lightBlueAccent)],
-                  showingTooltipIndicators: [0]),
-              BarChartGroupData(
-                  x: 3,
-                  barRods: [BarChartRodData(y: 15, color: Colors.lightBlueAccent)],
-                  showingTooltipIndicators: [0]),
-              BarChartGroupData(
-                  x: 3,
-                  barRods: [BarChartRodData(y: 13, color: Colors.lightBlueAccent)],
-                  showingTooltipIndicators: [0]),
-              BarChartGroupData(
-                  x: 3,
-                  barRods: [BarChartRodData(y: 10, color: Colors.lightBlueAccent)],
-                  showingTooltipIndicators: [0]),
-            ],
-          ),
-        ),
-      ),
+
+
+    // TODO: implement build
+    return Container(
+       child: Column(
+         children: <Widget>[
+           Expanded(
+             flex: 6,
+             child: Container(
+               alignment: Alignment.center,
+               child: Text(stoptimetodisplay,style: TextStyle(
+                 fontSize: 50.0,
+                 fontWeight: FontWeight.w700
+               ),),
+             ),
+           ),
+           Expanded(
+             flex: 4,
+             child: Container(
+               child: Column(
+                 children: <Widget>[
+                   Row(
+                     children: <Widget>[
+                       RaisedButton(
+                         onPressed: stopispressed ? null : stopsstopwatch,
+                         color: Colors.red,
+                         padding: EdgeInsets.symmetric(
+                           horizontal: 40.0,vertical: 15.0
+                         ),child: Text(
+                         'Stop',style: TextStyle(
+                         fontSize: 20.0,
+                         color: Colors.white
+                       ),
+                       ),
+                       ),
+                       RaisedButton(
+                         onPressed: resetispressed ? null : resetwatch,
+                         color: Colors.green,
+                         padding: EdgeInsets.symmetric(
+                             horizontal: 40.0,vertical: 15.0
+                         ),child: Text(
+                         'Reset',style: TextStyle(
+                           fontSize: 20.0,
+                           color: Colors.white
+                       ),
+                       ),
+                       ),
+                     ],
+                   ),
+                   RaisedButton(
+                     onPressed: startispressed ? startstopwatch : null,
+                     color: Colors.blue,
+                     padding: EdgeInsets.symmetric(
+                         horizontal: 40.0,vertical: 15.0
+                     ),child: Text(
+                     'Start',style: TextStyle(
+                       fontSize: 20.0,
+                       color: Colors.white
+                   ),
+                   ),
+                   ),
+                 ],
+               ),
+             ),
+           )
+         ],
+       ),
     );
   }
+
 }
+
+
+//import 'dart:async';
+//
+//import 'package:fl_chart/fl_chart.dart';
+//import 'package:flutter/material.dart';
+//
+//
+//class MyHomePage extends StatefulWidget {
+//  @override
+//  _MyHomePageState createState() => _MyHomePageState();
+//}
+//
+//class _MyHomePageState extends State<MyHomePage> {
+//  @override
+//  Widget build(BuildContext context) {
+//    var timerService = TimerService.of(context);
+//    return Scaffold(
+//      appBar: AppBar(),
+//      body: Center(
+//        child: AnimatedBuilder(
+//          animation: timerService, // listen to ChangeNotifier
+//          builder: (context, child) {
+//            // this part is rebuilt whenever notifyListeners() is called
+//            return Column(
+//              mainAxisAlignment: MainAxisAlignment.center,
+//              children: <Widget>[
+//                Text('Elapsed: ${timerService.currentDuration}'),
+//                RaisedButton(
+//                  onPressed: !timerService.isRunning ? timerService.start : timerService.stop,
+//                  child: Text(!timerService.isRunning ? 'Start' : 'Stop'),
+//                ),
+//                RaisedButton(
+//                  onPressed: timerService.reset,
+//                  child: Text('Reset'),
+//                )
+//              ],
+//            );
+//          },
+//        ),
+//      ),
+//    );
+//  }
+//}
+//
+//class TimerService extends ChangeNotifier {
+//  Stopwatch _watch;
+//  Timer _timer;
+//
+//  Duration get currentDuration => _currentDuration;
+//  Duration _currentDuration = Duration.zero;
+//
+//  bool get isRunning => _timer != null;
+//
+//  TimerService() {
+//    _watch = Stopwatch();
+//  }
+//
+//  void _onTick(Timer timer) {
+//    _currentDuration = _watch.elapsed;
+//
+//    // notify all listening widgets
+//    notifyListeners();
+//  }
+//
+//  void start() {
+//    if (_timer != null) return;
+//
+//    _timer = Timer.periodic(Duration(seconds: 1), _onTick);
+//    _watch.start();
+//
+//    notifyListeners();
+//  }
+//
+//  void stop() {
+//    _timer?.cancel();
+//    _timer = null;
+//    _watch.stop();
+//    _currentDuration = _watch.elapsed;
+//
+//    notifyListeners();
+//  }
+//
+//  void reset() {
+//    stop();
+//    _watch.reset();
+//    _currentDuration = Duration.zero;
+//
+//    notifyListeners();
+//  }
+//
+//  static TimerService of(BuildContext context) {
+//    var provider = context.inheritFromWidgetOfExactType(TimerServiceProvider) as TimerServiceProvider;
+//    return provider.service;
+//  }
+//}
+//
+//class TimerServiceProvider extends InheritedWidget {
+//  const TimerServiceProvider({Key key, this.service, Widget child}) : super(key: key, child: child);
+//
+//  final TimerService service;
+//
+//  @override
+//  bool updateShouldNotify(TimerServiceProvider old) => service != old.service;
+//}
+//

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_itemsecure_dsr/app_screens/dashboard_screen.dart';
 import 'package:flutter_itemsecure_dsr/app_screens/message_screen.dart';
@@ -7,6 +9,7 @@ import 'package:xlive_switch/xlive_switch.dart';
 
 import 'expense_list_screen.dart';
 import 'profile_screen.dart';
+import 'package:intl/intl.dart';
 
 class NavigationDrawerScreen extends StatefulWidget {
   @override
@@ -41,6 +44,7 @@ class NavigationDrawerScreenState extends State<NavigationDrawerScreen> {
       color: Colors.black);
 
   String punchstring = "";
+  String timetodisplay = "00:00:00";
 
   @override
   void initState() {
@@ -57,11 +61,39 @@ class NavigationDrawerScreenState extends State<NavigationDrawerScreen> {
 
   @override
   Widget build(BuildContext context) {
+    DateTime now = DateTime.now();
+    String currentTimeOn = DateFormat('yyyy-MM-dd HH:mm:ss').format(now);
+//    String currentTimeOff = DateFormat('kk:mm:ss').format(now);
+
+    //CONVERT STRING TO DATETIME
+    String date = '2020-03-05 10:10:05';
+   // String dateWithT = date.substring(0, 8) + 'T' + date.substring(8);
+    DateTime dateTime = DateTime.parse(date);
+    print(dateTime);
+
+//CONVERT TO STRING FROM DATE TIME
+    String currentTimeOff = DateFormat('yyyy-MM-dd HH:mm:ss').format(now);  //yyyy-MM-dd
+    print("STRING-->"+currentTimeOff);
+
+//    DIFFERENCE OF DATETIMES
+    final difference = now.difference(dateTime).inMinutes;
+    print("difference-->"+difference.toString());
+
+////
+//    // String dateWithT = date.substring(0, 8) + 'T' + date.substring(8);
+//    DateTime dateTimeee = DateTime.parse(difference.toString());
+//    print(dateTimeee.hour+dateTimeee.minute+dateTimeee.millisecond);
+////    String ddddd = DateFormat('mm').format(now);  //yyyy-MM-dd
+////    print("TIMEEE-->"+ddddd);
+
+
+
     TextStyle rupeestyle = TextStyle(
         fontSize: 24.0,
         fontWeight: FontWeight.w600,
 //        fontFamily: 'Quicksand',
         color: Colors.black);
+
     TextStyle headStyleYellow = TextStyle(
         fontSize: 16.0,
         fontWeight: FontWeight.w700,
@@ -69,6 +101,7 @@ class NavigationDrawerScreenState extends State<NavigationDrawerScreen> {
         color: Theme.of(context).primaryColor);
 
     print(_value);
+
     print(_valueTimeout);
 
     void _changeValue(bool value) {
@@ -120,42 +153,41 @@ class NavigationDrawerScreenState extends State<NavigationDrawerScreen> {
       setState(() {
         _valueTimeout = valueTimeout;
         if (_valueTimeout == false) {
-          print("renturn 11");
           return null;
         } else {
           print("renturn 22");
           return showDialog(
-            context: context,
-            builder: (context) => new AlertDialog(
-              title: new Text('Item Secure',
-                  style: TextStyle(
-                    fontSize: 16.0,
-                    color: Theme.of(context).primaryColor,
-                  )),
-              content: new Text(
-                'Enabling Time-Out will disable location tracking until you resume back. The Time-Out time will be deducted from your productive hours',
-                style: TextStyle(fontSize: 14.0),
-              ),
-              actions: <Widget>[
-                new FlatButton(
-                  onPressed: () => Navigator.of(context).pop(false),
-                  child: new Text('No'),
-                  textColor: Colors.grey,
-                ),
-                new FlatButton(
+                context: context,
+                builder: (context) => new AlertDialog(
+                  title: new Text('Item Secure',
+                      style: TextStyle(
+                        fontSize: 16.0,
+                        color: Theme.of(context).primaryColor,
+                      )),
+                  content: new Text(
+                    'Enabling Time-Out will disable location tracking until you resume back. The Time-Out time will be deducted from your productive hours',
+                    style: textStyle,
+                  ),
+                  actions: <Widget>[
+                    new FlatButton(
+                      onPressed: () => Navigator.of(context).pop(false),
+                      child: new Text('No'),
+                      textColor: Colors.grey,
+                    ),
+                    new FlatButton(
 /*          Navigator.of(context).pop(true)*/
-                  onPressed: () {
-                    setState(() {
-                      _valueTimeout == true;
-                      Navigator.of(context).pop(true);
-                    });
-                  },
-                  child: new Text('Yes'),
-                  textColor: Theme.of(context).primaryColor,
+                      onPressed: () {
+                        setState(() {
+                          _valueTimeout == true;
+                          Navigator.of(context).pop(true);
+                        });
+                      },
+                      child: new Text('Yes'),
+                      textColor: Theme.of(context).primaryColor,
+                    ),
+                  ],
                 ),
-              ],
-            ),
-          ) ??
+              ) ??
               false;
         }
       });
@@ -186,12 +218,10 @@ class NavigationDrawerScreenState extends State<NavigationDrawerScreen> {
                 ),
                 radius: 30,
               ),
-              onTap: (){
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) {
-                      return profile_screen();
-                    }));
-
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return profile_screen();
+                }));
               },
             ),
             Divider(
@@ -237,11 +267,20 @@ class NavigationDrawerScreenState extends State<NavigationDrawerScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
+                  //stoptimetodisplay
                   Expanded(
-                    flex: 5,
+                    flex: 3,
                     child: Text(
                       'No Time-Outs Today',
                       style: textStylePunch,
+                    ),
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: Text(
+                      currentTimeOn,
+                      textAlign: TextAlign.center,
+                      style: textStyle,
                     ),
                   ),
                   Expanded(
@@ -272,12 +311,10 @@ class NavigationDrawerScreenState extends State<NavigationDrawerScreen> {
                 "My Team",
                 style: navStyle,
               ),
-              onTap: (){
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) {
-                      return MyTeamScreen();
-                    }));
-
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return MyTeamScreen();
+                }));
               },
             ),
             ListTile(
@@ -289,11 +326,10 @@ class NavigationDrawerScreenState extends State<NavigationDrawerScreen> {
                 "Visit",
                 style: navStyle,
               ),
-              onTap: (){
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) {
-                      return DashbaroadScreen();
-                    }));
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return DashbaroadScreen();
+                }));
               },
             ),
             ListTile(
@@ -306,26 +342,22 @@ class NavigationDrawerScreenState extends State<NavigationDrawerScreen> {
                 style: navStyle,
               ),
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) {
-                      return message_screen();
-                    }));
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return message_screen();
+                }));
               },
             ),
             ListTile(
-              leading: Text(
-                '₹',
-                style: rupeestyle,textAlign: TextAlign.center
-              ),
+              leading:
+                  Text('₹', style: rupeestyle, textAlign: TextAlign.center),
               title: Text(
                 "Expenses",
                 style: navStyle,
               ),
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) {
-                      return ExpenseListScreen();
-                    }));
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return ExpenseListScreen();
+                }));
               },
             ),
             ListTile(
@@ -338,10 +370,9 @@ class NavigationDrawerScreenState extends State<NavigationDrawerScreen> {
                 style: navStyle,
               ),
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) {
-                      return SettingsScreen();
-                    }));
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return SettingsScreen();
+                }));
               },
             ),
             Divider(

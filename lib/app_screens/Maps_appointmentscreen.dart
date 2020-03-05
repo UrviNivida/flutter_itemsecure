@@ -1,4 +1,5 @@
 //import 'dart:html';
+import 'dart:async';
 import 'dart:math';
 
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
@@ -11,6 +12,7 @@ import 'package:flutter_itemsecure_dsr/app_screens/expense_list_screen.dart';
 import 'package:flutter_itemsecure_dsr/model/ScheduleModel.dart';
 import 'package:flutter_itemsecure_dsr/listing_data/Schedulelist.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:solid_bottom_sheet/solid_bottom_sheet.dart';
 
@@ -26,6 +28,8 @@ class Maps_appointmentscreen extends StatefulWidget with NavigationStates {
 }
 
 class MyAccountsPagenew extends State<Maps_appointmentscreen> {
+
+
   var _padding = 12.0;
   bool _value = true;
   var _imageheight = 40.0;
@@ -70,12 +74,12 @@ class MyAccountsPagenew extends State<Maps_appointmentscreen> {
     return _markers;
   }
 
-  bool isBuzy = true;
+  bool isMeetingGoingOn = false;
   bool isCheckin = false;
 
   Widget BuzyImage() {
     BuzyText();
-    if (isBuzy == true) {
+    if (isMeetingGoingOn == false) {
       // BuzyText();
       return Stack(
         alignment: Alignment.center,
@@ -93,7 +97,7 @@ class MyAccountsPagenew extends State<Maps_appointmentscreen> {
             data: new IconThemeData(
               color: Colors.white,
             ),
-            child: new Icon(Icons.add_call),
+            child: new Icon(Icons.add_photo_alternate),
           ))
         ],
       );
@@ -114,7 +118,7 @@ class MyAccountsPagenew extends State<Maps_appointmentscreen> {
             data: new IconThemeData(
               color: Colors.white,
             ),
-            child: new Icon(Icons.add_call),
+            child: new Icon(Icons.add_photo_alternate),
           ))
         ],
       );
@@ -122,12 +126,12 @@ class MyAccountsPagenew extends State<Maps_appointmentscreen> {
   }
 
   Widget BuzyText() {
-    if (isBuzy == true) {
+    if (isMeetingGoingOn == false) {
       return Expanded(
         flex: 1,
         child: GestureDetector(
           child: Text(
-            'Busy',
+            'Add Docs',
             style: textStyletab,
             textAlign: TextAlign.center,
           ),
@@ -138,7 +142,7 @@ class MyAccountsPagenew extends State<Maps_appointmentscreen> {
         flex: 1,
         child: GestureDetector(
           child: Text(
-            'Free',
+            'Add Docs',
             style: textStyletab,
             textAlign: TextAlign.center,
           ),
@@ -195,20 +199,18 @@ class MyAccountsPagenew extends State<Maps_appointmentscreen> {
   }
 
   Widget CheckInText() {
-    if(isCheckin==true)
-      {
-        return Expanded(
-          flex: 1,
-          child: GestureDetector(
-            child: Text(
-              'Check-Out',
-              style: textStyletab,
-              textAlign: TextAlign.center,
-            ),
+    if (isCheckin == true) {
+      return Expanded(
+        flex: 1,
+        child: GestureDetector(
+          child: Text(
+            'Check-Out',
+            style: textStyletab,
+            textAlign: TextAlign.center,
           ),
-        );
-      }
-    else{
+        ),
+      );
+    } else {
       return Expanded(
         flex: 1,
         child: GestureDetector(
@@ -220,7 +222,6 @@ class MyAccountsPagenew extends State<Maps_appointmentscreen> {
         ),
       );
     }
-
   }
 
   @override
@@ -242,6 +243,7 @@ class MyAccountsPagenew extends State<Maps_appointmentscreen> {
                       onTap: () {
                         setState(() {
                           if (isCheckin == true) {
+                            isMeetingGoingOn = false;
                             isCheckin = false;
                             showDialog(
                                 context: context,
@@ -249,6 +251,7 @@ class MyAccountsPagenew extends State<Maps_appointmentscreen> {
                                   return DynamicDialogCheckout();
                                 }));
                           } else {
+                            isMeetingGoingOn = true;
                             isCheckin = true;
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (context) {
@@ -258,8 +261,6 @@ class MyAccountsPagenew extends State<Maps_appointmentscreen> {
 
                           CheckInImage();
                         });
-
-
 
 //                        Navigator.push(context,
 //                            MaterialPageRoute(builder: (context) {
@@ -280,10 +281,17 @@ class MyAccountsPagenew extends State<Maps_appointmentscreen> {
                     child: GestureDetector(
                         onTap: () {
                           setState(() {
-                            if (isBuzy == true) {
-                              isBuzy = false;
+                            if (isMeetingGoingOn == true) {
                             } else {
-                              isBuzy = true;
+                              Fluttertoast.showToast(
+                                  msg:
+                                      "You can only add docs when you have checked-in the visit",
+                                  toastLength: Toast.LENGTH_SHORT,
+                                  gravity: ToastGravity.CENTER,
+                                  timeInSecForIos: 1,
+                                  backgroundColor: Colors.black,
+                                  textColor: Colors.white,
+                                  fontSize: 16.0);
                             }
                             BuzyImage();
                           });

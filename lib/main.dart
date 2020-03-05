@@ -71,6 +71,7 @@ Future main() async {
 //      home: new MainCollapsingToolbar()));
 //      home: new BarChartSample3()));
 //      home: new TodayVisitsScreen()));
+//      home: new StopWatchApp()));
 }
 
 class SplashScreen extends StatefulWidget {
