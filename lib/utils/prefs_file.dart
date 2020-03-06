@@ -9,6 +9,9 @@ class Prefs {
   final String _kSortingOrderPrefs = "sortOrder";
   final String _LoggedIn = "0";
   final String _SelectedDate = "0";
+  final String _lastTimeOutTime = "0";
+  final _lastTimeOutDuration = 0;
+  final _switchbtntime = false;
 
 
   getLoginData(String key) async {
@@ -45,11 +48,42 @@ class Prefs {
     return prefs.setString(_SelectedDate, value);
   }
 
+  Future<String> getLastTimeOutTime() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString(_lastTimeOutTime) ?? '0';
+  }
+
+  Future<bool> setLastTimeOutTime(String value) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.setString(_lastTimeOutTime, value);
+  }
 
 
+  Future<int> getLastTimeOutDuration() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getInt('_lastTimeOutDuration') ?? 0;
+  }
+
+  Future<bool> setLastTimeOutDuration(int value) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.setInt('_lastTimeOutDuration', value);
+  }
+
+  Future<bool> getSwitchBtnTime() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('_switchbtntime') ?? false;
+  }
+
+  Future<bool> setSwitchBtnTime(bool value) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.setBool('_switchbtntime', value);
+  }
 
 
-
+//  // read
+//  final myInt = prefs.getInt('my_int_key') ?? 0;
+//// write
+//  prefs.setInt('my_int_key', 42);
 
 
 

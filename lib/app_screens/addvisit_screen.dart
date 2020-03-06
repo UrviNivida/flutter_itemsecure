@@ -328,9 +328,12 @@ class AddVisitScreenState extends State<AddVisitScreen> {
                         onShowPicker: (context, currentValue) {
                           return showDatePicker(
                               context: context,
-                              firstDate: DateTime(1900),
+//                              firstDate: DateTime(1900),
+                              firstDate: DateTime.now().subtract(Duration(days: 1)),
+//                              initialDate:DateTime.now().add(Duration(days: 3)),
                               initialDate: currentValue ?? DateTime.now(),
-                              lastDate: DateTime(2100));
+                              lastDate: DateTime.now().subtract(Duration(days: 730))  // 2 years
+                          );
                         },
                         resetIcon: null,
                         autofocus: false,
@@ -407,9 +410,11 @@ class AddVisitScreenState extends State<AddVisitScreen> {
                           final time = await showTimePicker(
                             context: context,
                             initialTime: TimeOfDay.fromDateTime(currentValue ?? DateTime.now()),
+//                              initialTime: TimeOfDay(hour: DateTime.now().hour, minute: DateTime.now().minute),
                           );
                           return DateTimeField.convert(time);
                         },
+
                         autofocus: false,
 //                                  focusNode:  FocusScope.of(context).requestFocus(new FocusNode()),
                         keyboardType: TextInputType.datetime,

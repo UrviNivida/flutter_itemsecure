@@ -275,9 +275,15 @@ class _OutcomeScreenState extends State<OutcomeScreen> {
                       onShowPicker: (context, currentValue) {
                         return showDatePicker(
                             context: context,
-                            firstDate: DateTime(1900),
+                            firstDate: DateTime.now().subtract(Duration(days: 1)),
                             initialDate: currentValue ?? DateTime.now(),
-                            lastDate: DateTime(2100));
+                            lastDate: DateTime.now().add(Duration(days: 365))
+
+                          //                            context: context,
+//                            firstDate: DateTime(1900),
+//                            initialDate: currentValue ?? DateTime.now(),
+//                            lastDate: DateTime(2100)
+                        );
                       },
                       resetIcon: null,
                       autofocus: false,
