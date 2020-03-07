@@ -1,3 +1,4 @@
+
 import 'dart:async';
 import 'dart:io';
 
@@ -35,6 +36,8 @@ class ImagePickerHandler {
   Future cropImage(File image) async {
     File croppedFile = await ImageCropper.cropImage(
       sourcePath: image.path,
+//      ratioX: 1.0,
+//      ratioY: 1.0,
       maxWidth: 512,
       maxHeight: 512,
     );

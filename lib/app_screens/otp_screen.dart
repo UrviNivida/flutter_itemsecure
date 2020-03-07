@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'dashboard_screen.dart';
-import 'FadeAnimation.dart';
-import 'forgotpasswor_screen.dart';
 
-class Loginscreen extends StatefulWidget {
+import 'FadeAnimation.dart';
+import 'dashboard_screen.dart';
+import 'login_screen.dart';
+import 'package:intl/intl.dart';
+
+
+class OTPScreen extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return Loginscreennew();
+    return OTPScreenState();
   }
 }
 
-class Loginscreennew extends State<Loginscreen> {
+class OTPScreenState extends State<OTPScreen> {
   TextStyle headStyle = TextStyle(
       fontSize: 16.0,
       fontWeight: FontWeight.w700,
@@ -65,10 +67,10 @@ class Loginscreennew extends State<Loginscreen> {
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
             gradient: LinearGradient(begin: Alignment.topCenter, colors: [
-          Theme.of(context).primaryColor,
-          Color(0xFFFFEE58),
-          Theme.of(context).primaryColor
-        ])),
+              Theme.of(context).primaryColor,
+              Color(0xFFFFEE58),
+              Theme.of(context).primaryColor
+            ])),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -78,9 +80,8 @@ class Loginscreennew extends State<Loginscreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  FadeAnimation(1.2, Text("Welcome", style: welcomestyle)),
-                  FadeAnimation(
-                      1.6, Text("Login to ItemSecure", style: itemstyle))
+                  FadeAnimation(1.2, Text("Set New Password", style: welcomestyle)),
+
                 ],
               ),
             ),
@@ -114,8 +115,8 @@ class Loginscreennew extends State<Loginscreen> {
                                 child: TextField(
                                     decoration: InputDecoration(
 //                                        contentPadding: EdgeInsets.all(20.0),
-                                        labelText: "Email Address / Mobile No.",
-                                        hintText: "Email Address / Mobile No.",
+                                        labelText: "OTP",
+                                        hintText: "OTP",
                                         hintStyle: hintStyle,
                                         prefixIcon: Icon(Icons.account_circle),
 //                                        suffixIcon: GestureDetector(
@@ -136,7 +137,7 @@ class Loginscreennew extends State<Loginscreen> {
 //                                        labelStyle: textStyle,
 //                                        border: InputBorder.none),
 
-                                    ),
+                                ),
                               )),
                           SizedBox(height: 10),
                           FadeAnimation(
@@ -157,8 +158,8 @@ class Loginscreennew extends State<Loginscreen> {
                                     keyboardType: TextInputType.text,
                                     decoration: InputDecoration(
 //                                        contentPadding: EdgeInsets.all(20.0),
-                                        labelText: "Password",
-                                        hintText: "Password",
+                                        labelText: "New Password",
+                                        hintText: "New Password",
                                         hintStyle: hintStyle,
                                         prefixIcon: Icon(Icons.lock),
                                         suffixIcon: GestureDetector(
@@ -205,20 +206,73 @@ class Loginscreennew extends State<Loginscreen> {
 
                                     onSaved: (String value) {}),
                               )),
-                          SizedBox(height: 30),
-                          FadeAnimation(2,
-                              GestureDetector(
-                                child: Text("Forget your password?", style: headStyle),
-                                onTap: (){
-                                  Navigator.push(context,
-                                      MaterialPageRoute(builder: (context) {
-                                        return forgotpasswor_screen();
-                                      }));
+                          SizedBox(height: 10),
+                          FadeAnimation(
+                              1.9,
+                              Container(
+//                                decoration: BoxDecoration(
+//                                    color: Colors.white,
+//                                    borderRadius: BorderRadius.circular(5),
+//                                    boxShadow: [
+//                                      BoxShadow(
+//                                          color: Colors.black.withOpacity(0.1),
+//                                          blurRadius: 8,
+//                                          offset: Offset(0, 3))
+//                                    ]),
+                                child: TextFormField(
+                                    autofocus: false,
+                                    obscureText: _obscureText,
+                                    keyboardType: TextInputType.text,
+                                    decoration: InputDecoration(
+//                                        contentPadding: EdgeInsets.all(20.0),
+                                        labelText: "Confirm Password",
+                                        hintText: "Confirm Password",
+                                        hintStyle: hintStyle,
+                                        prefixIcon: Icon(Icons.lock),
+                                        suffixIcon: GestureDetector(
+                                          onTap: () {
+                                            setState(() {
+                                              _obscureText = !_obscureText;
+                                            });
+                                          },
+                                          child: Icon(
+                                            _obscureText
+                                                ? Icons.visibility
+                                                : Icons.visibility_off,
+                                            semanticLabel: _obscureText
+                                                ? 'show password'
+                                                : 'hide password',
+                                          ),
+                                        ),
+                                        border: OutlineInputBorder(
+                                            gapPadding: 10.0,
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(25.0)))),
 
+//                                      InputDecoration(
+//                                        border: InputBorder.none,
+//                                        hintStyle: hintStyle,
+//                                        labelStyle: textStyle,
+//                                        hintText: 'Password',
+//                                        suffixIcon: GestureDetector(
+//                                          onTap: () {
+//                                            setState(() {
+//                                              _obscureText = !_obscureText;
+//                                            });
+//                                          },
+//                                          child: Icon(
+//                                            _obscureText
+//                                                ? Icons.visibility
+//                                                : Icons.visibility_off,
+//                                            semanticLabel: _obscureText
+//                                                ? 'show password'
+//                                                : 'hide password',
+//                                          ),
+//                                        ),
+//                                      ),
 
-                                },
-                              )
-                              ),
+                                    onSaved: (String value) {}),
+                              )),
                           SizedBox(height: 40),
                           FadeAnimation(
                               2.2,
@@ -234,18 +288,15 @@ class Loginscreennew extends State<Loginscreen> {
                                             Color(0xFFFFEE58)
                                           ])),
                                   child: Center(
-                                      child: Text("Login", style: headStyle),
+                                    child: Text("Submit", style: headStyle),
                                   ),
                                 ),
-                                onTap: () {
-//                                  Navigator.push(context,
-////                                    MaterialPageRoute(builder: (context) {
-////                                      return DashbaroadScreen();
-////                                    }));
-                                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => DashbaroadScreen()));
-                                  },
+                                onTap: () {Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) {
+                                      return Loginscreen();
+                                    }));},
                               )
-                              )
+                          )
                         ],
                       ),
                     ),

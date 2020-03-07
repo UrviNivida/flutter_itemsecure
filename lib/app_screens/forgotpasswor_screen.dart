@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_itemsecure_dsr/app_screens/otp_screen.dart';
 
 import 'FadeAnimation.dart';
 
@@ -134,12 +135,12 @@ class forgotpasswor_screenstate extends State<forgotpasswor_screen> {
                                     child: Text("Submit", style: headStyle),
                                   ),
                                 ),
-//                                onTap: () {
-//                                  Navigator.push(context,
-//                                    MaterialPageRoute(builder: (context) {
-//                                      return DashbaroadScreen();
-//                                    }));
-//                                  },
+                                onTap: () {
+                                  Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) {
+                                      return OTPScreen();
+                                    }));
+                                  },
                               ))
                         ],
                       ),

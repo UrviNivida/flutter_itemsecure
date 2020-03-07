@@ -1,17 +1,13 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
-
-import 'ImagePickerHandler.dart';
+import 'package:flutter_itemsecure_dsr/utils/ImagePickerHandler.dart';
 
 
 class ImagePickerDialog extends StatelessWidget {
   ImagePickerHandler _listener;
   AnimationController _controller;
   BuildContext context;
-
   ImagePickerDialog(this._listener, this._controller);
-
   Animation<double> _drawerContentsOpacity;
   Animation<Offset> _drawerDetailsPosition;
 
@@ -84,7 +80,7 @@ class ImagePickerDialog extends StatelessWidget {
                   child: roundedButton(
                       "Camera",
                       EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
-                      Theme.of(context).primaryColor,
+                      const Color(0xFF167F67),
                       const Color(0xFFFFFFFF)),
                 ),
                 new GestureDetector(
@@ -92,7 +88,7 @@ class ImagePickerDialog extends StatelessWidget {
                   child: roundedButton(
                       "Gallery",
                       EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
-                      Theme.of(context).primaryColor,
+                      const Color(0xFF167F67),
                       const Color(0xFFFFFFFF)),
                 ),
                 const SizedBox(height: 15.0),
@@ -103,7 +99,7 @@ class ImagePickerDialog extends StatelessWidget {
                     child: roundedButton(
                         "Cancel",
                         EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
-                        Theme.of(context).primaryColor,
+                        const Color(0xFF167F67),
                         const Color(0xFFFFFFFF)),
                   ),
                 ),
@@ -121,7 +117,7 @@ class ImagePickerDialog extends StatelessWidget {
       alignment: FractionalOffset.center,
       decoration: new BoxDecoration(
         color: bgColor,
-        borderRadius: new BorderRadius.all(const Radius.circular(50.0)),
+        borderRadius: new BorderRadius.all(const Radius.circular(100.0)),
         boxShadow: <BoxShadow>[
           BoxShadow(
             color: const Color(0xFF696969),
@@ -133,7 +129,7 @@ class ImagePickerDialog extends StatelessWidget {
       child: Text(
         buttonLabel,
         style: new TextStyle(
-            color: textColor, fontSize: 16.0, fontWeight: FontWeight.bold),
+            color: textColor, fontSize: 20.0, fontWeight: FontWeight.bold),
       ),
     );
     return loginBtn;

@@ -158,13 +158,12 @@ class NavigationDrawerScreenState extends State<NavigationDrawerScreen> {
           totalTimeOut = totalTimeOut + difference;
           displayedDuration = ConvertSectoDay(totalTimeOut);
         }
+
         _prefs.setLastTimeOutDuration(totalTimeOut);
         _prefs.setLastTimeOutTime("0");
         _prefs.setSwitchBtnTime(_valueTimeout);
         _getPrefsData();
         DurationTime();
-
-
         return null;
       } else {
         _valueTimeout == true;
@@ -174,8 +173,6 @@ class NavigationDrawerScreenState extends State<NavigationDrawerScreen> {
         _prefs.setSwitchBtnTime(_valueTimeout);
         _getPrefsData();
         DurationTime();
-
-
 
         /* return
         showDialog(
@@ -308,7 +305,7 @@ class NavigationDrawerScreenState extends State<NavigationDrawerScreen> {
               ),
               onTap: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return profile_screen();
+                  return UserOptions();
                 }));
               },
             ),
