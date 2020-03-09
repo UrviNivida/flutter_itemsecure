@@ -305,7 +305,7 @@ class NavigationDrawerScreenState extends State<NavigationDrawerScreen> {
               ),
               onTap: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return UserOptions();
+                  return profile_screen();
                 }));
               },
             ),

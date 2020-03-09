@@ -212,7 +212,7 @@ class SettingsScreenState extends State<SettingsScreen> {
               onTap: (){
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) {
-                      return UserOptions();
+                      return profile_screen();
                     }));
               },
             ),
