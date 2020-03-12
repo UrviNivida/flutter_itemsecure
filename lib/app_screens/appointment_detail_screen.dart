@@ -426,7 +426,6 @@ class _AppointmentDetailState extends State<AppointmentDetailScreen> {
 //                              child: Icon(Icons.cancel),
 //                            ))),
 //                  ),
-
                   Tab(
                     child: Align(
                       alignment: Alignment.center,
@@ -653,144 +652,144 @@ class _AppointmentDetailState extends State<AppointmentDetailScreen> {
                           ],
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.all(_padding),
-                        child: Row(
-                          children: <Widget>[
-                            Expanded(
-                              flex: 0,
-                              child: GestureDetector(
-                                onTap: () {
-//                Alert(
-//                    context: context,
-//                    title: "",
-//                    content: Form(
-//                      child: new Column(
-//                        children: <Widget>[
-//                          CircleAvatar(
-//                            backgroundImage: NetworkImage(
-//                                "http://app.nivida.in/bita_rjvision/files/upload_document/" +
-//                                    widget.image_path),
-//                            minRadius: 50,
-//                            maxRadius: 90,
-//                          ),
-//                        ],
+//                      Padding(
+//                        padding: EdgeInsets.all(_padding),
+//                        child: Row(
+//                          children: <Widget>[
+//                            Expanded(
+//                              flex: 0,
+//                              child: GestureDetector(
+//                                onTap: () {
+////                Alert(
+////                    context: context,
+////                    title: "",
+////                    content: Form(
+////                      child: new Column(
+////                        children: <Widget>[
+////                          CircleAvatar(
+////                            backgroundImage: NetworkImage(
+////                                "http://app.nivida.in/bita_rjvision/files/upload_document/" +
+////                                    widget.image_path),
+////                            minRadius: 50,
+////                            maxRadius: 90,
+////                          ),
+////                        ],
+////                      ),
+////                    )).show();
+//                                  //Insert event to be fired up when button is clicked here
+//                                  //in this case, this increments our `countValue` variable by one.
+//                                },
+//                                child: new Container(
+//                                    width: _imagewidth,
+//                                    height: _imageheight,
+//                                    decoration: new BoxDecoration(
+//                                        shape: BoxShape.circle,
+//                                        image: new DecorationImage(
+//                                          fit: BoxFit.cover,
+//                                          image: new NetworkImage(
+//                                              "https://cdn.pixabay.com/photo/2013/07/21/13/00/rose-165819_960_720.jpg"),
+//                                        ))),
+//                              ),
+//                            ),
+//                            Expanded(
+//                                flex: 4,
+//                                child: GestureDetector(
+//                                  child: Padding(
+//                                    padding: EdgeInsets.all(_circlePadding),
+//                                    child: Text(
+//                                      'Nilesh Shah',
+//                                      style: textStyleTitle,
+//                                    ),
+//                                  ),
+//                                )),
+//                            Expanded(
+//                                flex: 4,
+//                                child: GestureDetector(
+//                                    child: Row(
+//                                  mainAxisAlignment: MainAxisAlignment.end,
+//                                  children: <Widget>[
+//                                    Padding(
+//                                      padding: EdgeInsets.only(right: _padding),
+//                                      child: Container(
+//                                          child: IconTheme(
+//                                        data: new IconThemeData(
+//                                            color: Colors.grey),
+//                                        child: new Icon(Icons.chat_bubble),
+//                                      )),
+//                                    ),
+//                                    Container(
+//                                        child: IconTheme(
+//                                      data:
+//                                          new IconThemeData(color: Colors.grey),
+//                                      child: new Icon(Icons.call),
+//                                    ))
+//                                  ],
+//                                ))),
+//                          ],
+//                        ),
 //                      ),
-//                    )).show();
-                                  //Insert event to be fired up when button is clicked here
-                                  //in this case, this increments our `countValue` variable by one.
-                                },
-                                child: new Container(
-                                    width: _imagewidth,
-                                    height: _imageheight,
-                                    decoration: new BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        image: new DecorationImage(
-                                          fit: BoxFit.cover,
-                                          image: new NetworkImage(
-                                              "https://cdn.pixabay.com/photo/2013/07/21/13/00/rose-165819_960_720.jpg"),
-                                        ))),
-                              ),
-                            ),
-                            Expanded(
-                                flex: 4,
-                                child: GestureDetector(
-                                  child: Padding(
-                                    padding: EdgeInsets.all(_circlePadding),
-                                    child: Text(
-                                      'Nilesh Shah',
-                                      style: textStyleTitle,
-                                    ),
-                                  ),
-                                )),
-                            Expanded(
-                                flex: 4,
-                                child: GestureDetector(
-                                    child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: <Widget>[
-                                    Padding(
-                                      padding: EdgeInsets.only(right: _padding),
-                                      child: Container(
-                                          child: IconTheme(
-                                        data: new IconThemeData(
-                                            color: Colors.grey),
-                                        child: new Icon(Icons.chat_bubble),
-                                      )),
-                                    ),
-                                    Container(
-                                        child: IconTheme(
-                                      data:
-                                          new IconThemeData(color: Colors.grey),
-                                      child: new Icon(Icons.call),
-                                    ))
-                                  ],
-                                ))),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(_padding),
-                        child: Row(
-                          children: <Widget>[
-                            Expanded(
-                              flex: 1,
-                              child: GestureDetector(
-                                  child: Stack(
-                                alignment: Alignment.center,
-                                children: <Widget>[
-                                  Container(
-                                    child: Image(
-                                      image:
-                                          AssetImage('images/yellowcircle.png'),
-                                      width: _imagewidth,
-                                      height: _imageheight,
-                                      color: Colors.grey,
-                                    ),
-                                  ),
-                                  Container(
-                                    child: IconTheme(
-                                      data: new IconThemeData(
-                                        color: Colors.white,
-                                      ),
-                                      child: new Icon(Icons.business_center),
-                                    ),
-                                  )
-                                ],
-                              )),
-                            ),
-                            Expanded(
-                                flex: 4,
-                                child: GestureDetector(
-                                  child: Padding(
-                                    padding: EdgeInsets.all(_circlePadding),
-                                    child: Text(
-                                      'Boardline',
-                                      style: textStyleTitle,
-                                    ),
-                                  ),
-                                )),
-                            Expanded(
-                                flex: 4,
-                                child: GestureDetector(
-                                    child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: <Widget>[
-                                    Padding(
-                                      padding: EdgeInsets.only(right: _padding),
-                                      child: Container(),
-                                    ),
-                                    Container(
-                                        child: IconTheme(
-                                      data:
-                                          new IconThemeData(color: Colors.grey),
-                                      child: new Icon(Icons.call),
-                                    ))
-                                  ],
-                                ))),
-                          ],
-                        ),
-                      ),
+//                      Padding(
+//                        padding: EdgeInsets.all(_padding),
+//                        child: Row(
+//                          children: <Widget>[
+//                            Expanded(
+//                              flex: 1,
+//                              child: GestureDetector(
+//                                  child: Stack(
+//                                alignment: Alignment.center,
+//                                children: <Widget>[
+//                                  Container(
+//                                    child: Image(
+//                                      image:
+//                                          AssetImage('images/yellowcircle.png'),
+//                                      width: _imagewidth,
+//                                      height: _imageheight,
+//                                      color: Colors.grey,
+//                                    ),
+//                                  ),
+//                                  Container(
+//                                    child: IconTheme(
+//                                      data: new IconThemeData(
+//                                        color: Colors.white,
+//                                      ),
+//                                      child: new Icon(Icons.business_center),
+//                                    ),
+//                                  )
+//                                ],
+//                              )),
+//                            ),
+//                            Expanded(
+//                                flex: 4,
+//                                child: GestureDetector(
+//                                  child: Padding(
+//                                    padding: EdgeInsets.all(_circlePadding),
+//                                    child: Text(
+//                                      'Boardline',
+//                                      style: textStyleTitle,
+//                                    ),
+//                                  ),
+//                                )),
+//                            Expanded(
+//                                flex: 4,
+//                                child: GestureDetector(
+//                                    child: Row(
+//                                  mainAxisAlignment: MainAxisAlignment.end,
+//                                  children: <Widget>[
+//                                    Padding(
+//                                      padding: EdgeInsets.only(right: _padding),
+//                                      child: Container(),
+//                                    ),
+//                                    Container(
+//                                        child: IconTheme(
+//                                      data:
+//                                          new IconThemeData(color: Colors.grey),
+//                                      child: new Icon(Icons.call),
+//                                    ))
+//                                  ],
+//                                ))),
+//                          ],
+//                        ),
+//                      ),
                     ],
                   ),
                 ),

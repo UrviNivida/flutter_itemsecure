@@ -236,31 +236,45 @@ class profile_screenState extends State<profile_screen>
                           ),
                         ),
                         child: new Center(
-                          child: Padding(
-                            padding: EdgeInsets.all(6.0),
-                            child:  Stack(
-                              children: <Widget>[
+                            child: Padding(
+                          padding: EdgeInsets.all(0.0),
+                          child: Stack(
+                            children: <Widget>[
 //                        SizedBox(
 //                          height: 120,
 //                        ),
-                                Center(
-                                  child: new Image.file(
-                                    file,
-                                    fit: BoxFit.contain,
-//                                  width: 50,
-//                                  height: 50,
+                              Center(
+                                child:  Container(
+                                  height: 120.0,
+                                  width: 120.0,
+                                  decoration: new BoxDecoration(
+                                    shape: BoxShape.circle,
                                   ),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(75.0),
+                                    child: (file != null)
+                                        ? new Image.file(file,fit: BoxFit.cover,height: 120.0,width: 120.0,): Container(),
+                                  ),),
+//                                new Container(
+//
+//                                    decoration: new BoxDecoration(
+//                                        shape: BoxShape.circle,
+//                                        image: DecorationImage(
+//                                            fit: BoxFit.fill,
+//                                            image: new NetworkImage(file.path)
+////                                            image: new Image.file(file.path)
+//                                        )
+//                                    )),
+
 //                          Image.asset('images/smile_fill.png'),
-                                ),
+
+                              ),
 //                        Text(
 //                          "Create Project",
 //                        ),
-                              ],
-                            ),
-                          )
-
-
-                        ),
+                            ],
+                          ),
+                        )),
                         height: 120,
                         width: 120,
                       ),

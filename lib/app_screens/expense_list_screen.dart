@@ -142,13 +142,11 @@ class ExpenseListScreenState extends State<ExpenseListScreen> {
               children: <Widget>[
                 Expanded(
                   flex: 1,
-                  child: Text('Claimed',
-                      textAlign: TextAlign.left, style: titleStyle),
+                  child: Text('Claimed', textAlign: TextAlign.left, style: titleStyle),
                 ),
                 Expanded(
                   flex: 1,
-                  child: Text('₹ ' + '380.0',
-                      textAlign: TextAlign.right, style: valueStyle),
+                  child: Text('₹ ' + '380.0', textAlign: TextAlign.right, style: valueStyle),
                 )
               ],
             ),
@@ -159,13 +157,11 @@ class ExpenseListScreenState extends State<ExpenseListScreen> {
               children: <Widget>[
                 Expanded(
                   flex: 1,
-                  child: Text('Approved',
-                      textAlign: TextAlign.left, style: titleStyle),
+                  child: Text('Approved', textAlign: TextAlign.left, style: titleStyle),
                 ),
                 Expanded(
                   flex: 1,
-                  child: Text('₹ ' + '0.0',
-                      textAlign: TextAlign.right, style: valueStyle),
+                  child: Text('₹ ' + '0.0', textAlign: TextAlign.right, style: valueStyle),
                 )
               ],
             ),
