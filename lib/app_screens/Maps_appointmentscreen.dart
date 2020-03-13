@@ -1,23 +1,24 @@
-//import 'dart:html';
-import 'dart:async';
-import 'dart:math';
+import 'dart:typed_data';
 
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
+
+import 'package:flutter/widgets.dart';
 import 'package:flutter_itemsecure_dsr/adapters/Schdeulecard.dart';
 import 'package:flutter_itemsecure_dsr/app_screens/addvisit_screen.dart';
-import 'package:flutter_itemsecure_dsr/app_screens/appointment_detail_screen.dart';
 import 'package:flutter_itemsecure_dsr/app_screens/checkin_screen.dart';
-import 'package:flutter_itemsecure_dsr/app_screens/expense_list_screen.dart';
-import 'package:flutter_itemsecure_dsr/model/ScheduleModel.dart';
 import 'package:flutter_itemsecure_dsr/listing_data/Schedulelist.dart';
+import 'package:flutter_itemsecure_dsr/model/ScheduleModel.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+
 import 'package:solid_bottom_sheet/solid_bottom_sheet.dart';
 
 import 'NavigationBloc.dart';
-import 'package:intl/intl.dart';
+import 'locations.dart' as locations;
+import 'dart:ui' as ui;
+//import 'package:intl/date_symbol_data_local.dart';
 
 class Maps_appointmentscreen extends StatefulWidget with NavigationStates {
   @override
@@ -28,6 +29,87 @@ class Maps_appointmentscreen extends StatefulWidget with NavigationStates {
 }
 
 class MyAccountsPagenew extends State<Maps_appointmentscreen> {
+
+
+  final Map<String, Marker> _markers = {};
+
+  static Future<Uint8List> getBytesFromCanvas(int width, int height,int position) async {
+    final ui.PictureRecorder pictureRecorder = ui.PictureRecorder();
+    final Canvas canvas = Canvas(pictureRecorder);
+    final Paint paint = Paint()..color = Colors.amber;
+    final Radius radius = Radius.circular(30.0);
+    canvas.drawRRect(
+        RRect.fromRectAndCorners(
+          Rect.fromLTWH(0.0, 0.0, width.toDouble(), height.toDouble()),
+          topLeft: radius,
+          topRight: radius,
+          bottomLeft: radius,
+          bottomRight: radius,
+        ),
+        paint);
+
+    TextPainter painter = TextPainter(textDirection: TextDirection.ltr); //
+    painter.text = TextSpan(
+//      text: 'Hello world',
+      text: position.toString(),
+      style: TextStyle(fontSize: 25.0, color: Colors.white),
+    );
+    painter.layout();
+    painter.paint(
+        canvas,
+        Offset((width * 0.5) - painter.width * 0.5,
+            (height * 0.5) - painter.height * 0.5));
+    final img = await pictureRecorder.endRecording().toImage(width, height);
+    final data = await img.toByteData(format: ui.ImageByteFormat.png);
+    return data.buffer.asUint8List();
+  }
+
+  Future<void> _onMapCreated(GoogleMapController controller) async {
+    final googleOffices = await locations.getGoogleOffices();
+//    Uint8List markerIcon = await getBytesFromCanvas(200, 100);
+    Uint8List markerIcon ;
+//    getBytesFromCanvas(200, 100);
+    final Marker markerrrrr = Marker(icon: BitmapDescriptor.fromBytes(markerIcon));
+//    setState(() {
+    _markers.clear();
+//      for (final office in googleOffices.offices)  {
+////        markerIcon=getBytesFromCanvas(200, 500) as Uint8List;
+//      print();
+//        markerIcon = await getBytesFromCanvas(200, 100);
+//        final marker = Marker(
+//          icon: BitmapDescriptor.fromBytes(markerIcon),
+//          markerId: MarkerId(office.name),
+//          position: LatLng(office.lat, office.lng),
+//          infoWindow: InfoWindow(
+//            title: office.name,
+//            snippet: office.address,
+//          ),
+//        );
+//        _markers[office.name] = marker;
+//      }
+
+
+    googleOffices.offices.asMap().forEach((idx, val) async {
+      print('$idx: $val');
+//      print();
+      markerIcon = await getBytesFromCanvas(50, 50,idx+1);
+      final marker = Marker(
+        icon: BitmapDescriptor.fromBytes(markerIcon),
+        markerId: MarkerId(val.name),
+        position: LatLng(val.lat, val.lng),
+        infoWindow: InfoWindow(
+          title: val.name,
+          snippet: val.address,
+        ),
+      );
+      _markers[val.name] = marker;
+      setState(() {
+        _onMapCreated;
+      });
+    });
+//    });
+  }
+
 
 
   var _padding = 12.0;
@@ -47,32 +129,32 @@ class MyAccountsPagenew extends State<Maps_appointmentscreen> {
       color: Colors.black);
 
   final List<ScheduleModel> scheduleing = Schedulelist.getschedule();
-  GoogleMapController myMapController;
-  final Set<Marker> _markers = new Set();
-  static const LatLng _mainLocation = const LatLng(22.317498, 73.164598);
 
-  Set<Marker> myMarker() {
-    setState(() {
-      _markers.add(Marker(
-        // This marker id can be anything that uniquely identifies each marker.
-        markerId: MarkerId(_mainLocation.toString()),
-        position: _mainLocation,
-        infoWindow: InfoWindow(
-          onTap: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return AppointmentDetailScreen();
-            }));
-          },
-          title: 'Nivida Web Solutions Pvt. Ltd.',
-          snippet:
-              '305, Privilege Avenue, Opp. isha hospital, Behind atlantis Sarabhai campus, Sarabhai Rd, Vadiwadi, Vadodara, Gujarat 390023',
-        ),
-        icon: BitmapDescriptor.defaultMarker,
-      ));
-    });
-
-    return _markers;
-  }
+//  GoogleMapController myMapController;
+//  final Set<Marker> _markers = new Set();
+//  static const LatLng _mainLocation = const LatLng(22.317498, 73.164598);
+//  Set<Marker> myMarker() {
+//    setState(() {
+//      _markers.add(Marker(
+//        // This marker id can be anything that uniquely identifies each marker.
+//        markerId: MarkerId(_mainLocation.toString()),
+//        position: _mainLocation,
+//        infoWindow: InfoWindow(
+//          onTap: () {
+//            Navigator.push(context, MaterialPageRoute(builder: (context) {
+//              return AppointmentDetailScreen();
+//            }));
+//          },
+//          title: 'Nivida Web Solutions Pvt. Ltd.',
+//          snippet:
+//              '305, Privilege Avenue, Opp. isha hospital, Behind atlantis Sarabhai campus, Sarabhai Rd, Vadiwadi, Vadodara, Gujarat 390023',
+//        ),
+//        icon: BitmapDescriptor.defaultMarker,
+//      ));
+//    });
+//
+//    return _markers;
+//  }
 
   bool isMeetingGoingOn = false;
   bool isCheckin = false;
@@ -453,18 +535,32 @@ class MyAccountsPagenew extends State<Maps_appointmentscreen> {
       child: Stack(
         children: <Widget>[
           GoogleMap(
+            onMapCreated: _onMapCreated,
             initialCameraPosition: CameraPosition(
-              target: _mainLocation,
-              zoom: 10.0,
+//              target: const LatLng(0, 0),
+              target: const LatLng(22.317498, 73.164598),
+              zoom: 10,
             ),
-            markers: this.myMarker(),
-            mapType: MapType.normal,
-            onMapCreated: (controller) {
-              setState(() {
-                myMapController = controller;
-              });
-            },
+            markers: _markers.values.toSet(),
           ),
+
+
+//          GoogleMap(
+//            initialCameraPosition: CameraPosition(
+//              target: _mainLocation,
+//              zoom: 10.0,
+//            ),
+//            markers: this.myMarker(),
+//            mapType: MapType.normal,
+//            onMapCreated: (controller) {
+//              setState(() {
+//                myMapController = controller;
+//              });
+//            },
+//          ),
+
+
+
 //          Align(
 //            alignment: Alignment.bottomLeft,
 //            child: Padding(
@@ -605,10 +701,10 @@ class _DynamicDialogState extends State<DynamicDialog> {
         fontFamily: 'Quicksand',
         color: Colors.black);
 
-    final format1 = DateFormat("dd-MM-yyyy");
-    final timeFormat = DateFormat("h:mm a");
-    DateTime date;
-    TimeOfDay time;
+//    final format1 = DateFormat("dd-MM-yyyy");
+//    final timeFormat = DateFormat("h:mm a");
+//    DateTime date;
+//    TimeOfDay time;
 
     return AlertDialog(
       shape: RoundedRectangleBorder(
@@ -1046,8 +1142,7 @@ class _DynamicDialogCheckoutState extends State<DynamicDialogCheckout> {
         fontFamily: 'Quicksand',
         color: Colors.black);
 
-    final format1 = DateFormat("dd-MM-yyyy");
-    final timeFormat = DateFormat("h:mm a");
+//    final timeFormat = DateFormat("h:mm a");
     DateTime date;
     TimeOfDay time;
     TextEditingController endtimecon = new TextEditingController();
@@ -1106,7 +1201,7 @@ class _DynamicDialogCheckoutState extends State<DynamicDialogCheckout> {
                 child: DateTimeField(
                   textAlign: TextAlign.center,
                   resetIcon: null,
-                  format: timeFormat,
+//                  format: timeFormat,
                   onShowPicker: (context, currentValue) async {
                     final time = await showTimePicker(
                       context: context,
@@ -1159,7 +1254,7 @@ class _DynamicDialogCheckoutState extends State<DynamicDialogCheckout> {
                 child: DateTimeField(
                   textAlign: TextAlign.center,
                   resetIcon: null,
-                  format: timeFormat,
+//                  format: timeFormat,
                   onShowPicker: (context, currentValue) async {
                     final time = await showTimePicker(
                       context: context,

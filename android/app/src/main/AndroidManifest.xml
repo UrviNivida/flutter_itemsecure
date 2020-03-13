@@ -38,13 +38,14 @@
 <!--            android:name="io.flutter.embedding.android.SplashScreenDrawable"-->
 <!--            android:resource="@drawable/splashscreen"-->
 <!--            />-->
-        <activity
-            android:name="com.yalantis.ucrop.UCropActivity"
-            android:screenOrientation="fullSensor"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+<!--        <activity-->
+<!--            android:name="com.yalantis.ucrop.UCropActivity"-->
+<!--            android:screenOrientation="fullSensor"-->
+<!--            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>-->
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+        <!-- Add the following entry, with your API key -->
         <meta-data android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDvZfo4Z2wFsdLsU8MyZ3gU0wb7jldkwv4"/>
     </application>
