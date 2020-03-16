@@ -50,17 +50,13 @@ class NavigationDrawerScreenState extends State<NavigationDrawerScreen> {
   int totalTimeOut = 0;
   int prefstotalTimeOutDuration = 0;
   String prefsLastTimeOutTime = "0";
-  bool prefsswitchbtn=false;
+  bool prefsswitchbtn = false;
 
   @override
   void initState() {
     super.initState();
     _getPrefsData();
-
-
   }
-
-
 
   bool _value = true;
   bool _valueTimeout = false;
@@ -75,8 +71,6 @@ class NavigationDrawerScreenState extends State<NavigationDrawerScreen> {
     // TODO: implement deactivate
     super.deactivate();
     print("deactivate");
-
-
   }
 
   @override
@@ -94,37 +88,37 @@ class NavigationDrawerScreenState extends State<NavigationDrawerScreen> {
       } else {
         print("renturn 22");
         return showDialog(
-          context: context,
-          builder: (context) => new AlertDialog(
-            title: new Text('Item Secure',
-                style: TextStyle(
-                  fontSize: 16.0,
-                  color: Theme.of(context).primaryColor,
-                )),
-            content: new Text(
-              'Are you sure you want to PunchOut?',
-              style: TextStyle(fontSize: 14.0),
-            ),
-            actions: <Widget>[
-              new FlatButton(
-                onPressed: () => Navigator.of(context).pop(false),
-                child: new Text('No'),
-                textColor: Colors.grey,
-              ),
-              new FlatButton(
+              context: context,
+              builder: (context) => new AlertDialog(
+                title: new Text('Item Secure',
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      color: Theme.of(context).primaryColor,
+                    )),
+                content: new Text(
+                  'Are you sure you want to PunchOut?',
+                  style: TextStyle(fontSize: 14.0),
+                ),
+                actions: <Widget>[
+                  new FlatButton(
+                    onPressed: () => Navigator.of(context).pop(false),
+                    child: new Text('No'),
+                    textColor: Colors.grey,
+                  ),
+                  new FlatButton(
 /*          Navigator.of(context).pop(true)*/
-                onPressed: () {
-                  setState(() {
-                    _value == false;
-                    Navigator.of(context).pop(true);
-                  });
-                },
-                child: new Text('Yes'),
-                textColor: Theme.of(context).primaryColor,
+                    onPressed: () {
+                      setState(() {
+                        _value == false;
+                        Navigator.of(context).pop(true);
+                      });
+                    },
+                    child: new Text('Yes'),
+                    textColor: Theme.of(context).primaryColor,
+                  ),
+                ],
               ),
-            ],
-          ),
-        ) ??
+            ) ??
             false;
       }
     });
@@ -145,25 +139,37 @@ class NavigationDrawerScreenState extends State<NavigationDrawerScreen> {
 
         //   DIFFERENCE OF DATETIMES
         var difference = dateTimeOff.difference(dateTimeOn).inSeconds;
-        totalTimeOut = totalTimeOut + difference;
+        print("difference 1--->"+difference.toString());
+//        totalTimeOut = totalTimeOut + difference;
 
-        if(prefstotalTimeOutDuration!="" && prefstotalTimeOutDuration!=0)
-        {
-          totalTimeOut=prefstotalTimeOutDuration;
+
+
+        if (prefstotalTimeOutDuration != "" && prefstotalTimeOutDuration != 0) {
+          totalTimeOut = prefstotalTimeOutDuration;
           totalTimeOut = totalTimeOut + difference;
-          displayedDuration = ConvertSectoDay(prefstotalTimeOutDuration);
+          _prefs.setLastTimeOutDuration(totalTimeOut);
+          _prefs.setLastTimeOutTime("0");
+          _prefs.setSwitchBtnTime(_valueTimeout);
+          _getPrefsData();
+          DurationTime();
+          displayedDuration = ConvertSectoDay(totalTimeOut);
           prefstotalTimeOutDuration = 0;
-        }
-        else{
+        } else {
           totalTimeOut = totalTimeOut + difference;
+          _prefs.setLastTimeOutDuration(totalTimeOut);
+          _prefs.setLastTimeOutTime("0");
+          _prefs.setSwitchBtnTime(_valueTimeout);
+          _getPrefsData();
+          DurationTime();
           displayedDuration = ConvertSectoDay(totalTimeOut);
         }
 
-        _prefs.setLastTimeOutDuration(totalTimeOut);
-        _prefs.setLastTimeOutTime("0");
-        _prefs.setSwitchBtnTime(_valueTimeout);
-        _getPrefsData();
-        DurationTime();
+//        _prefs.setLastTimeOutDuration(totalTimeOut);
+//        _prefs.setLastTimeOutTime("0");
+//        _prefs.setSwitchBtnTime(_valueTimeout);
+//        _getPrefsData();
+//        DurationTime();
+
         return null;
       } else {
         _valueTimeout == true;
@@ -254,12 +260,6 @@ class NavigationDrawerScreenState extends State<NavigationDrawerScreen> {
 //
 //    ConvertSectoDay(difference.toInt());
 
-
-
-
-
-
-
     TextStyle rupeestyle = TextStyle(
         fontSize: 24.0,
         fontWeight: FontWeight.w600,
@@ -271,12 +271,6 @@ class NavigationDrawerScreenState extends State<NavigationDrawerScreen> {
         fontWeight: FontWeight.w700,
         fontFamily: 'Quicksand',
         color: Theme.of(context).primaryColor);
-
-
-
-
-
-
 
     return Material(
       child: Container(
@@ -507,21 +501,18 @@ class NavigationDrawerScreenState extends State<NavigationDrawerScreen> {
         ),
       ),
     );
-
-
   }
 
   Future _getPrefsData() async {
     prefstotalTimeOutDuration = (await _prefs.getLastTimeOutDuration());
     prefsLastTimeOutTime = (await _prefs.getLastTimeOutTime());
     prefsswitchbtn = (await _prefs.getSwitchBtnTime());
-    print("getLastTimeOutTime->"+prefsLastTimeOutTime);
-    print("prefsswitchbtn->"+prefsswitchbtn.toString());
+    print("getLastTimeOutTime->" + prefsLastTimeOutTime);
+    print("prefsswitchbtn->" + prefsswitchbtn.toString());
     setState(() {
-      currentTimeOn=prefsLastTimeOutTime;
-      _valueTimeout=prefsswitchbtn;
+      currentTimeOn = prefsLastTimeOutTime;
+      _valueTimeout = prefsswitchbtn;
     });
-
   }
 
   String ConvertSectoDay(int n) {

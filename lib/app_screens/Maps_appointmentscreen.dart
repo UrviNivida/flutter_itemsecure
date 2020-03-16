@@ -103,14 +103,14 @@ class MyAccountsPagenew extends State<Maps_appointmentscreen> {
         ),
       );
       _markers[val.name] = marker;
+
       setState(() {
         _onMapCreated;
       });
+
     });
 //    });
   }
-
-
 
   var _padding = 12.0;
   bool _value = true;
