@@ -27,6 +27,7 @@ class NavigationDrawerScreenState extends State<NavigationDrawerScreen> {
       fontWeight: FontWeight.w700,
       fontFamily: 'Quicksand',
       color: Colors.black);
+
   TextStyle textStyle = TextStyle(
       fontSize: 14.0,
       fontWeight: FontWeight.w500,
@@ -44,6 +45,7 @@ class NavigationDrawerScreenState extends State<NavigationDrawerScreen> {
       fontWeight: FontWeight.w600,
       fontFamily: 'Quicksand',
       color: Colors.black);
+
   Prefs _prefs = new Prefs();
   String punchstring = "";
   String timetodisplay = "00:00:00";
@@ -127,10 +129,10 @@ class NavigationDrawerScreenState extends State<NavigationDrawerScreen> {
   void _changeValueTimeOut(bool valueTimeout) {
     setState(() {
       _valueTimeout = valueTimeout;
-
       if (_valueTimeout == false) {
         now = DateTime.now();
         currentTimeOff = DateFormat('yyyy-MM-dd HH:mm:ss').format(now);
+
         //CONVERT STRING TO DATETIME
         DateTime dateTimeOn = DateTime.parse(currentTimeOn);
         print(dateTimeOn);
@@ -141,8 +143,6 @@ class NavigationDrawerScreenState extends State<NavigationDrawerScreen> {
         var difference = dateTimeOff.difference(dateTimeOn).inSeconds;
         print("difference 1--->"+difference.toString());
 //        totalTimeOut = totalTimeOut + difference;
-
-
 
         if (prefstotalTimeOutDuration != "" && prefstotalTimeOutDuration != 0) {
           totalTimeOut = prefstotalTimeOutDuration;
@@ -163,13 +163,11 @@ class NavigationDrawerScreenState extends State<NavigationDrawerScreen> {
           DurationTime();
           displayedDuration = ConvertSectoDay(totalTimeOut);
         }
-
 //        _prefs.setLastTimeOutDuration(totalTimeOut);
 //        _prefs.setLastTimeOutTime("0");
 //        _prefs.setSwitchBtnTime(_valueTimeout);
 //        _getPrefsData();
 //        DurationTime();
-
         return null;
       } else {
         _valueTimeout == true;

@@ -340,7 +340,6 @@ class MyAccountsPagenew extends State<Maps_appointmentscreen> {
                               return CheckInScreen();
                             }));
                           }
-
                           CheckInImage();
                         });
 
