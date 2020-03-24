@@ -96,10 +96,12 @@ class ExpenseListScreenState extends State<ExpenseListScreen> {
             children: <Widget>[
               IconButton(
                 icon: new Icon(Icons.add),
-                onPressed: () {Navigator.push(context,
+                onPressed: () {
+                  Navigator.push(context,
                     MaterialPageRoute(builder: (context) {
                       return AddExpenseScreen();
-                    }));},
+                    }));
+                  },
               ),
               IconButton(
                 icon: new Icon(Icons.filter_list),

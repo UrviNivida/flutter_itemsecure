@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter/widgets.dart';
 import 'package:flutter_itemsecure_dsr/adapters/Schdeulecard.dart';
+import 'package:flutter_itemsecure_dsr/app_screens/add_visit_docs_screen.dart';
 import 'package:flutter_itemsecure_dsr/app_screens/addvisit_screen.dart';
 import 'package:flutter_itemsecure_dsr/app_screens/checkin_screen.dart';
 import 'package:flutter_itemsecure_dsr/listing_data/Schedulelist.dart';
@@ -363,6 +364,12 @@ class MyAccountsPagenew extends State<Maps_appointmentscreen> {
                         onTap: () {
                           setState(() {
                             if (isMeetingGoingOn == true) {
+
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                    return AddVisitDocsScreen();
+                                  }));
+
                             } else {
                               Fluttertoast.showToast(
                                   msg:
