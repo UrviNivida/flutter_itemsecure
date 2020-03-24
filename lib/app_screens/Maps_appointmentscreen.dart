@@ -34,6 +34,7 @@ class MyAccountsPagenew extends State<Maps_appointmentscreen> {
 
   final Map<String, Marker> _markers = {};
 
+
   static Future<Uint8List> getBytesFromCanvas(int width, int height,int position) async {
     final ui.PictureRecorder pictureRecorder = ui.PictureRecorder();
     final Canvas canvas = Canvas(pictureRecorder);
